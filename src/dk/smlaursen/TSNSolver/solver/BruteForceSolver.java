@@ -29,6 +29,7 @@ public class BruteForceSolver implements Solver {
 		}
 
 		//Combinatoric, try all possibilities
+		//TEST"
 		
 		Set<VLAN> vlans = new HashSet<VLAN>();
 		vlans.add(new VLAN(app1, gps));
