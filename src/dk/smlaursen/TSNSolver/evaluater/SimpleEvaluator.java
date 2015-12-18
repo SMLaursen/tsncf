@@ -27,5 +27,4 @@ public class SimpleEvaluator implements evaluator {
 		}
 		return cost;
 	}
-
 }
