@@ -1,0 +1,73 @@
+package dk.smlaursen.TSNSolver.visualization;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.util.Collection;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+import org.jgrapht.Graph;
+import org.jgrapht.ext.JGraphXAdapter;
+import org.jgrapht.graph.DefaultEdge;
+
+import com.mxgraph.layout.mxGraphLayout;
+import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
+import com.mxgraph.model.mxCell;
+import com.mxgraph.model.mxGraphModel;
+import com.mxgraph.model.mxGraphModel.Filter;
+import com.mxgraph.swing.mxGraphComponent;
+import com.mxgraph.util.mxConstants;
+import com.mxgraph.util.mxStyleUtils;
+import com.mxgraph.view.mxGraphView;
+
+import dk.smlaursen.TSNSolver.architecture.EndSystem;
+import dk.smlaursen.TSNSolver.architecture.Node;
+
+public class TopologyVisualizer{
+	private static final Dimension DEFAULT_SIZE = new Dimension(500, 320);
+
+	/***/
+	public static void display(final Graph<Node, DefaultEdge> g){
+		JGraphXAdapter<Node, DefaultEdge> adapter = new JGraphXAdapter<Node, DefaultEdge>(g);
+		mxGraphComponent component = new mxGraphComponent(adapter);
+		mxGraphModel graphModel = (mxGraphModel) component.getGraph().getModel();
+		mxGraphView view = component.getGraph().getView();
+		view.setScale(2);
+		Collection<Object> cells = graphModel.getCells().values();
+		Object[] endSystems = mxGraphModel.filterCells(cells.toArray(), new Filter() {
+			@Override
+			public boolean filter(Object cell) {
+				if(cell instanceof mxCell){
+					mxCell mxc = (mxCell) cell;
+					if(mxc.getValue() instanceof EndSystem){
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+		
+		mxStyleUtils.setCellStyles(graphModel, cells.toArray(), mxConstants.STYLE_ENDARROW, mxConstants.NONE);
+		mxStyleUtils.setCellStyles(graphModel, endSystems, mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
+		mxStyleUtils.setCellStyles(graphModel, endSystems, mxConstants.STYLE_FILLCOLOR, "FAFAD2");
+		component.setEnabled(false);
+		
+		mxGraphLayout layout = new mxHierarchicalLayout(adapter);
+		layout.execute(adapter.getDefaultParent());
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				JFrame frame = new JFrame();
+				frame.setSize(DEFAULT_SIZE);
+				frame.setLayout(new BorderLayout(50,50));
+				frame.add(component, BorderLayout.CENTER);
+				frame.setTitle("Topology Visualization");
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.pack();
+				frame.setVisible(true);			
+			}
+		});
+	}
+}
