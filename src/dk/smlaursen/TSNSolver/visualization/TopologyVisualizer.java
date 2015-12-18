@@ -27,7 +27,9 @@ import dk.smlaursen.TSNSolver.architecture.Node;
 public class TopologyVisualizer{
 	private static final Dimension DEFAULT_SIZE = new Dimension(500, 320);
 
-	/***/
+	/** Displays the topology in a JFrame.
+	 * This call requires the libraries JGraphX and JGraphT-ext to be present on the classpath
+	 * @param g the {@link Graph} to display*/
 	public static void display(final Graph<Node, DefaultEdge> g){
 		JGraphXAdapter<Node, DefaultEdge> adapter = new JGraphXAdapter<Node, DefaultEdge>(g);
 		mxGraphComponent component = new mxGraphComponent(adapter);
@@ -35,6 +37,8 @@ public class TopologyVisualizer{
 		mxGraphView view = component.getGraph().getView();
 		view.setScale(2);
 		Collection<Object> cells = graphModel.getCells().values();
+		
+		//Filter to get endSystems
 		Object[] endSystems = mxGraphModel.filterCells(cells.toArray(), new Filter() {
 			@Override
 			public boolean filter(Object cell) {
@@ -48,9 +52,26 @@ public class TopologyVisualizer{
 			}
 		});
 		
-		mxStyleUtils.setCellStyles(graphModel, cells.toArray(), mxConstants.STYLE_ENDARROW, mxConstants.NONE);
+		//Filter to get edges
+		Object[] edges = mxGraphModel.filterCells(cells.toArray(), new Filter() {
+			@Override
+			public boolean filter(Object cell) {
+				if(cell instanceof mxCell){
+					mxCell mxc = (mxCell) cell;
+					if(mxc.getValue() instanceof DefaultEdge){
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+		
+		mxStyleUtils.setCellStyles(graphModel, edges, mxConstants.STYLE_ENDARROW, mxConstants.NONE);
+		mxStyleUtils.setCellStyles(graphModel, edges, mxConstants.STYLE_NOLABEL ,"1");
 		mxStyleUtils.setCellStyles(graphModel, endSystems, mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
 		mxStyleUtils.setCellStyles(graphModel, endSystems, mxConstants.STYLE_FILLCOLOR, "FAFAD2");
+		
+		//Disable editing of figure
 		component.setEnabled(false);
 		
 		mxGraphLayout layout = new mxHierarchicalLayout(adapter);
