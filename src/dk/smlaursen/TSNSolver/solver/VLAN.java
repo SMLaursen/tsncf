@@ -21,6 +21,16 @@ public class VLAN {
 		return aRouting;
 	}
 	
+	public Application getApplication(){
+		return aApp;
+	}
+	
+	@Override
+	public int hashCode(){
+		return aApp.hashCode() + aRouting.hashCode();
+	}
+	
+	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append(aApp.getTitle()).append(" | ").append(aRouting);

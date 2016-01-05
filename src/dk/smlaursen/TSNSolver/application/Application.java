@@ -36,4 +36,9 @@ public abstract class Application {
 	public String getTitle(){
 		return aTitle;
 	}
+	
+	@Override
+	public int hashCode(){
+		return aTitle.hashCode();
+	}
 }

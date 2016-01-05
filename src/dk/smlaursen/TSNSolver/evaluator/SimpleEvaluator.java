@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNSolver.evaluater;
+package dk.smlaursen.TSNSolver.evaluator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +10,9 @@ import org.jgrapht.graph.DefaultEdge;
 import dk.smlaursen.TSNSolver.architecture.Node;
 import dk.smlaursen.TSNSolver.solver.VLAN;
 
-public class SimpleEvaluator implements evaluator {
+/** SimpleEvaluator is an evaluator that counts the number of disjoint edges used.
+ *  The fewer the better. */
+public class SimpleEvaluator implements Evaluator {
 
 	@Override
 	public double evaluate(Set<VLAN> vlans, Graph<Node, DefaultEdge> graph) {

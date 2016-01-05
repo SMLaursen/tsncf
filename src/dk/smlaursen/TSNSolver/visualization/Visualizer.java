@@ -3,6 +3,7 @@ package dk.smlaursen.TSNSolver.visualization;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.Collection;
+import java.util.Set;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -23,14 +24,15 @@ import com.mxgraph.view.mxGraphView;
 
 import dk.smlaursen.TSNSolver.architecture.EndSystem;
 import dk.smlaursen.TSNSolver.architecture.Node;
+import dk.smlaursen.TSNSolver.solver.VLAN;
 
-public class TopologyVisualizer{
+public class Visualizer{
 	private static final Dimension DEFAULT_SIZE = new Dimension(500, 320);
-
+	
 	/** Displays the topology in a JFrame.
 	 * This call requires the libraries JGraphX and JGraphT-ext to be present on the classpath
 	 * @param g the {@link Graph} to display*/
-	public static void display(final Graph<Node, DefaultEdge> g){
+	public static void displayTopology(final Graph<Node, DefaultEdge> g){
 		JGraphXAdapter<Node, DefaultEdge> adapter = new JGraphXAdapter<Node, DefaultEdge>(g);
 		mxGraphComponent component = new mxGraphComponent(adapter);
 		mxGraphModel graphModel = (mxGraphModel) component.getGraph().getModel();
@@ -90,5 +92,9 @@ public class TopologyVisualizer{
 				frame.setVisible(true);			
 			}
 		});
+	}
+	
+	public static void displaySolution(Set<VLAN> solution){
+		
 	}
 }
