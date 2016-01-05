@@ -25,7 +25,7 @@ import dk.smlaursen.TSNSolver.solver.VLAN;
  * So increase K with care, as it can quickly lead to excessive memory and computation time use. */
 public class KShortestPathSolver implements Solver {
 	private static final int K = 1;
-	private static final int MAX_HOPS = 2;
+	private static final int MAX_HOPS = 5;
 	private static final int PROGRESS_PERIOD = 10000;
 	
 	private static Logger logger = LoggerFactory.getLogger(KShortestPathSolver.class.getSimpleName());

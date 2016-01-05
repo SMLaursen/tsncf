@@ -30,11 +30,11 @@ public class Main {
 		Graph<Node, DefaultEdge> graph= TopologyParser.parse();
 		logger.info("Parsed topology : "+graph);
 		
+		Visualizer vis = new Visualizer(graph);
 		//Display Application?
 		if(display){
-			Visualizer.displayTopology(graph);
+			vis.topologyPanel();
 		}
-		
 		//Parse Applications
 		logger.debug("Parsing application set");
 		List<Application> apps = ApplicationParser.parse(graph);
@@ -47,7 +47,7 @@ public class Main {
 		logger.info("Found solution : "+sol);
 		
 		if(display){
-			Visualizer.displaySolution(sol);
+			vis.addSolutions(sol);
 		}
 	}
 }
