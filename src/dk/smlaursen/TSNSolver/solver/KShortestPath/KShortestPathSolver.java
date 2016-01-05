@@ -24,8 +24,8 @@ import dk.smlaursen.TSNSolver.solver.VLAN;
  * for each src-dest nodes. Naturally, the greater K the better solution can be found, but as the shortest paths are in sorted order, the simples routes (Often yielding the best results) are evaluated first. 
  * So increase K with care, as it can quickly lead to excessive memory and computation time use. */
 public class KShortestPathSolver implements Solver {
-	private static final int K = 1;
-	private static final int MAX_HOPS = 5;
+	private static final int K = 3;
+	private static final int MAX_HOPS = 7;
 	private static final int PROGRESS_PERIOD = 10000;
 	
 	private static Logger logger = LoggerFactory.getLogger(KShortestPathSolver.class.getSimpleName());
@@ -95,7 +95,7 @@ public class KShortestPathSolver implements Solver {
 			public void run() {
 				//Report progress every 10sec
 				if(logger.isInfoEnabled()){
-					logger.info("Progress = "+table.getCurrCombination()+"/"+table.getNoOfCombinations());
+					logger.info("Progress = "+(float) table.getCurrCombination()/table.getNoOfCombinations() * 100+"%");
 				}
 			}
 		};
@@ -109,6 +109,7 @@ public class KShortestPathSolver implements Solver {
 		double bestCost = Double.MAX_VALUE;
 		SimpleEvaluator eval = new SimpleEvaluator();
 
+		//TODO Parallelize
 		while(!abortFlag && table.hasNext()){
 
 			//Retrieve the set of VLANs

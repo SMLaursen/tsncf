@@ -28,7 +28,7 @@ public class Main {
 		//Parse Architecture
 		logger.debug("Parsing Topology");
 		Graph<Node, DefaultEdge> graph= TopologyParser.parse();
-		logger.info("Parsed topology : "+graph);
+		logger.info("Parsed topology ");
 		
 		Visualizer vis = new Visualizer(graph);
 		//Display Application?
@@ -38,13 +38,13 @@ public class Main {
 		//Parse Applications
 		logger.debug("Parsing application set");
 		List<Application> apps = ApplicationParser.parse(graph);
-		logger.info("Parsed applications : "+apps);
+		logger.info("Parsed applications  ");
 		
 		//Solve problem
 		logger.debug("Solving problem");
 		Solver s = new KShortestPathSolver();
 		Set<VLAN> sol = s.solve(graph, apps);
-		logger.info("Found solution : "+sol);
+		logger.info("Found solution ");
 		
 		if(display){
 			vis.addSolutions(sol);
