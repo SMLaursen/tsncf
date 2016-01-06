@@ -19,12 +19,19 @@ import dk.smlaursen.TSNSolver.solver.KShortestPath.KShortestPathSolver;
 import dk.smlaursen.TSNSolver.visualization.Visualizer;
 
 public class Main {
-	//FIXME Add parameter handling
 	public static final boolean display = true;
+	
+	//TODO Add parameter handling
+	//TODO Extend JGraphT to include GraphML parser 
+	//TODO Add application parser
+	//TODO Add TTApplication and Create simple TTApplication layout pre-processor and validator
+	//TODO Add real Evaluator
+	//TODO Create GUI in separate project
+	//TODO Put this on GitHub
 	
 	public static void main(String[] args){
 		Logger logger = LoggerFactory.getLogger(Main.class.getSimpleName());
-		
+//		
 		//Parse Architecture
 		logger.debug("Parsing Topology");
 		Graph<Node, DefaultEdge> graph= TopologyParser.parse();
@@ -37,7 +44,8 @@ public class Main {
 		}
 		//Parse Applications
 		logger.debug("Parsing application set");
-		List<Application> apps = ApplicationParser.parse(graph);
+		List<Application> apps = ApplicationParser.parse();
+		System.out.println(apps);
 		logger.info("Parsed applications  ");
 		
 		//Solve problem

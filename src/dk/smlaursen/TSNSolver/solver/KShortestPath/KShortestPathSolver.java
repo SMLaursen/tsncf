@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import dk.smlaursen.TSNSolver.application.Application;
+import dk.smlaursen.TSNSolver.application.SRApplication;
 import dk.smlaursen.TSNSolver.architecture.Node;
 import dk.smlaursen.TSNSolver.evaluator.SimpleEvaluator;
 import dk.smlaursen.TSNSolver.solver.Solver;
@@ -50,6 +51,11 @@ public class KShortestPathSolver implements Solver {
 
 		// Loop through each application and add it's K shortest paths to above arraylist
 		for(Application app : applications){
+			
+			//Only do this for SRApplications
+			if(!(app instanceof SRApplication)){
+				continue;
+			}
 			KShortestPaths<Node, DefaultEdge> shortestPaths = new KShortestPaths<Node, DefaultEdge>(topology, app.getSource(), K, MAX_HOPS);
 
 			//For each destinations

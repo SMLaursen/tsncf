@@ -1,21 +1,14 @@
 package dk.smlaursen.TSNSolver.visualization;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
-
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JList;
-import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 
 import org.jgrapht.Graph;

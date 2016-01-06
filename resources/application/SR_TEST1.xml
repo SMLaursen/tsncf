@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Applications>
+	<SRApplication name="APP1_SR">
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>8</PayloadSize>
+		<NoOfFrames>10</NoOfFrames>
+		<Source name="ES1"></Source>
+		<Destinations>
+			<Dest name="ES2"></Dest>
+			<Dest name="ES4"></Dest>
+		</Destinations>
+	</SRApplication>
+	
+	<SRApplication name="APP2_SR">
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>8</PayloadSize>
+		<NoOfFrames>10</NoOfFrames>
+		<Source name="ES1"></Source>
+		<Destinations>
+			<Dest name="ES3"></Dest>
+		</Destinations>
+	</SRApplication>
+	
+	<TTApplication name="APP3_TT">
+		<PayloadSize>8</PayloadSize>
+		<Period>10000</Period>
+		<Deadline>12000</Deadline>
+		<Source name="ES1"></Source>
+		<Destinations>
+			<Dest name="ES4"></Dest>
+		</Destinations>
+	</TTApplication>
+	
+</Applications>

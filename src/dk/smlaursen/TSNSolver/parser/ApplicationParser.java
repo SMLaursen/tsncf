@@ -1,79 +1,140 @@
 package dk.smlaursen.TSNSolver.parser;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultEdge;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import dk.smlaursen.TSNSolver.application.Application;
 import dk.smlaursen.TSNSolver.application.SRApplication;
 import dk.smlaursen.TSNSolver.application.SRType;
+import dk.smlaursen.TSNSolver.application.TTApplication;
 import dk.smlaursen.TSNSolver.architecture.EndSystem;
-import dk.smlaursen.TSNSolver.architecture.Node;
 
 public class ApplicationParser {
-	private static Logger logger = LoggerFactory.getLogger(ApplicationParser.class.getSimpleName());
 	
-	/**Parses the */
-	public static List<Application> parse(Graph<Node, DefaultEdge> graph){
+	/**Parses the  */
+	public static List<Application> parse(){
 		List<Application> applications = new LinkedList<Application>();
-		
-		//FIXME Parse file
-		//For each application {:
-		String app1name = "APP1";
-		int payloadSize = 8;
-		int noOfFrames = 10;
-		SRType type = SRType.CLASS_A;
-		EndSystem app1src = new EndSystem("ES1");
-		EndSystem[] app1dests = {new EndSystem("ES2"), new EndSystem("ES4")};
-		
-		
 
-		//Check that src ES exists
-		if(!graph.containsVertex(app1src)){
-			logger.error("Aborting : src node "+app1src+" could not be found in graph "+graph);
-			return null;
-		}
-		
-		//Then check that all dest ES exists
-		for(EndSystem es : app1dests){
-			if(!graph.containsVertex(es)){
-				logger.error("Aborting : destination node "+es+" could not be found in graph "+graph);
-				return null;
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		Document dom;
+
+		try{
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			dom = db.parse("./resources/application/SR_TEST1.xml");
+			Element docEle = dom.getDocumentElement();
+			
+			//Get nodelist of SRApplicationElements
+			NodeList nl = docEle.getElementsByTagName("SRApplication");
+			if(nl != null && nl.getLength() > 0){
+				for(int i = 0; i < nl.getLength(); i++){
+					//Get the SRApplication element
+					Element srAppEle = (Element) nl.item(i);
+					//Get the SRApplication object
+					Application srApp = getSRApplication(srAppEle);
+					//Add it to the application list
+					applications.add(srApp);
+				}
 			}
+			
+			//Get nodelist of TTApplicationElements
+			nl = docEle.getElementsByTagName("TTApplication");
+			if(nl != null && nl.getLength() > 0){
+				for(int i = 0; i < nl.getLength(); i++){
+					//Get the TTApplication element
+					Element ttAppEle = (Element) nl.item(i);
+					//Get the TTApplication object
+					Application ttApp = getTTApplication(ttAppEle);
+					//Add it to the application list
+					applications.add(ttApp);
+				}
+			}
+			
+		} catch(ParserConfigurationException pce){
+			pce.printStackTrace();
+		} catch(SAXException se){
+			se.printStackTrace();
+		} catch(IOException ioe){
+			ioe.printStackTrace();
 		}
-		applications.add(new SRApplication(app1name, type, payloadSize, noOfFrames , app1src, app1dests));
-		//}
-
-		EndSystem app2src = new EndSystem("ES1");
-		EndSystem[] app2dests = {new EndSystem("ES3")};
-		applications.add(new SRApplication("APP2", type, payloadSize, noOfFrames , app2src, app2dests));
-		
-		EndSystem app3src = new EndSystem("ES3");
-		EndSystem[] app3dests = {new EndSystem("ES1"), new EndSystem("ES4")};
-		applications.add(new SRApplication("APP3", type, payloadSize, noOfFrames , app3src, app3dests));
-		
-		EndSystem app4src = new EndSystem("ES4");
-		EndSystem[] app4dests = {new EndSystem("ES1")};
-		applications.add(new SRApplication("APP4", type, payloadSize, noOfFrames , app4src, app4dests));
-		
-		EndSystem app5src = new EndSystem("ES2");
-		EndSystem[] app5dests = {new EndSystem("ES1"), new EndSystem("ES4")};
-		applications.add(new SRApplication("APP5", type, payloadSize, noOfFrames , app5src, app5dests));
-		
-		EndSystem app6src = new EndSystem("ES1");
-		EndSystem[] app6dests = {new EndSystem("ES2"), new EndSystem("ES3"), new EndSystem("ES4")};
-		applications.add(new SRApplication("APP6", type, payloadSize, noOfFrames , app6src, app6dests));
-		applications.add(new SRApplication("APP7", type, payloadSize, noOfFrames , app6src, app6dests));
-		applications.add(new SRApplication("APP8", type, payloadSize, noOfFrames , app6src, app6dests));
-		applications.add(new SRApplication("APP9", type, payloadSize, noOfFrames , app6src, app6dests));
-		applications.add(new SRApplication("APP10", type, payloadSize, noOfFrames , app6src, app6dests));
-		applications.add(new SRApplication("APP6", type, payloadSize, noOfFrames , app6src, app6dests));
-		
 		
 		return applications;
+	}
+	
+	/**Parses an element into a {@link SRApplication}
+	 * @param srAppEle the SRApplicationElement
+	 * @throws A
+	 * @return The corresponding {@link SRApplication}*/
+	private static SRApplication getSRApplication(Element srAppEle){
+		String name = srAppEle.getAttribute("name");
+		SRType type;
+
+		//Parse SRType
+		String text =  srAppEle.getElementsByTagName("SRType").item(0).getFirstChild().getNodeValue();
+		switch(text){
+		case "CLASS_A" : type = SRType.CLASS_A; break;
+		case "CLASS_B" : type = SRType.CLASS_B; break;
+		default : return null;
+		}
+
+		//Parse PayloadSize
+		int payloadSize = parsePayloadSize(srAppEle);
+
+		//Parse NoOfFrames
+		int noOfFrames = Integer.parseInt(srAppEle.getElementsByTagName("NoOfFrames").item(0).getFirstChild().getNodeValue());
+
+		//Parse Source
+		EndSystem src = parseSource(srAppEle);
+
+		//Parse Destinations
+		EndSystem[] dest = parseDestinations(srAppEle);
+		
+		return new SRApplication(name, type, payloadSize, noOfFrames, src, dest);
+	}
+	
+	/**Parses an element into a {@link TTApplication}
+	 * @param ttAppEle the TTApplicationElement
+	 * @return The corresponding {@link TTApplication}*/
+	private static TTApplication getTTApplication(Element ttAppEle){
+		String name = ttAppEle.getAttribute("name");
+		int payloadSize = parsePayloadSize(ttAppEle);
+		
+		int period = Integer.parseInt(ttAppEle.getElementsByTagName("Period").item(0).getFirstChild().getNodeValue());
+		
+		int deadline = Integer.parseInt(ttAppEle.getElementsByTagName("Deadline").item(0).getFirstChild().getNodeValue());
+		
+		EndSystem src = parseSource(ttAppEle);
+		EndSystem[] dest = parseDestinations(ttAppEle);
+		return new TTApplication(name, payloadSize, period, deadline, src, dest);
+	}
+	
+	private static int parsePayloadSize(Element ele){
+		return Integer.parseInt(ele.getElementsByTagName("PayloadSize").item(0).getFirstChild().getNodeValue());
+	}
+	
+	private static EndSystem parseSource(Element ele){
+		return new EndSystem(((Element) ele.getElementsByTagName("Source").item(0)).getAttribute("name"));
+	}
+	
+	private static EndSystem[] parseDestinations(Element ele){
+		EndSystem[] dest = null;
+		Element el = (Element) ele.getElementsByTagName("Destinations").item(0);
+		NodeList nl = el.getElementsByTagName("Dest");
+		if(nl != null && nl.getLength() > 0){
+			dest = new EndSystem[nl.getLength()];
+			for(int i= 0; i < nl.getLength(); i++){
+				dest[i] = new EndSystem(((Element) nl.item(i)).getAttribute("name"));
+			}
+		} 
+		return dest;
 	}
 }
