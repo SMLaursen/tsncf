@@ -1,5 +1,6 @@
 package dk.smlaursen.TSNSolver;
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ import dk.smlaursen.TSNSolver.parser.ApplicationParser;
 import dk.smlaursen.TSNSolver.parser.TopologyParser;
 import dk.smlaursen.TSNSolver.solver.Solver;
 import dk.smlaursen.TSNSolver.solver.VLAN;
-import dk.smlaursen.TSNSolver.solver.KShortestPath.KShortestPathSolver;
+import dk.smlaursen.TSNSolver.solver.KShortestPath.KShortestPathSolver_SR;
 import dk.smlaursen.TSNSolver.visualization.Visualizer;
 
 public class Main {
@@ -23,7 +24,6 @@ public class Main {
 	
 	//TODO Add parameter handling
 	//TODO Extend JGraphT to include GraphML parser 
-	//TODO Add application parser
 	//TODO Add TTApplication and Create simple TTApplication layout pre-processor and validator
 	//TODO Add real Evaluator
 	//TODO Create GUI in separate project
@@ -31,8 +31,8 @@ public class Main {
 	
 	public static void main(String[] args){
 		Logger logger = LoggerFactory.getLogger(Main.class.getSimpleName());
-//		
-		//Parse Architecture
+
+		//Parse Topology
 		logger.debug("Parsing Topology");
 		Graph<Node, DefaultEdge> graph= TopologyParser.parse();
 		logger.info("Parsed topology ");
@@ -42,15 +42,15 @@ public class Main {
 		if(display){
 			vis.topologyPanel();
 		}
+		
 		//Parse Applications
 		logger.debug("Parsing application set");
-		List<Application> apps = ApplicationParser.parse();
-		System.out.println(apps);
+		List<Application> apps = ApplicationParser.parse(new File("./resources/application/SR_TEST1.xml"));
 		logger.info("Parsed applications  ");
 		
 		//Solve problem
 		logger.debug("Solving problem");
-		Solver s = new KShortestPathSolver();
+		Solver s = new KShortestPathSolver_SR();
 		Set<VLAN> sol = s.solve(graph, apps);
 		logger.info("Found solution ");
 		

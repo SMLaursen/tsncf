@@ -1,5 +1,6 @@
 package dk.smlaursen.TSNSolver.parser;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,7 +23,7 @@ import dk.smlaursen.TSNSolver.architecture.EndSystem;
 public class ApplicationParser {
 	
 	/**Parses the  */
-	public static List<Application> parse(){
+	public static List<Application> parse(File f){
 		List<Application> applications = new LinkedList<Application>();
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -30,7 +31,7 @@ public class ApplicationParser {
 
 		try{
 			DocumentBuilder db = dbf.newDocumentBuilder();
-			dom = db.parse("./resources/application/SR_TEST1.xml");
+			dom = db.parse(f);
 			Element docEle = dom.getDocumentElement();
 			
 			//Get nodelist of SRApplicationElements

@@ -21,15 +21,15 @@ import dk.smlaursen.TSNSolver.evaluator.SimpleEvaluator;
 import dk.smlaursen.TSNSolver.solver.Solver;
 import dk.smlaursen.TSNSolver.solver.VLAN;
 
-/**The KShortestPathSolver relies on the {@link KShortestPaths} algorithm in the jgrapht library to calculate the K shortest paths
- * for each src-dest nodes. Naturally, the greater K the better solution can be found, but as the shortest paths are in sorted order, the simples routes (Often yielding the best results) are evaluated first. 
+/**The KShortestPathSolver_SR relies on the {@link KShortestPaths} algorithm in the jgrapht library to calculate the K shortest paths
+ * for each src-dest nodes of an SRApplication. Naturally, the greater K the better solution can be found, but as the shortest paths are in sorted order, the simples routes (Often yielding the best results) are evaluated first. 
  * So increase K with care, as it can quickly lead to excessive memory and computation time use. */
-public class KShortestPathSolver implements Solver {
+public class KShortestPathSolver_SR implements Solver {
 	private static final int K = 3;
 	private static final int MAX_HOPS = 7;
 	private static final int PROGRESS_PERIOD = 10000;
 	
-	private static Logger logger = LoggerFactory.getLogger(KShortestPathSolver.class.getSimpleName());
+	private static Logger logger = LoggerFactory.getLogger(KShortestPathSolver_SR.class.getSimpleName());
 
 	//For storing the so far best solution
 	private Set<VLAN> bestVlan = new HashSet<VLAN>();
@@ -39,7 +39,7 @@ public class KShortestPathSolver implements Solver {
 	@Override
 	public Set<VLAN> solve(final Graph<Node, DefaultEdge> topology,final List<Application> applications) {
 		abortFlag = false;
-
+		
 		///////////////////////////////////////////////////////
 		//-- First we retrieve all individual graphPaths  -- //
 		///////////////////////////////////////////////////////
