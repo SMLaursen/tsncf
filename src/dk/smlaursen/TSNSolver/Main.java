@@ -34,7 +34,7 @@ public class Main {
 
 		//Parse Topology
 		logger.debug("Parsing Topology");
-		Graph<Node, DefaultEdge> graph= TopologyParser.parse();
+		Graph<Node, DefaultEdge> graph= TopologyParser.parse(new File("./resources/architecture/SR_TEST1.xml"));
 		logger.info("Parsed topology ");
 		
 		Visualizer vis = new Visualizer(graph);

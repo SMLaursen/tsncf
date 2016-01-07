@@ -1,50 +1,92 @@
 package dk.smlaursen.TSNSolver.parser;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.HashMap;
+import java.util.InputMismatchException;
+import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import dk.smlaursen.TSNSolver.architecture.Bridge;
 import dk.smlaursen.TSNSolver.architecture.EndSystem;
 import dk.smlaursen.TSNSolver.architecture.Node;
 
 public class TopologyParser {
-	
-	public static SimpleGraph<Node, DefaultEdge> parse(){
+
+	public static SimpleGraph<Node, DefaultEdge> parse(File f){
 		SimpleGraph<Node, DefaultEdge> graph = new SimpleGraph<Node, DefaultEdge>(DefaultEdge.class);
-		
-		EndSystem es1 = new EndSystem("ES1");
-		graph.addVertex(es1);
-		
-		EndSystem es2 = new EndSystem("ES2");
-		graph.addVertex(es2);
-		
-		EndSystem es3 = new EndSystem("ES3");
-		graph.addVertex(es3);
-		
-		EndSystem es4 = new EndSystem("ES4");
-		graph.addVertex(es4);
-		
-		Bridge b1 = new Bridge("B1");
-		graph.addVertex(b1);
-		
-		Bridge b2 = new Bridge("B2");
-		graph.addVertex(b2);
-		
-		Bridge b3 = new Bridge("B3");
-		graph.addVertex(b3);
-		
-		Bridge b4 = new Bridge("B4");
-		graph.addVertex(b4);
-		
-		graph.addEdge(es1, b1);
-		graph.addEdge(es3, b3);
-		graph.addEdge(b1, b4);
-		graph.addEdge(b4, b2);
-		graph.addEdge(b1, b3);
-		graph.addEdge(b3, b2);
-		graph.addEdge(b2, es4);
-		graph.addEdge(b2, es2);
-		
+
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		Document dom;
+
+		try{
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			dom = db.parse(f);
+			Element docEle = dom.getDocumentElement();
+
+			Element graphEle = (Element) docEle.getElementsByTagName("graph").item(0);
+			Map<String, Node> nodeMap = new HashMap<String, Node>();
+			
+			//Parse nodes and create graph-vertices accordingly
+			NodeList nl = graphEle.getElementsByTagName("node");
+			if(nl != null && nl.getLength() > 0){
+				for(int i = 0; i < nl.getLength(); i++){
+					String nodeName = ((Element) nl.item(i)).getAttribute("id");
+					if(nodeName == null){
+						throw new InputMismatchException("Aborting : nodes don't contain 'id' attribute");
+					} 
+					nodeName = nodeName.toUpperCase();
+					Node n;
+					if(nodeName.startsWith("ES")){
+						n = new EndSystem(nodeName);
+					} else if(nodeName.startsWith("B") || nodeName.startsWith("SW")){
+						n = new Bridge(nodeName);
+					} else {
+						throw new InputMismatchException("Aborting : Node type of "+nodeName+" unrecognized.");
+					}
+					nodeMap.put(nodeName, n);
+					graph.addVertex(n);
+				}
+			}
+
+			//Parse edges and create graph-edges accordingly
+			nl = graphEle.getElementsByTagName("edge");
+			if(nl != null && nl.getLength() > 0){
+				for(int i = 0; i < nl.getLength(); i++){
+					String source = ((Element) nl.item(i)).getAttribute("source");
+					if(source == null){
+						throw new InputMismatchException("Aborting : edge didn't contain any source");
+					} 
+					source = source.toUpperCase();
+					
+					String target = ((Element) nl.item(i)).getAttribute("target");
+					if(target == null){
+						throw new InputMismatchException("Aborting : edge didn't contain any target");
+					} 
+					target = target.toUpperCase();
+					
+					graph.addEdge(nodeMap.get(source), nodeMap.get(target));
+				}
+			}
+			nodeMap.clear();
+		} catch(ParserConfigurationException pce){
+			pce.printStackTrace();
+		} catch(SAXException se){
+			se.printStackTrace();
+		} catch(IOException ioe){
+			ioe.printStackTrace();
+		}
 		return graph;
 	}
 }
