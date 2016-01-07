@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Applications>
+	<SRApplication name="APP1_SR">
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>8</PayloadSize>
+		<NoOfFrames>10</NoOfFrames>
+		<Source name="ES3"></Source>
+		<Destinations>
+			<Dest name="ES1"></Dest>
+			<Dest name="ES2"></Dest>
+		</Destinations>
+	</SRApplication>
+</Applications>

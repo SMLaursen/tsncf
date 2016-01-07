@@ -23,7 +23,6 @@ public class Main {
 	public static final boolean display = true;
 	
 	//TODO Add parameter handling
-	//TODO Extend JGraphT to include GraphML parser 
 	//TODO Add TTApplication and Create simple TTApplication layout pre-processor and validator
 	//TODO Add real Evaluator
 	//TODO Create GUI in separate project
@@ -34,7 +33,7 @@ public class Main {
 
 		//Parse Topology
 		logger.debug("Parsing Topology");
-		Graph<Node, DefaultEdge> graph= TopologyParser.parse(new File("./resources/architecture/SR_TEST1.xml"));
+		Graph<Node, DefaultEdge> graph= TopologyParser.parse(new File("./resources/architecture/SR_TEST3.xml"));
 		logger.info("Parsed topology ");
 		
 		Visualizer vis = new Visualizer(graph);
@@ -45,7 +44,7 @@ public class Main {
 		
 		//Parse Applications
 		logger.debug("Parsing application set");
-		List<Application> apps = ApplicationParser.parse(new File("./resources/application/SR_TEST1.xml"));
+		List<Application> apps = ApplicationParser.parse(new File("./resources/application/SR_TEST3.xml"));
 		logger.info("Parsed applications  ");
 		
 		//Solve problem

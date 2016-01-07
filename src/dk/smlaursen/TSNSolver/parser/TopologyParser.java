@@ -2,7 +2,6 @@ package dk.smlaursen.TSNSolver.parser;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Map;
@@ -11,6 +10,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jgrapht.graph.AbstractBaseGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 import org.w3c.dom.Document;
@@ -24,8 +24,8 @@ import dk.smlaursen.TSNSolver.architecture.Node;
 
 public class TopologyParser {
 
-	public static SimpleGraph<Node, DefaultEdge> parse(File f){
-		SimpleGraph<Node, DefaultEdge> graph = new SimpleGraph<Node, DefaultEdge>(DefaultEdge.class);
+	public static AbstractBaseGraph<Node, DefaultEdge> parse(File f){
+		AbstractBaseGraph<Node, DefaultEdge> graph = null;
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		Document dom;
@@ -37,6 +37,13 @@ public class TopologyParser {
 
 			Element graphEle = (Element) docEle.getElementsByTagName("graph").item(0);
 			Map<String, Node> nodeMap = new HashMap<String, Node>();
+			
+			String edgeDefault = graphEle.getAttribute("edgedefault");
+			switch(edgeDefault){
+			case "undirected" : graph = new SimpleGraph<Node, DefaultEdge>(DefaultEdge.class); break;
+			
+			default : throw new InputMismatchException("edgeDefault "+edgeDefault+" is not supported");
+			}
 			
 			//Parse nodes and create graph-vertices accordingly
 			NodeList nl = graphEle.getElementsByTagName("node");
