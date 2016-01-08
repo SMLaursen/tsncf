@@ -4,6 +4,13 @@ import java.io.File;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 
@@ -20,41 +27,71 @@ import dk.smlaursen.TSNSolver.solver.KShortestPath.KShortestPathSolver_SR;
 import dk.smlaursen.TSNSolver.visualization.Visualizer;
 
 public class Main {
-	public static final boolean display = true;
 	
-	//TODO Add parameter handling
-	//TODO Add TTApplication and Create simple TTApplication layout pre-processor and validator
+	//TODO Create pre-processor and validator
 	//TODO Add real Evaluator
 	//TODO Create GUI in separate project
 	//TODO Put this on GitHub
 	
+	private static final String APP_ARG = "app",NET_ARG = "net", DISP_ARG = "display", VERBOSE_ARG = "v";
+	
+	
 	public static void main(String[] args){
 		Logger logger = LoggerFactory.getLogger(Main.class.getSimpleName());
-
-		//Parse Topology
-		logger.debug("Parsing Topology");
-		Graph<Node, DefaultEdge> graph= TopologyParser.parse(new File("./resources/architecture/SR_TEST3.xml"));
-		logger.info("Parsed topology ");
 		
-		Visualizer vis = new Visualizer(graph);
-		//Display Application?
-		if(display){
-			vis.topologyPanel();
-		}
+		Option architectureFile = Option.builder(NET_ARG).required().argName("file").hasArg().desc("Use given file as network").build();
+		Option applicationFile = Option.builder(APP_ARG).required().argName("file").hasArg().desc("Use given file as application").build();
 		
-		//Parse Applications
-		logger.debug("Parsing application set");
-		List<Application> apps = ApplicationParser.parse(new File("./resources/application/SR_TEST3.xml"));
-		logger.info("Parsed applications  ");
 		
-		//Solve problem
-		logger.debug("Solving problem");
-		Solver s = new KShortestPathSolver_SR();
-		Set<VLAN> sol = s.solve(graph, apps);
-		logger.info("Found solution ");
+		Options options = new Options();
+		options.addOption(applicationFile);
+		options.addOption(architectureFile);
+		options.addOption(VERBOSE_ARG, false, "Verbose output");
+		options.addOption(DISP_ARG, false, "Display output");
 		
-		if(display){
-			vis.addSolutions(sol);
+		CommandLineParser parser = new DefaultParser();
+		
+		try {
+			//Parse command line arguments
+			CommandLine line = parser.parse(options, args);
+			//Required, so cannot be null
+			File net = new File(line.getOptionValue(NET_ARG));
+			File app = new File(line.getOptionValue(APP_ARG));
+			
+			boolean verbose = line.hasOption(VERBOSE_ARG);
+			boolean display = line.hasOption(DISP_ARG);
+			
+			//Parse Topology
+			logger.debug("Parsing Topology");
+			Graph<Node, DefaultEdge> graph= TopologyParser.parse(net);
+			logger.info("Parsed topology ");
+			
+			Visualizer vis = new Visualizer(graph);
+			//Display Application?
+			if(display){
+				vis.topologyPanel();
+			}
+			
+			//Parse Applications
+			logger.debug("Parsing application set");
+			List<Application> apps = ApplicationParser.parse(app);
+			logger.info("Parsed applications  ");
+			
+			//Solve problem
+			logger.debug("Solving problem");
+			Solver s = new KShortestPathSolver_SR();
+			Set<VLAN> sol = s.solve(graph, apps);
+			logger.info("Found solution ");
+			
+			if(display){
+				vis.addSolutions(sol);
+			}
+			
+		} catch (ParseException e) {
+			System.err.println(e);
+			
+			HelpFormatter formatter = new HelpFormatter();
+			formatter.printHelp("ant", options );
 		}
 	}
 }
