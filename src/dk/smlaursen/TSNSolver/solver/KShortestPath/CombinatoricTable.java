@@ -54,7 +54,7 @@ public class CombinatoricTable {
 		Map<Application, ArrayList<GraphPath<Node, DefaultEdge>>> map = new HashMap<Application, ArrayList<GraphPath<Node, DefaultEdge>>>();
 		Set<VLAN> routing = new HashSet<VLAN>();
 		
-		//FIXME performance can be improved by an incremental "find and replace" instead of this redo everything naive approach
+		//TODO performance can be improved by an incremental "find and replace" instead of this redo everything naive approach
 		for(int i = 0; i < graphPaths.size(); i++){
 			Application app = graphPaths.get(i).getApplication();
 			//This merges multiple destinations into one vlan

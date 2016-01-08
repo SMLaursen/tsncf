@@ -13,5 +13,5 @@ import dk.smlaursen.TSNSolver.solver.VLAN;
 public interface Evaluator {
 	
 	/** Evaluates the set of vlans and returns a score based on how well it fits*/
-	public double evaluate(Set<VLAN> vlans, Graph<Node, DefaultEdge> graph);
+	public double evaluate(final Set<VLAN> vlans,final Graph<Node, DefaultEdge> graph);
 }

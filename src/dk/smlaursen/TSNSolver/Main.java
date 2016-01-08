@@ -11,6 +11,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+
 import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultEdge;
 
@@ -19,6 +20,7 @@ import org.slf4j.LoggerFactory;
 
 import dk.smlaursen.TSNSolver.application.Application;
 import dk.smlaursen.TSNSolver.architecture.Node;
+import dk.smlaursen.TSNSolver.evaluator.DisjointEdgesEvaluator;
 import dk.smlaursen.TSNSolver.parser.ApplicationParser;
 import dk.smlaursen.TSNSolver.parser.TopologyParser;
 import dk.smlaursen.TSNSolver.solver.Solver;
@@ -27,21 +29,22 @@ import dk.smlaursen.TSNSolver.solver.KShortestPath.KShortestPathSolver_SR;
 import dk.smlaursen.TSNSolver.visualization.Visualizer;
 
 public class Main {
-	
-	//TODO Create pre-processor and validator
-	//TODO Add real Evaluator
-	//TODO Create GUI in separate project
-	//TODO Put this on GitHub
-	
+	//Command line options
 	private static final String APP_ARG = "app",NET_ARG = "net", DISP_ARG = "display", VERBOSE_ARG = "v";
 	
+	//FIXME todos
+	//////////////////////////////////////////////
+	//TODO Create pre-processor and validator  
+	//TODO Improve logging and error handling
+	//TODO Add real Evaluator
+	//TODO Create GUI in separate project
+	//////////////////////////////////////////////
 	
 	public static void main(String[] args){
 		Logger logger = LoggerFactory.getLogger(Main.class.getSimpleName());
 		
 		Option architectureFile = Option.builder(NET_ARG).required().argName("file").hasArg().desc("Use given file as network").build();
 		Option applicationFile = Option.builder(APP_ARG).required().argName("file").hasArg().desc("Use given file as application").build();
-		
 		
 		Options options = new Options();
 		options.addOption(applicationFile);
@@ -80,13 +83,12 @@ public class Main {
 			//Solve problem
 			logger.debug("Solving problem");
 			Solver s = new KShortestPathSolver_SR();
-			Set<VLAN> sol = s.solve(graph, apps);
+			Set<VLAN> sol = s.solve(graph, apps, new DisjointEdgesEvaluator());
 			logger.info("Found solution ");
 			
 			if(display){
 				vis.addSolutions(sol);
 			}
-			
 		} catch (ParseException e) {
 			System.err.println(e);
 			

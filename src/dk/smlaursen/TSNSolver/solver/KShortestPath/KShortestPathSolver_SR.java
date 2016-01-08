@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import dk.smlaursen.TSNSolver.application.Application;
 import dk.smlaursen.TSNSolver.application.SRApplication;
 import dk.smlaursen.TSNSolver.architecture.Node;
-import dk.smlaursen.TSNSolver.evaluator.SimpleEvaluator;
+import dk.smlaursen.TSNSolver.evaluator.Evaluator;
 import dk.smlaursen.TSNSolver.solver.Solver;
 import dk.smlaursen.TSNSolver.solver.VLAN;
 
@@ -34,10 +34,9 @@ public class KShortestPathSolver_SR implements Solver {
 	//For storing the so far best solution
 	private Set<VLAN> bestVlan = new HashSet<VLAN>();
 	private boolean abortFlag;
-
-
+	
 	@Override
-	public Set<VLAN> solve(final Graph<Node, DefaultEdge> topology,final List<Application> applications) {
+	public Set<VLAN> solve(final Graph<Node, DefaultEdge> topology,final List<Application> applications, Evaluator eval) {
 		abortFlag = false;
 		
 		///////////////////////////////////////////////////////
@@ -113,7 +112,6 @@ public class KShortestPathSolver_SR implements Solver {
 
 		//Start evaluating
 		double bestCost = Double.MAX_VALUE;
-		SimpleEvaluator eval = new SimpleEvaluator();
 
 		//TODO Parallelize
 		while(!abortFlag && table.hasNext()){
@@ -137,12 +135,6 @@ public class KShortestPathSolver_SR implements Solver {
 		timer.cancel();
 		//return best;
 		return bestVlan;
-	}
-
-
-	@Override
-	public void configure(Object param) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override

@@ -12,10 +12,10 @@ import dk.smlaursen.TSNSolver.solver.VLAN;
 
 /** SimpleEvaluator is an evaluator that counts the number of disjoint edges used.
  *  The fewer the better. */
-public class SimpleEvaluator implements Evaluator {
+public class DisjointEdgesEvaluator implements Evaluator {
 
 	@Override
-	public double evaluate(Set<VLAN> vlans, Graph<Node, DefaultEdge> graph) {
+	public double evaluate(final Set<VLAN> vlans,final Graph<Node, DefaultEdge> graph) {
 		double cost = 0;
 		
 		for(VLAN vl : vlans){
