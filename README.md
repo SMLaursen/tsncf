@@ -1,5 +1,4 @@
 #TSNSolver
-=========
 
 ## Installation ##
 
@@ -12,7 +11,8 @@ Being based on Java TSNSolver should run on all major platforms. Following exter
 * [SLF4J](http://www.slf4j.org/) and [LogBack](http://logback.qos.ch/) for logging (not mandatory)
 
 ## Getting Started ##
-The folder 'resource' includes some small example files. The solution for these can be displayed using the command where the -net argument refers to architecture files and -app argument for application files.
+The folder `/resource` includes some small example files. The solution for these can be displayed using the command where the -net argument refers to architecture files and -app argument for application files.
+	
 	$ Java -jar TSNSolver -net <file> -app <file> -display
 
 ## Authors ##
