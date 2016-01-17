@@ -4,20 +4,16 @@ import dk.smlaursen.TSNSolver.architecture.EndSystem;
 
 /** Model of a application */
 public abstract class Application {
-	//Many layers, see http://www.satnac.org.za/proceedings/2012/papers/5.Coverged_Services/72.pdf
-	//Investigate whether this is the same for all traffic classes 
-	private static final int MESSAGE_OVERHEAD_BYTES = 74;
-	
-	protected int aMaxFrameSize;
 	protected String aTitle;
+	
+	protected int aNoOfFramesPerInterval,aMaxFrameSize;
 	
 	protected EndSystem aSource;
 	protected EndSystem[] aDestinations;
 	
-	public Application(int maxPayloadSize, String title, EndSystem src, EndSystem ... dest) {
+	public Application(String title,int aNoOfFramesPerInterval, int aMaxFrameSize, EndSystem src, EndSystem ... dest) {
 		this.aSource = src;
 		this.aDestinations = dest;
-		this.aMaxFrameSize = maxPayloadSize + MESSAGE_OVERHEAD_BYTES;
 		this.aTitle = title;
 	}
 	
@@ -27,6 +23,10 @@ public abstract class Application {
 	
 	public EndSystem[] getDestinations(){
 		return aDestinations;
+	}
+	
+	public int getNoOfFramesPerInterval(){
+		return aNoOfFramesPerInterval;
 	}
 	
 	public int getMaxFrameSize(){

@@ -5,22 +5,18 @@ import java.util.Arrays;
 import dk.smlaursen.TSNSolver.architecture.EndSystem;
 
 public class TTApplication extends Application{
-	private Long aPeriod;
-	private Long aDeadline;
+	private int ttInterval = 500;
 	
-	public TTApplication(String name, int payloadSize, long period, long deadline, EndSystem src, EndSystem ...dest) {
-		super(payloadSize, name, src, dest);
-		this.aPeriod = period;
-		this.aDeadline = deadline;
+	/** Assumes that all TTApplications are periodic so payloadSize and NoOfFrames is enough */
+	public TTApplication(String name, int payloadSize, int noOfFrames, EndSystem src, EndSystem ...dest) {
+		super(name, payloadSize, noOfFrames, src, dest);
 	}
 	
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("TT ").append(aTitle);
-		sb.append(" S : ").append(aMaxFrameSize).append("B");
-		sb.append(" P : ").append(aPeriod).append("ms");
-		sb.append(" D : ").append(aDeadline).append("ms");
+		sb.append(" (").append(aNoOfFramesPerInterval).append(" x ").append(aMaxFrameSize).append("B / ").append(ttInterval).append("us)");
 		sb.append(" (").append(aSource).append(" -> ").append(Arrays.toString(aDestinations)).append(")");
 		return sb.toString();
 	}

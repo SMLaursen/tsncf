@@ -11,7 +11,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jgrapht.graph.AbstractBaseGraph;
-import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -20,12 +19,13 @@ import org.xml.sax.SAXException;
 
 import dk.smlaursen.TSNSolver.architecture.Bridge;
 import dk.smlaursen.TSNSolver.architecture.EndSystem;
+import dk.smlaursen.TSNSolver.architecture.GCLEdge;
 import dk.smlaursen.TSNSolver.architecture.Node;
 
 public class TopologyParser {
 
-	public static AbstractBaseGraph<Node, DefaultEdge> parse(File f){
-		AbstractBaseGraph<Node, DefaultEdge> graph = null;
+	public static AbstractBaseGraph<Node, GCLEdge> parse(File f){
+		AbstractBaseGraph<Node, GCLEdge> graph = null;
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		Document dom;
@@ -40,7 +40,7 @@ public class TopologyParser {
 			
 			String edgeDefault = graphEle.getAttribute("edgedefault");
 			switch(edgeDefault){
-			case "undirected" : graph = new SimpleGraph<Node, DefaultEdge>(DefaultEdge.class); break;
+			case "undirected" : graph = new SimpleGraph<Node, GCLEdge>(GCLEdge.class); break;
 			
 			default : throw new InputMismatchException("edgeDefault "+edgeDefault+" is not supported");
 			}

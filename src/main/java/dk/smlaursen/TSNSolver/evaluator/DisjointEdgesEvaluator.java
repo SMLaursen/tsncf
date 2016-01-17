@@ -7,6 +7,7 @@ import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.graph.DefaultEdge;
 
+import dk.smlaursen.TSNSolver.architecture.GCLEdge;
 import dk.smlaursen.TSNSolver.architecture.Node;
 import dk.smlaursen.TSNSolver.solver.VLAN;
 
@@ -15,12 +16,12 @@ import dk.smlaursen.TSNSolver.solver.VLAN;
 public class DisjointEdgesEvaluator implements Evaluator {
 
 	@Override
-	public double evaluate(final Set<VLAN> vlans,final Graph<Node, DefaultEdge> graph) {
+	public double evaluate(final Set<VLAN> vlans,final Graph<Node, GCLEdge> graph) {
 		double cost = 0;
 		
 		for(VLAN vl : vlans){
 			Set<DefaultEdge> edges = new HashSet<DefaultEdge>();
-			for(GraphPath<Node, DefaultEdge> gp : vl.getRoutings()){
+			for(GraphPath<Node, GCLEdge> gp : vl.getRoutings()){
 				//Hashset so only unique edges will be stored for this route
 				edges.addAll(gp.getEdgeList());
 			}

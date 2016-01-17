@@ -13,14 +13,15 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
 
 import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultEdge;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import dk.smlaursen.TSNSolver.application.Application;
+import dk.smlaursen.TSNSolver.architecture.GCLEdge;
 import dk.smlaursen.TSNSolver.architecture.Node;
-import dk.smlaursen.TSNSolver.evaluator.DisjointEdgesEvaluator;
+import dk.smlaursen.TSNSolver.evaluator.Evaluator;
+import dk.smlaursen.TSNSolver.evaluator.ModifiedLegacyAVBEvaluator;
+import dk.smlaursen.TSNSolver.evaluator.TSNEvaluator;
 import dk.smlaursen.TSNSolver.parser.ApplicationParser;
 import dk.smlaursen.TSNSolver.parser.TopologyParser;
 import dk.smlaursen.TSNSolver.solver.Solver;
@@ -53,7 +54,7 @@ public class Main {
 		options.addOption(DISP_ARG, false, "Display output");
 		
 		CommandLineParser parser = new DefaultParser();
-		
+	
 		try {
 			//Parse command line arguments
 			CommandLine line = parser.parse(options, args);
@@ -66,7 +67,7 @@ public class Main {
 			
 			//Parse Topology
 			logger.debug("Parsing Topology");
-			Graph<Node, DefaultEdge> graph= TopologyParser.parse(net);
+			Graph<Node, GCLEdge> graph= TopologyParser.parse(net);
 			logger.info("Parsed topology ");
 			
 			Visualizer vis = new Visualizer(graph);
@@ -83,7 +84,7 @@ public class Main {
 			//Solve problem
 			logger.debug("Solving problem");
 			Solver s = new KShortestPathSolver_SR();
-			Set<VLAN> sol = s.solve(graph, apps, new DisjointEdgesEvaluator());
+			Set<VLAN> sol = s.solve(graph, apps, new TSNEvaluator());
 			logger.info("Found solution ");
 			
 			if(display){

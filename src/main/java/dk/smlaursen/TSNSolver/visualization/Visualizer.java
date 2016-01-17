@@ -26,6 +26,7 @@ import com.mxgraph.util.mxStyleUtils;
 import com.mxgraph.view.mxGraphView;
 
 import dk.smlaursen.TSNSolver.architecture.EndSystem;
+import dk.smlaursen.TSNSolver.architecture.GCLEdge;
 import dk.smlaursen.TSNSolver.architecture.Node;
 import dk.smlaursen.TSNSolver.solver.VLAN;
 
@@ -40,8 +41,8 @@ public class Visualizer{
 	/**Setups the topology in a JFrame.
 	 * This call requires the libraries JGraphX and JGraphT-ext to be present on the classpath
 	 * @param g the {@link Graph} to display*/
-	public Visualizer(final Graph<Node, DefaultEdge> g){
-		JGraphXAdapter<Node, DefaultEdge> adapter = new JGraphXAdapter<Node, DefaultEdge>(g);
+	public Visualizer(final Graph<Node, GCLEdge> g){
+		JGraphXAdapter<Node, GCLEdge> adapter = new JGraphXAdapter<Node, GCLEdge>(g);
 		canvasComponent = new mxGraphComponent(adapter);
 		graphModel = (mxGraphModel) canvasComponent.getGraph().getModel();
 		mxGraphView view = canvasComponent.getGraph().getView();

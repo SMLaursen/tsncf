@@ -10,12 +10,12 @@ import java.util.TimerTask;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.KShortestPaths;
-import org.jgrapht.graph.DefaultEdge;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import dk.smlaursen.TSNSolver.application.Application;
 import dk.smlaursen.TSNSolver.application.SRApplication;
+import dk.smlaursen.TSNSolver.architecture.GCLEdge;
 import dk.smlaursen.TSNSolver.architecture.Node;
 import dk.smlaursen.TSNSolver.evaluator.Evaluator;
 import dk.smlaursen.TSNSolver.solver.Solver;
@@ -36,7 +36,7 @@ public class KShortestPathSolver_SR implements Solver {
 	private boolean abortFlag;
 	
 	@Override
-	public Set<VLAN> solve(final Graph<Node, DefaultEdge> topology,final List<Application> applications, Evaluator eval) {
+	public Set<VLAN> solve(final Graph<Node, GCLEdge> topology,final List<Application> applications, Evaluator eval) {
 		abortFlag = false;
 		
 		///////////////////////////////////////////////////////
@@ -55,15 +55,15 @@ public class KShortestPathSolver_SR implements Solver {
 			if(!(app instanceof SRApplication)){
 				continue;
 			}
-			KShortestPaths<Node, DefaultEdge> shortestPaths = new KShortestPaths<Node, DefaultEdge>(topology, app.getSource(), K, MAX_HOPS);
+			KShortestPaths<Node, GCLEdge> shortestPaths = new KShortestPaths<Node, GCLEdge>(topology, app.getSource(), K, MAX_HOPS);
 
 			//For each destinations
 			int noOfDests = app.getDestinations().length;
 			for(int d = 0; d < noOfDests; d++){
 				//Up to K paths to the destination exists
-				ArrayList<GraphPath<Node,DefaultEdge>> appPaths = new ArrayList<GraphPath<Node, DefaultEdge>>(K);	
+				ArrayList<GraphPath<Node,GCLEdge>> appPaths = new ArrayList<GraphPath<Node, GCLEdge>>(K);	
 				//Retrieve the K shortest paths to the destination
-				List<GraphPath<Node, DefaultEdge>> sp = shortestPaths.getPaths(app.getDestinations()[d]);
+				List<GraphPath<Node, GCLEdge>> sp = shortestPaths.getPaths(app.getDestinations()[d]);
 				//Abort If no such exists as the problem cannot be solved
 				if(sp == null){
 					logger.warn("Aborting, could not find a path from "+app.getSource()+" to "+app.getDestinations()[d]+" within "+MAX_HOPS+" hops");

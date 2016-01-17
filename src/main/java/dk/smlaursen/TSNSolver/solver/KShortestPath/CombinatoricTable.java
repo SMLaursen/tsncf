@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.jgrapht.GraphPath;
-import org.jgrapht.graph.DefaultEdge;
 
 import dk.smlaursen.TSNSolver.application.Application;
+import dk.smlaursen.TSNSolver.architecture.GCLEdge;
 import dk.smlaursen.TSNSolver.architecture.Node;
 import dk.smlaursen.TSNSolver.solver.VLAN;
 
@@ -51,7 +51,7 @@ public class CombinatoricTable {
 	}
 	
 	public Set<VLAN> getSet(){
-		Map<Application, ArrayList<GraphPath<Node, DefaultEdge>>> map = new HashMap<Application, ArrayList<GraphPath<Node, DefaultEdge>>>();
+		Map<Application, ArrayList<GraphPath<Node, GCLEdge>>> map = new HashMap<Application, ArrayList<GraphPath<Node, GCLEdge>>>();
 		Set<VLAN> routing = new HashSet<VLAN>();
 		
 		//TODO performance can be improved by an incremental "find and replace" instead of this redo everything naive approach
@@ -59,7 +59,7 @@ public class CombinatoricTable {
 			Application app = graphPaths.get(i).getApplication();
 			//This merges multiple destinations into one vlan
 			if(!map.containsKey(app)){
-				map.put(app, new ArrayList<GraphPath<Node, DefaultEdge>>());
+				map.put(app, new ArrayList<GraphPath<Node, GCLEdge>>());
 			}
 			map.get(app).add(graphPaths.get(i).getRoutings().get(indexTable[i]));
 		}

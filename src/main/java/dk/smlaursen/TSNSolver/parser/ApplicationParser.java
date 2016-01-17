@@ -108,18 +108,19 @@ public class ApplicationParser {
 	private static TTApplication getTTApplication(Element ttAppEle){
 		String name = ttAppEle.getAttribute("name");
 		int payloadSize = parsePayloadSize(ttAppEle);
-		
-		int period = Integer.parseInt(ttAppEle.getElementsByTagName("Period").item(0).getFirstChild().getNodeValue());
-		
-		int deadline = Integer.parseInt(ttAppEle.getElementsByTagName("Deadline").item(0).getFirstChild().getNodeValue());
+		int noOfFrames = parseNoOfFrames(ttAppEle);
 		
 		EndSystem src = parseSource(ttAppEle);
 		EndSystem[] dest = parseDestinations(ttAppEle);
-		return new TTApplication(name, payloadSize, period, deadline, src, dest);
+		return new TTApplication(name, payloadSize, noOfFrames, src, dest);
 	}
 	
 	private static int parsePayloadSize(Element ele){
 		return Integer.parseInt(ele.getElementsByTagName("PayloadSize").item(0).getFirstChild().getNodeValue());
+	}
+	
+	private static int parseNoOfFrames(Element ele){
+		return Integer.parseInt(ele.getElementsByTagName("NoOfFrames").item(0).getFirstChild().getNodeValue());
 	}
 	
 	private static EndSystem parseSource(Element ele){
