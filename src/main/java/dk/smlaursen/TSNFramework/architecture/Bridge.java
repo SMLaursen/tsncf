@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNSolver.architecture;
+package dk.smlaursen.TSNFramework.architecture;
 
 public class Bridge extends Node {
 	private int aRateMBPS;

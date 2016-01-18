@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNSolver.evaluator;
+package dk.smlaursen.TSNFramework.evaluator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -7,12 +7,12 @@ import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.graph.DefaultEdge;
 
-import dk.smlaursen.TSNSolver.application.Application;
-import dk.smlaursen.TSNSolver.application.SRApplication;
-import dk.smlaursen.TSNSolver.application.TTApplication;
-import dk.smlaursen.TSNSolver.architecture.GCLEdge;
-import dk.smlaursen.TSNSolver.architecture.Node;
-import dk.smlaursen.TSNSolver.solver.VLAN;
+import dk.smlaursen.TSNFramework.application.Application;
+import dk.smlaursen.TSNFramework.application.SRApplication;
+import dk.smlaursen.TSNFramework.application.TTApplication;
+import dk.smlaursen.TSNFramework.architecture.GCLEdge;
+import dk.smlaursen.TSNFramework.architecture.Node;
+import dk.smlaursen.TSNFramework.solver.VLAN;
 
 /** This {@link Evaluator} is used for calculating the cost of the given {@link VLAN} assignment taking SR- and TT-timings into account.
  *  The evaluation is based on the following penalties :

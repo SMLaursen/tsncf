@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNSolver.parser;
+package dk.smlaursen.TSNFramework.parser;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,11 +14,11 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import dk.smlaursen.TSNSolver.application.Application;
-import dk.smlaursen.TSNSolver.application.SRApplication;
-import dk.smlaursen.TSNSolver.application.SRType;
-import dk.smlaursen.TSNSolver.application.TTApplication;
-import dk.smlaursen.TSNSolver.architecture.EndSystem;
+import dk.smlaursen.TSNFramework.application.Application;
+import dk.smlaursen.TSNFramework.application.SRApplication;
+import dk.smlaursen.TSNFramework.application.SRType;
+import dk.smlaursen.TSNFramework.application.TTApplication;
+import dk.smlaursen.TSNFramework.architecture.EndSystem;
 
 public class ApplicationParser {
 	

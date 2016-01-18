@@ -1,8 +1,8 @@
-package dk.smlaursen.TSNSolver.application;
+package dk.smlaursen.TSNFramework.application;
 
 import java.util.Arrays;
 
-import dk.smlaursen.TSNSolver.architecture.EndSystem;
+import dk.smlaursen.TSNFramework.architecture.EndSystem;
 
 public class SRApplication extends Application {
 	private SRType aSRType;
@@ -18,11 +18,16 @@ public class SRApplication extends Application {
 		return aSRType;
 	}
 	
+	@Override
+	public int getInterval() {
+		return aSRType.getIntervalMicroSec();
+	}
+	
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("SR ").append(aTitle);
 		sb.append(" : ").append(aSRType);
-		sb.append(" (").append(aNoOfFramesPerInterval).append("x").append(aMaxFrameSize).append("B / ").append(aSRType.getIntervalMicroSec()).append("us)");
+		sb.append(" (").append(aNoOfFramesPerInterval).append("x").append(aMaxFrameSize).append("B / ").append(getInterval()).append("us)");
 		sb.append(" (").append(aSource).append(" -> ").append(Arrays.toString(aDestinations)).append(")");
 		return sb.toString();
 	}

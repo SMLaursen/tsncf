@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNSolver.validation;
+package dk.smlaursen.TSNFramework.validation;
 
 public class ValidateInput {
 	//		//Check that src ES exists

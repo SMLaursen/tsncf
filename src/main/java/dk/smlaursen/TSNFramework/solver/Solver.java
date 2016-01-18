@@ -1,14 +1,14 @@
-package dk.smlaursen.TSNSolver.solver;
+package dk.smlaursen.TSNFramework.solver;
 
 import java.util.List;
 import java.util.Set;
 
 import org.jgrapht.Graph;
 
-import dk.smlaursen.TSNSolver.application.Application;
-import dk.smlaursen.TSNSolver.architecture.GCLEdge;
-import dk.smlaursen.TSNSolver.architecture.Node;
-import dk.smlaursen.TSNSolver.evaluator.Evaluator;
+import dk.smlaursen.TSNFramework.application.Application;
+import dk.smlaursen.TSNFramework.architecture.GCLEdge;
+import dk.smlaursen.TSNFramework.architecture.Node;
+import dk.smlaursen.TSNFramework.evaluator.Evaluator;
 
 /** Classes implementing the Solver interface are intended to return the {@link VLAN} assignments that given the topology and set of applications solves the problem.
  *  For non-analysis based solvers, the solve implementation will most likely make use of an {@link Evaluator} to score and direct the different guesses.  */

@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNSolver.parser;
+package dk.smlaursen.TSNFramework.parser;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,10 +17,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import dk.smlaursen.TSNSolver.architecture.Bridge;
-import dk.smlaursen.TSNSolver.architecture.EndSystem;
-import dk.smlaursen.TSNSolver.architecture.GCLEdge;
-import dk.smlaursen.TSNSolver.architecture.Node;
+import dk.smlaursen.TSNFramework.architecture.Bridge;
+import dk.smlaursen.TSNFramework.architecture.EndSystem;
+import dk.smlaursen.TSNFramework.architecture.GCLEdge;
+import dk.smlaursen.TSNFramework.architecture.Node;
 
 public class TopologyParser {
 
@@ -83,7 +83,7 @@ public class TopologyParser {
 					} 
 					target = target.toUpperCase();
 					
-					graph.addEdge(nodeMap.get(source), nodeMap.get(target));
+					graph.addEdge(nodeMap.get(source), nodeMap.get(target), new GCLEdge(100));
 				}
 			}
 			nodeMap.clear();

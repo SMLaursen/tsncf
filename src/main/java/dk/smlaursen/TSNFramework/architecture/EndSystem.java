@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNSolver.architecture;
+package dk.smlaursen.TSNFramework.architecture;
 
 /** Model of a endsystem*/
 public class EndSystem extends Node{

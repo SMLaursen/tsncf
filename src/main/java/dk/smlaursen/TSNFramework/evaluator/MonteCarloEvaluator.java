@@ -1,15 +1,15 @@
-package dk.smlaursen.TSNSolver.evaluator;
+package dk.smlaursen.TSNFramework.evaluator;
 
 import java.util.Set;
 
 import org.jgrapht.Graph;
 
-import dk.smlaursen.TSNSolver.application.Application;
-import dk.smlaursen.TSNSolver.application.SRApplication;
-import dk.smlaursen.TSNSolver.application.TTApplication;
-import dk.smlaursen.TSNSolver.architecture.GCLEdge;
-import dk.smlaursen.TSNSolver.architecture.Node;
-import dk.smlaursen.TSNSolver.solver.VLAN;
+import dk.smlaursen.TSNFramework.application.Application;
+import dk.smlaursen.TSNFramework.application.SRApplication;
+import dk.smlaursen.TSNFramework.application.TTApplication;
+import dk.smlaursen.TSNFramework.architecture.GCLEdge;
+import dk.smlaursen.TSNFramework.architecture.Node;
+import dk.smlaursen.TSNFramework.solver.VLAN;
 
 public class MonteCarloEvaluator implements Evaluator {
 

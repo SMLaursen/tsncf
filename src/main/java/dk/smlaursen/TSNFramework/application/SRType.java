@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNSolver.application;
+package dk.smlaursen.TSNFramework.application;
 
 public enum SRType {
 	CLASS_A(125,  2000), 
