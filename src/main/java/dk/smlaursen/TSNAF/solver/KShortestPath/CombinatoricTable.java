@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNFramework.solver.KShortestPath;
+package dk.smlaursen.TSNAF.solver.KShortestPath;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,10 +8,10 @@ import java.util.Set;
 
 import org.jgrapht.GraphPath;
 
-import dk.smlaursen.TSNFramework.application.Application;
-import dk.smlaursen.TSNFramework.architecture.GCLEdge;
-import dk.smlaursen.TSNFramework.architecture.Node;
-import dk.smlaursen.TSNFramework.solver.VLAN;
+import dk.smlaursen.TSNAF.application.Application;
+import dk.smlaursen.TSNAF.architecture.GCLEdge;
+import dk.smlaursen.TSNAF.architecture.Node;
+import dk.smlaursen.TSNAF.solver.VLAN;
 
 public class CombinatoricTable {
 	//FIXME ensure no overflow

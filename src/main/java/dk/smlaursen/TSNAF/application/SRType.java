@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNFramework.application;
+package dk.smlaursen.TSNAF.application;
 
 public enum SRType {
 	CLASS_A(125,  2000), 

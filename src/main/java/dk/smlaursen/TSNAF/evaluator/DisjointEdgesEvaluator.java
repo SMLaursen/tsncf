@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNFramework.evaluator;
+package dk.smlaursen.TSNAF.evaluator;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -7,9 +7,9 @@ import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.graph.DefaultEdge;
 
-import dk.smlaursen.TSNFramework.architecture.GCLEdge;
-import dk.smlaursen.TSNFramework.architecture.Node;
-import dk.smlaursen.TSNFramework.solver.VLAN;
+import dk.smlaursen.TSNAF.architecture.GCLEdge;
+import dk.smlaursen.TSNAF.architecture.Node;
+import dk.smlaursen.TSNAF.solver.VLAN;
 
 /** SimpleEvaluator is an evaluator that counts the number of disjoint edges used.
  *  The fewer the better. */

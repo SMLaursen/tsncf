@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNFramework;
+package dk.smlaursen.TSNAF;
 
 import java.io.File;
 import java.util.List;
@@ -16,17 +16,16 @@ import org.jgrapht.Graph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dk.smlaursen.TSNFramework.application.Application;
-import dk.smlaursen.TSNFramework.architecture.GCLEdge;
-import dk.smlaursen.TSNFramework.architecture.Node;
-import dk.smlaursen.TSNFramework.evaluator.ModifiedLegacyAVBEvaluator;
-import dk.smlaursen.TSNFramework.evaluator.TSNEvaluator;
-import dk.smlaursen.TSNFramework.parser.ApplicationParser;
-import dk.smlaursen.TSNFramework.parser.TopologyParser;
-import dk.smlaursen.TSNFramework.solver.Solver;
-import dk.smlaursen.TSNFramework.solver.VLAN;
-import dk.smlaursen.TSNFramework.solver.KShortestPath.KShortestPathSolver_SR;
-import dk.smlaursen.TSNFramework.visualization.Visualizer;
+import dk.smlaursen.TSNAF.application.Application;
+import dk.smlaursen.TSNAF.architecture.GCLEdge;
+import dk.smlaursen.TSNAF.architecture.Node;
+import dk.smlaursen.TSNAF.evaluator.ModifiedLegacyAVBEvaluator;
+import dk.smlaursen.TSNAF.parser.ApplicationParser;
+import dk.smlaursen.TSNAF.parser.TopologyParser;
+import dk.smlaursen.TSNAF.solver.Solver;
+import dk.smlaursen.TSNAF.solver.VLAN;
+import dk.smlaursen.TSNAF.solver.KShortestPath.KShortestPathSolver_SR;
+import dk.smlaursen.TSNAF.visualization.Visualizer;
 
 public class Main {
 	//Command line options
@@ -36,7 +35,6 @@ public class Main {
 	//////////////////////////////////////////////
 	//TODO Create pre-processor and validator  
 	//TODO Improve logging and error handling
-	//TODO Add real Evaluator
 	//TODO Create GUI in separate project
 	//////////////////////////////////////////////
 	
@@ -53,7 +51,6 @@ public class Main {
 		options.addOption(DISP_ARG, false, "Display output");
 		
 		CommandLineParser parser = new DefaultParser();
-		
 		try {
 			//Parse command line arguments
 			CommandLine line = parser.parse(options, args);
@@ -83,7 +80,7 @@ public class Main {
 			//Solve problem
 			logger.debug("Solving problem");
 			Solver s = new KShortestPathSolver_SR();
-			Set<VLAN> sol = s.solve(graph, apps, new TSNEvaluator());
+			Set<VLAN> sol = s.solve(graph, apps, new ModifiedLegacyAVBEvaluator());
 			logger.info("Found solution ");
 			
 			if(display){

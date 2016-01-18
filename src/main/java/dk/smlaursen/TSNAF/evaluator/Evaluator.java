@@ -1,12 +1,12 @@
-package dk.smlaursen.TSNFramework.evaluator;
+package dk.smlaursen.TSNAF.evaluator;
 
 import java.util.Set;
 
 import org.jgrapht.Graph;
 
-import dk.smlaursen.TSNFramework.architecture.GCLEdge;
-import dk.smlaursen.TSNFramework.architecture.Node;
-import dk.smlaursen.TSNFramework.solver.VLAN;
+import dk.smlaursen.TSNAF.architecture.GCLEdge;
+import dk.smlaursen.TSNAF.architecture.Node;
+import dk.smlaursen.TSNAF.solver.VLAN;
 
 /**Classes implementing the Evaluator interface are used to score a given {@link VLAN} assignment based on the actual topology. 
  * The score denotes an associated cost of doing that assignment and can be used to direct a {@link Solver} towards a less costly assignment.*/

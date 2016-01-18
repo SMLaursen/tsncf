@@ -1,6 +1,6 @@
-package dk.smlaursen.TSNFramework.application;
+package dk.smlaursen.TSNAF.application;
 
-import dk.smlaursen.TSNFramework.architecture.EndSystem;
+import dk.smlaursen.TSNAF.architecture.EndSystem;
 
 /** Model of a application */
 public abstract class Application {
@@ -13,6 +13,7 @@ public abstract class Application {
 	
 	/** Returns the period for this class of traffic in microseconds / us*/
 	public abstract int getInterval();
+	public abstract int getDeadline();
 	
 	public Application(String title,int aNoOfFramesPerInterval, int aMaxFrameSize, EndSystem src, EndSystem ... dest) {
 		this.aSource = src;

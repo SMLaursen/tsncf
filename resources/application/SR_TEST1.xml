@@ -2,8 +2,8 @@
 <Applications>
 	<SRApplication name="APP1_SR">
 		<SRType>CLASS_A</SRType>
-		<PayloadSize>8</PayloadSize>
-		<NoOfFrames>10</NoOfFrames>
+		<PayloadSize>16</PayloadSize>
+		<NoOfFrames>4</NoOfFrames>
 		<Source name="ES1"></Source>
 		<Destinations>
 			<Dest name="ES2"></Dest>

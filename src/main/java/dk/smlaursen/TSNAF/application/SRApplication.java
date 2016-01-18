@@ -1,8 +1,8 @@
-package dk.smlaursen.TSNFramework.application;
+package dk.smlaursen.TSNAF.application;
 
 import java.util.Arrays;
 
-import dk.smlaursen.TSNFramework.architecture.EndSystem;
+import dk.smlaursen.TSNAF.architecture.EndSystem;
 
 public class SRApplication extends Application {
 	private SRType aSRType;
@@ -21,6 +21,11 @@ public class SRApplication extends Application {
 	@Override
 	public int getInterval() {
 		return aSRType.getIntervalMicroSec();
+	}
+	
+	@Override
+	public int getDeadline(){
+		return aSRType.getMaxEndToEndDelayMicroSec();
 	}
 	
 	public String toString(){
