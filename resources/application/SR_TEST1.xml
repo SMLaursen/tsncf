@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Applications>
-	<SRApplication name="APP1_SR">
+	<SRApplication name="APP1">
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>16</PayloadSize>
 		<NoOfFrames>4</NoOfFrames>
@@ -11,7 +11,7 @@
 		</Destinations>
 	</SRApplication>
 
-	<SRApplication name="APP2_SR">
+	<SRApplication name="APP2">
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>8</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
@@ -21,18 +21,18 @@
 		</Destinations>
 	</SRApplication>
 
-	<TTApplication name="APP3_TT">
+	<TTApplication name="APP3">
 		<PayloadSize>8</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
 		<Source name="ES1"></Source>
 		<Destinations>
-			<Dest name="ES4"></Dest>
-			<Route>
-				<Bridge name="B1"></Bridge>
-				<Bridge name="B4"></Bridge>
-				<Bridge name="B2"></Bridge>
-			</Route>
+			<Dest name="ES4">
+				<Route>
+					<Bridge name="B1"></Bridge>
+					<Bridge name="B4"></Bridge>
+					<Bridge name="B2"></Bridge>
+				</Route>
+			</Dest>
 		</Destinations>
 	</TTApplication>
-
 </Applications>

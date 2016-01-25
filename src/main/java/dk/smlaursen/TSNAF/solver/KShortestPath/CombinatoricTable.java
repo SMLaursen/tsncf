@@ -25,8 +25,8 @@ public class CombinatoricTable {
 	
 	public CombinatoricTable(ArrayList<VLAN> paths){
 		hasNext = true;
-		graphPaths = paths;
 		
+		graphPaths = paths;
 		indexTable = new byte[graphPaths.size()];
 		sizes = new byte[graphPaths.size()];
 		
@@ -38,6 +38,10 @@ public class CombinatoricTable {
 	}
 	
 	public void next(){
+		if(indexTable.length == 0){
+			hasNext = false;
+			return;
+		}
 		currCombination++;
 		byte index = 0;
 		while(hasNext && ++indexTable[index] == sizes[index]){

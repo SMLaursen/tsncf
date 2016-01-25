@@ -29,7 +29,7 @@ import dk.smlaursen.TSNAF.visualization.Visualizer;
 
 public class Main {
 	//Command line options
-	private static final String APP_ARG = "app",NET_ARG = "net", DISP_ARG = "display", VERBOSE_ARG = "v";
+	private static final String APP_ARG = "app",NET_ARG = "net", DISP_ARG = "display", VERBOSE_ARG = "verbose";
 
 	//FIXME todos
 	//////////////////////////////////////////////
@@ -37,10 +37,7 @@ public class Main {
 	//TODO Improve logging and error handling
 	//TODO Create GUI in separate project
 	//////////////////////////////////////////////
-
 	public static void main(String[] args){
-		Logger logger = LoggerFactory.getLogger(Main.class.getSimpleName());
-
 		Option architectureFile = Option.builder(NET_ARG).required().argName("file").hasArg().desc("Use given file as network").build();
 		Option applicationFile = Option.builder(APP_ARG).required().argName("file").hasArg().desc("Use given file as application").build();
 
@@ -61,6 +58,7 @@ public class Main {
 			if(line.hasOption(VERBOSE_ARG)){
 				System.setProperty(org.slf4j.impl.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "TRACE");
 			}
+			Logger logger = LoggerFactory.getLogger(Main.class.getSimpleName());
 			boolean display = line.hasOption(DISP_ARG);
 
 			//Parse Topology
@@ -69,6 +67,7 @@ public class Main {
 			logger.info("Topology parsed!");
 
 			Visualizer vis = new Visualizer(graph);
+			
 			//Display Application?
 			if(display){
 				vis.topologyPanel();

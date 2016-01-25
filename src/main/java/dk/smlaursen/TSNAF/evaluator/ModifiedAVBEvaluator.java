@@ -8,9 +8,12 @@ import java.util.Set;
 
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import dk.smlaursen.TSNAF.application.Application;
 import dk.smlaursen.TSNAF.application.SRType;
+import dk.smlaursen.TSNAF.application.TTApplication;
 import dk.smlaursen.TSNAF.architecture.GCLEdge;
 import dk.smlaursen.TSNAF.architecture.Node;
 import dk.smlaursen.TSNAF.solver.VLAN;
@@ -36,6 +39,8 @@ public class ModifiedAVBEvaluator implements Evaluator{
 	/** The maximum BE frame-size*/
 	private final static int MAX_BE_FRAME_BYTES = 1522;
 	
+	private static Logger logger = LoggerFactory.getLogger(ModifiedAVBEvaluator.class.getSimpleName());
+	
 	@Override
 	public double evaluate(Set<VLAN> vlans, Graph<Node, GCLEdge> graph) {
 		Map<GCLEdge, Double> allocMap = new HashMap<GCLEdge, Double>(); 
@@ -58,7 +63,9 @@ public class ModifiedAVBEvaluator implements Evaluator{
 					
 					//Abort if edge-capacity exceeded (remember not 100% of the edge is allowed to be reserved)
 					if(totalAllocMbps > edge.getCapacityMbps() * MAX_ALLOC){
-						//TODO LOG
+						if(logger.isDebugEnabled()){
+							logger.debug("VLANS invalid : edge "+edge+"'s capacity exceeded. VLANS : "+vlans);
+						}
 						return cost = Double.MAX_VALUE;
 					}
 					allocMap.put(edge, totalAllocMbps);
@@ -71,6 +78,10 @@ public class ModifiedAVBEvaluator implements Evaluator{
 		//Now calculate timings 
 		for(VLAN vl : vlans){
 			Application app = vl.getApplication();
+			//Below calculation is only valid for AVB-traffic
+			if(app instanceof TTApplication){
+				continue;
+			}
 			double maxLatency = 0;
 			for(GraphPath<Node, GCLEdge> gp : vl.getRoutings()){
 				double latency = 0;
@@ -84,6 +95,9 @@ public class ModifiedAVBEvaluator implements Evaluator{
 				}
 			}
 			if(maxLatency > app.getDeadline()){
+				if(logger.isDebugEnabled()){
+					logger.debug(vlans+" set non-schedulable : "+app.getTitle()+"'s maxLatency exceeds deadline");
+				}
 				cost = Double.MAX_VALUE;
 				break;
 			} else if (maxLatency / app.getDeadline() > PENALITY_THRESHOLD){
