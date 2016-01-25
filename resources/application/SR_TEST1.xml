@@ -10,7 +10,7 @@
 			<Dest name="ES4"></Dest>
 		</Destinations>
 	</SRApplication>
-	
+
 	<SRApplication name="APP2_SR">
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>8</PayloadSize>
@@ -20,14 +20,19 @@
 			<Dest name="ES3"></Dest>
 		</Destinations>
 	</SRApplication>
-	
+
 	<TTApplication name="APP3_TT">
 		<PayloadSize>8</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
 		<Source name="ES1"></Source>
 		<Destinations>
 			<Dest name="ES4"></Dest>
+			<Route>
+				<Bridge name="B1"></Bridge>
+				<Bridge name="B4"></Bridge>
+				<Bridge name="B2"></Bridge>
+			</Route>
 		</Destinations>
 	</TTApplication>
-	
+
 </Applications>

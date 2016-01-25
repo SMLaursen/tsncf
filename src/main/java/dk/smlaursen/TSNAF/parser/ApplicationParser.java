@@ -2,6 +2,7 @@ package dk.smlaursen.TSNAF.parser;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import dk.smlaursen.TSNAF.application.Application;
 import dk.smlaursen.TSNAF.application.SRApplication;
 import dk.smlaursen.TSNAF.application.SRType;
 import dk.smlaursen.TSNAF.application.TTApplication;
+import dk.smlaursen.TSNAF.architecture.Bridge;
 import dk.smlaursen.TSNAF.architecture.EndSystem;
 
 public class ApplicationParser {
@@ -109,10 +111,12 @@ public class ApplicationParser {
 		String name = ttAppEle.getAttribute("name");
 		int payloadSize = parsePayloadSize(ttAppEle);
 		int noOfFrames = parseNoOfFrames(ttAppEle);
-		
+
 		EndSystem src = parseSource(ttAppEle);
+		List<List<Bridge>> path = parseExplicitPath(ttAppEle);
+		
 		EndSystem[] dest = parseDestinations(ttAppEle);
-		return new TTApplication(name, payloadSize, noOfFrames, src, dest);
+		return new TTApplication(name, payloadSize, noOfFrames, path, src, dest);
 	}
 	
 	private static int parsePayloadSize(Element ele){
@@ -138,5 +142,28 @@ public class ApplicationParser {
 			}
 		} 
 		return dest;
+	}
+	
+	private static List<List<Bridge>> parseExplicitPath(Element ele){
+		List<List<Bridge>> path = null;
+		Element destEl = (Element) ele.getElementsByTagName("Destinations").item(0);
+		NodeList destNL = destEl.getElementsByTagName("Dest");
+		if(destNL != null && destNL.getLength() > 0){
+			path = new ArrayList<List<Bridge>>(destNL.getLength());
+			for(int i= 0; i < destNL.getLength(); i++){
+				Element routeEL = (Element) ele.getElementsByTagName("Route").item(0);
+				if(routeEL == null){
+					throw new IllegalArgumentException("Route to "+((Element) destNL.item(i)).getAttribute("name")+" not specified");
+				}
+				NodeList routeNL = routeEL.getElementsByTagName("Bridge");
+				if(routeNL != null && routeNL.getLength() > 0){
+					path.add(i, new LinkedList<Bridge>());
+					for(int u= 0; u < routeNL.getLength(); u++){
+						path.get(i).add(new Bridge(((Element) routeNL.item(u)).getAttribute("name")));
+					}
+				} 
+			}
+		} 
+		return path;
 	}
 }

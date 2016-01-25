@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Applications>
+	<TTApplication name="TT_EngineControl">
+		<PayloadSize>100</PayloadSize>
+		<NoOfFrames>2</NoOfFrames>
+		<Source name="ES1"></Source>
+		<Destinations>
+			<Dest name="ES5">
+				<Route>
+					<Bridge name="B1"></Bridge>
+					<Bridge name="B3"></Bridge>
+				</Route>
+			</Dest>
+		</Destinations>
+	</TTApplication>
+
+	<SRApplication name="AVB_Parking">
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>50</PayloadSize>
+		<NoOfFrames>10</NoOfFrames>
+		<Source name="ES2"></Source>
+		<Destinations>
+			<Dest name="ES4"></Dest>
+		</Destinations>
+	</SRApplication>
+
+	<SRApplication name="AVB_Lane">
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>60</PayloadSize>
+		<NoOfFrames>10</NoOfFrames>
+		<Source name="ES3"></Source>
+		<Destinations>
+			<Dest name="ES6"></Dest>
+		</Destinations>
+	</SRApplication>
+</Applications>

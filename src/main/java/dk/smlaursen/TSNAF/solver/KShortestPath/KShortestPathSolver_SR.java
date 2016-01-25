@@ -2,6 +2,7 @@ package dk.smlaursen.TSNAF.solver.KShortestPath;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.Timer;
@@ -10,11 +11,13 @@ import java.util.TimerTask;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.KShortestPaths;
+import org.jgrapht.graph.SimpleGraph;
+import org.jgrapht.graph.SimpleGraphPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import dk.smlaursen.TSNAF.application.Application;
-import dk.smlaursen.TSNAF.application.SRApplication;
+import dk.smlaursen.TSNAF.application.TTApplication;
 import dk.smlaursen.TSNAF.architecture.GCLEdge;
 import dk.smlaursen.TSNAF.architecture.Node;
 import dk.smlaursen.TSNAF.evaluator.Evaluator;
@@ -28,17 +31,21 @@ public class KShortestPathSolver_SR implements Solver {
 	private static final int K = 3;
 	private static final int MAX_HOPS = 7;
 	private static final int PROGRESS_PERIOD = 10000;
-	
+
 	private static Logger logger = LoggerFactory.getLogger(KShortestPathSolver_SR.class.getSimpleName());
 
 	//For storing the so far best solution
 	private Set<VLAN> bestVlan = new HashSet<VLAN>();
+
+	//For storing the TT-Applications 
+	private Set<VLAN> ttVlan  = new HashSet<VLAN>();
+
 	private boolean abortFlag;
-	
+
 	@Override
 	public Set<VLAN> solve(final Graph<Node, GCLEdge> topology,final List<Application> applications, Evaluator eval) {
 		abortFlag = false;
-		
+
 		///////////////////////////////////////////////////////
 		//-- First we retrieve all individual graphPaths  -- //
 		///////////////////////////////////////////////////////
@@ -50,11 +57,14 @@ public class KShortestPathSolver_SR implements Solver {
 
 		// Loop through each application and add it's K shortest paths to above arraylist
 		for(Application app : applications){
-			
-			//Only do this for SRApplications
-			if(!(app instanceof SRApplication)){
+
+			//If TT-Application (explicitlyRouted) parse to VLAN and continue
+			if(app instanceof TTApplication){
+				ttVlan.add(convertToVLAN((TTApplication) app, topology));
 				continue;
 			}
+
+			//Else SR-Application
 			KShortestPaths<Node, GCLEdge> shortestPaths = new KShortestPaths<Node, GCLEdge>(topology, app.getSource(), K, MAX_HOPS);
 
 			//For each destinations
@@ -118,6 +128,7 @@ public class KShortestPathSolver_SR implements Solver {
 
 			//Retrieve the set of VLANs
 			Set<VLAN> curr = table.getSet();
+			curr.addAll(ttVlan);
 
 			//Evaluate and store the so far best solution
 			double currCost = eval.evaluate(curr, topology); 
@@ -135,6 +146,25 @@ public class KShortestPathSolver_SR implements Solver {
 		timer.cancel();
 		//return best;
 		return bestVlan;
+	}
+
+	/**Method which converts the routing of a {@link TTApplication} to a {@link VLAN}*/
+	private VLAN convertToVLAN(TTApplication ttApp, Graph<Node, GCLEdge> graph){
+		ArrayList<GraphPath<Node, GCLEdge>> aRouting = new ArrayList<GraphPath<Node, GCLEdge>>(ttApp.getDestinations().length);
+		try{
+			for(int i=0; i<ttApp.getDestinations().length; i++){
+				List<Node> path = new LinkedList<Node>();
+				path.add(ttApp.getSource());
+				path.addAll(ttApp.getPath().get(i));
+				path.add(ttApp.getDestinations()[i]);
+				
+				SimpleGraphPath<Node, GCLEdge> p = new SimpleGraphPath<Node, GCLEdge>((SimpleGraph<Node, GCLEdge>) graph, path , 1.0);
+				aRouting.add(p);
+			}
+			return new VLAN(ttApp, aRouting);
+		} catch(IllegalArgumentException e){
+			throw new IllegalArgumentException("The specified vertice-Route for "+ttApp.getTitle()+" do not form a path.");
+		}
 	}
 
 	@Override

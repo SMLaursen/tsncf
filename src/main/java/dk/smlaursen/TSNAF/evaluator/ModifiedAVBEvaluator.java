@@ -20,7 +20,7 @@ import dk.smlaursen.TSNAF.solver.VLAN;
  *  <li> {@value #HOP_PENALITY} for each edge. This favors shorter paths and penalizes disjoint multi-cast routes.
  *  <li> {@value #PENALITY_THRESHOLD} The threshold of when to start increasing cost due to high-utilization.   
  *  <li> {@value #THRESHOLD_EXCEEDED_PENALITY} The penality applied to every percent of WCRT / DEADLINE exceeds {@link #PENALITY_THRESHOLD}  */
-public class ModifiedLegacyAVBEvaluator implements Evaluator{
+public class ModifiedAVBEvaluator implements Evaluator{
 	//----------- PENALTIES ----------------------
 	/** The threshold of WCRT / DEADLINE for when starting to increase with {@value #THRESHOLD_EXCEEDED_PENALITY} per. percent*/
 	private final static double PENALITY_THRESHOLD = 0.8;

@@ -9,9 +9,7 @@ public class SRApplication extends Application {
 	
 	public SRApplication (String name, SRType type, int payloadSize, int noOfFrames, EndSystem src, EndSystem ...dest){
 		super(name, payloadSize, noOfFrames, src, dest);
-		this.aSRType = type;
-		this.aNoOfFramesPerInterval = noOfFrames;
-		this.aMaxFrameSize = payloadSize;
+		aSRType = type;
 	}
 	
 	public SRType getType(){

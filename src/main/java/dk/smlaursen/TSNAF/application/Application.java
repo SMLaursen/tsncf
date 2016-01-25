@@ -15,10 +15,12 @@ public abstract class Application {
 	public abstract int getInterval();
 	public abstract int getDeadline();
 	
-	public Application(String title,int aNoOfFramesPerInterval, int aMaxFrameSize, EndSystem src, EndSystem ... dest) {
+	public Application(String title, int aMaxFrameSize,int aNoOfFramesPerInterval, EndSystem src, EndSystem ... dest) {
 		this.aSource = src;
 		this.aDestinations = dest;
 		this.aTitle = title;
+		this.aNoOfFramesPerInterval = aNoOfFramesPerInterval;
+		this.aMaxFrameSize = aMaxFrameSize;
 	}
 	
 	public EndSystem getSource(){
