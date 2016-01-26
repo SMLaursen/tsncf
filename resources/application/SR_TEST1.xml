@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Applications>
-	<SRApplication name="APP1">
+		<SRApplication name="APP1">
+		<Mode>A</Mode>
+		<Mode>B</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>16</PayloadSize>
 		<NoOfFrames>4</NoOfFrames>
@@ -12,6 +14,7 @@
 	</SRApplication>
 
 	<SRApplication name="APP2">
+		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>8</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>

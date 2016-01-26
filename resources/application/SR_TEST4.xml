@@ -3,34 +3,36 @@
 	<TTApplication name="TT_EngineControl">
 		<PayloadSize>100</PayloadSize>
 		<NoOfFrames>2</NoOfFrames>
-		<Source name="ES1"></Source>
+		<Source name="ES1"/>
 		<Destinations>
 			<Dest name="ES5">
 				<Route>
-					<Bridge name="B1"></Bridge>
-					<Bridge name="B3"></Bridge>
+					<Bridge name="B1"/>
+					<Bridge name="B3"/>
 				</Route>
 			</Dest>
 		</Destinations>
 	</TTApplication>
 
 	<SRApplication name="AVB_Parking">
+		<Mode>Parking</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>50</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
-		<Source name="ES2"></Source>
+		<Source name="ES2"/>
 		<Destinations>
-			<Dest name="ES4"></Dest>
+			<Dest name="ES4"/>
 		</Destinations>
 	</SRApplication>
 
 	<SRApplication name="AVB_Lane">
+		<Mode>Lane</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>60</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
-		<Source name="ES3"></Source>
+		<Source name="ES3"/>
 		<Destinations>
-			<Dest name="ES6"></Dest>
+			<Dest name="ES6"/>
 		</Destinations>
 	</SRApplication>
 </Applications>
