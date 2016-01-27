@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNAF.parser;
+package dk.smlaursen.TSNCF.parser;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,12 +17,12 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import dk.smlaursen.TSNAF.application.Application;
-import dk.smlaursen.TSNAF.application.SRApplication;
-import dk.smlaursen.TSNAF.application.SRType;
-import dk.smlaursen.TSNAF.application.TTApplication;
-import dk.smlaursen.TSNAF.architecture.Bridge;
-import dk.smlaursen.TSNAF.architecture.EndSystem;
+import dk.smlaursen.TSNCF.application.Application;
+import dk.smlaursen.TSNCF.application.SRApplication;
+import dk.smlaursen.TSNCF.application.SRType;
+import dk.smlaursen.TSNCF.application.TTApplication;
+import dk.smlaursen.TSNCF.architecture.Bridge;
+import dk.smlaursen.TSNCF.architecture.EndSystem;
 
 public class ApplicationParser {
 	private static Logger logger = LoggerFactory.getLogger(ApplicationParser.class.getSimpleName());

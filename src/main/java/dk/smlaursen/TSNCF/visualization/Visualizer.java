@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNAF.visualization;
+package dk.smlaursen.TSNCF.visualization;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -25,10 +25,10 @@ import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxStyleUtils;
 import com.mxgraph.view.mxGraphView;
 
-import dk.smlaursen.TSNAF.architecture.EndSystem;
-import dk.smlaursen.TSNAF.architecture.GCLEdge;
-import dk.smlaursen.TSNAF.architecture.Node;
-import dk.smlaursen.TSNAF.solver.VLAN;
+import dk.smlaursen.TSNCF.architecture.EndSystem;
+import dk.smlaursen.TSNCF.architecture.GCLEdge;
+import dk.smlaursen.TSNCF.architecture.Node;
+import dk.smlaursen.TSNCF.solver.VLAN;
 
 public class Visualizer{
 	private static final Dimension DEFAULT_SIZE = new Dimension(500, 320);

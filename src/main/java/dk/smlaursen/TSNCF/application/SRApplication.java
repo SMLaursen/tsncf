@@ -1,9 +1,9 @@
-package dk.smlaursen.TSNAF.application;
+package dk.smlaursen.TSNCF.application;
 
 import java.util.Arrays;
 import java.util.List;
 
-import dk.smlaursen.TSNAF.architecture.EndSystem;
+import dk.smlaursen.TSNCF.architecture.EndSystem;
 
 public class SRApplication extends Application {
 	private SRType aSRType;

@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNAF.parser;
+package dk.smlaursen.TSNCF.parser;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,10 +17,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import dk.smlaursen.TSNAF.architecture.Bridge;
-import dk.smlaursen.TSNAF.architecture.EndSystem;
-import dk.smlaursen.TSNAF.architecture.GCLEdge;
-import dk.smlaursen.TSNAF.architecture.Node;
+import dk.smlaursen.TSNCF.architecture.Bridge;
+import dk.smlaursen.TSNCF.architecture.EndSystem;
+import dk.smlaursen.TSNCF.architecture.GCLEdge;
+import dk.smlaursen.TSNCF.architecture.Node;
 
 public class TopologyParser {
 

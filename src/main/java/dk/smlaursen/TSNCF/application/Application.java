@@ -1,6 +1,6 @@
-package dk.smlaursen.TSNAF.application;
+package dk.smlaursen.TSNCF.application;
 
-import dk.smlaursen.TSNAF.architecture.EndSystem;
+import dk.smlaursen.TSNCF.architecture.EndSystem;
 
 /** Model of a application */
 public abstract class Application {

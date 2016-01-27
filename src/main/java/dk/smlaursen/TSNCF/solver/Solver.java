@@ -1,14 +1,14 @@
-package dk.smlaursen.TSNAF.solver;
+package dk.smlaursen.TSNCF.solver;
 
 import java.util.List;
 import java.util.Set;
 
 import org.jgrapht.Graph;
 
-import dk.smlaursen.TSNAF.application.Application;
-import dk.smlaursen.TSNAF.architecture.GCLEdge;
-import dk.smlaursen.TSNAF.architecture.Node;
-import dk.smlaursen.TSNAF.evaluator.Evaluator;
+import dk.smlaursen.TSNCF.application.Application;
+import dk.smlaursen.TSNCF.architecture.GCLEdge;
+import dk.smlaursen.TSNCF.architecture.Node;
+import dk.smlaursen.TSNCF.evaluator.Evaluator;
 
 /** Classes implementing the Solver interface are intended to return the {@link VLAN} assignments that given the topology and set of applications solves the problem.
  *  For non-analysis based solvers, the solve implementation will most likely make use of an {@link Evaluator} to score and direct the different guesses.  */

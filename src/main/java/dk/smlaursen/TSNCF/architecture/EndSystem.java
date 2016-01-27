@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNAF.architecture;
+package dk.smlaursen.TSNCF.architecture;
 
 /** Model of a endsystem*/
 public class EndSystem extends Node{

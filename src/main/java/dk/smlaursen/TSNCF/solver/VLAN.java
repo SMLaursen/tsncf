@@ -1,11 +1,11 @@
-package dk.smlaursen.TSNAF.solver;
+package dk.smlaursen.TSNCF.solver;
 
 import java.util.ArrayList;
 import org.jgrapht.GraphPath;
 
-import dk.smlaursen.TSNAF.application.Application;
-import dk.smlaursen.TSNAF.architecture.GCLEdge;
-import dk.smlaursen.TSNAF.architecture.Node;
+import dk.smlaursen.TSNCF.application.Application;
+import dk.smlaursen.TSNCF.architecture.GCLEdge;
+import dk.smlaursen.TSNCF.architecture.Node;
 
 /** Class representing a VLAN which tells the routing*/
 public class VLAN {

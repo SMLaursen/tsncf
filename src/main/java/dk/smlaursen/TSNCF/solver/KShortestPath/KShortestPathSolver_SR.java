@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNAF.solver.KShortestPath;
+package dk.smlaursen.TSNCF.solver.KShortestPath;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -16,13 +16,13 @@ import org.jgrapht.graph.SimpleGraphPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dk.smlaursen.TSNAF.application.Application;
-import dk.smlaursen.TSNAF.application.TTApplication;
-import dk.smlaursen.TSNAF.architecture.GCLEdge;
-import dk.smlaursen.TSNAF.architecture.Node;
-import dk.smlaursen.TSNAF.evaluator.Evaluator;
-import dk.smlaursen.TSNAF.solver.Solver;
-import dk.smlaursen.TSNAF.solver.VLAN;
+import dk.smlaursen.TSNCF.application.Application;
+import dk.smlaursen.TSNCF.application.TTApplication;
+import dk.smlaursen.TSNCF.architecture.GCLEdge;
+import dk.smlaursen.TSNCF.architecture.Node;
+import dk.smlaursen.TSNCF.evaluator.Evaluator;
+import dk.smlaursen.TSNCF.solver.Solver;
+import dk.smlaursen.TSNCF.solver.VLAN;
 
 /**The KShortestPathSolver_SR relies on the {@link KShortestPaths} algorithm in the jgrapht library to calculate the K shortest paths
  * for each src-dest nodes of an SRApplication. Naturally, the greater K the better solution can be found, but as the shortest paths are in sorted order, the simples routes (Often yielding the best results) are evaluated first. 

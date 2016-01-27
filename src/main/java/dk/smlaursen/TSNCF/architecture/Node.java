@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNAF.architecture;
+package dk.smlaursen.TSNCF.architecture;
 
 /**Vertices in a network should implement this class*/
 public abstract class Node {

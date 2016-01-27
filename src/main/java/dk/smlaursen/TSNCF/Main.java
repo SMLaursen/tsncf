@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNAF;
+package dk.smlaursen.TSNCF;
 
 import java.io.File;
 import java.util.List;
@@ -16,16 +16,16 @@ import org.jgrapht.Graph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dk.smlaursen.TSNAF.application.Application;
-import dk.smlaursen.TSNAF.architecture.GCLEdge;
-import dk.smlaursen.TSNAF.architecture.Node;
-import dk.smlaursen.TSNAF.evaluator.ModifiedAVBEvaluator;
-import dk.smlaursen.TSNAF.parser.ApplicationParser;
-import dk.smlaursen.TSNAF.parser.TopologyParser;
-import dk.smlaursen.TSNAF.solver.Solver;
-import dk.smlaursen.TSNAF.solver.VLAN;
-import dk.smlaursen.TSNAF.solver.KShortestPath.KShortestPathSolver_SR;
-import dk.smlaursen.TSNAF.visualization.Visualizer;
+import dk.smlaursen.TSNCF.application.Application;
+import dk.smlaursen.TSNCF.architecture.GCLEdge;
+import dk.smlaursen.TSNCF.architecture.Node;
+import dk.smlaursen.TSNCF.evaluator.ModifiedAVBEvaluator;
+import dk.smlaursen.TSNCF.parser.ApplicationParser;
+import dk.smlaursen.TSNCF.parser.TopologyParser;
+import dk.smlaursen.TSNCF.solver.Solver;
+import dk.smlaursen.TSNCF.solver.VLAN;
+import dk.smlaursen.TSNCF.solver.KShortestPath.KShortestPathSolver_SR;
+import dk.smlaursen.TSNCF.visualization.Visualizer;
 
 public class Main {
 	//Command line options

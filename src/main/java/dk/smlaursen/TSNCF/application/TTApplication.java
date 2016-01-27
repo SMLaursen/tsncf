@@ -1,10 +1,10 @@
-package dk.smlaursen.TSNAF.application;
+package dk.smlaursen.TSNCF.application;
 
 import java.util.Arrays;
 import java.util.List;
 
-import dk.smlaursen.TSNAF.architecture.Bridge;
-import dk.smlaursen.TSNAF.architecture.EndSystem;
+import dk.smlaursen.TSNCF.architecture.Bridge;
+import dk.smlaursen.TSNCF.architecture.EndSystem;
 
 public class TTApplication extends Application{
 	private int ttInterval = 500;

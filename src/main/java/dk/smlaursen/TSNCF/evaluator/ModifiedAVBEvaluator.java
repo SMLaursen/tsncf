@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNAF.evaluator;
+package dk.smlaursen.TSNCF.evaluator;
 
 import java.util.HashMap;
 
@@ -11,13 +11,13 @@ import org.jgrapht.GraphPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import dk.smlaursen.TSNAF.application.Application;
-import dk.smlaursen.TSNAF.application.SRApplication;
-import dk.smlaursen.TSNAF.application.SRType;
-import dk.smlaursen.TSNAF.application.TTApplication;
-import dk.smlaursen.TSNAF.architecture.GCLEdge;
-import dk.smlaursen.TSNAF.architecture.Node;
-import dk.smlaursen.TSNAF.solver.VLAN;
+import dk.smlaursen.TSNCF.application.Application;
+import dk.smlaursen.TSNCF.application.SRApplication;
+import dk.smlaursen.TSNCF.application.SRType;
+import dk.smlaursen.TSNCF.application.TTApplication;
+import dk.smlaursen.TSNCF.architecture.GCLEdge;
+import dk.smlaursen.TSNCF.architecture.Node;
+import dk.smlaursen.TSNCF.solver.VLAN;
 
 /** This {@link Evaluator} is used for calculating the cost of the given {@link VLAN} assignment taking SR- and TT-timings into account.
  *  The cost is calculated using the following penalties :

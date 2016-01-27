@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNAF.architecture;
+package dk.smlaursen.TSNCF.architecture;
 
 import org.jgrapht.graph.DefaultEdge;
 
