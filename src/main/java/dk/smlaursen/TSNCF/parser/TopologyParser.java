@@ -11,6 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jgrapht.graph.AbstractBaseGraph;
+import org.jgrapht.graph.SimpleDirectedGraph;
 import org.jgrapht.graph.SimpleGraph;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -25,7 +26,7 @@ import dk.smlaursen.TSNCF.architecture.Node;
 public class TopologyParser {
 
 	public static AbstractBaseGraph<Node, GCLEdge> parse(File f){
-		AbstractBaseGraph<Node, GCLEdge> graph = null;
+		AbstractBaseGraph<Node, GCLEdge> graph = new SimpleDirectedGraph<Node, GCLEdge>(GCLEdge.class);
 
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		Document dom;
@@ -39,9 +40,10 @@ public class TopologyParser {
 			Map<String, Node> nodeMap = new HashMap<String, Node>();
 			
 			String edgeDefault = graphEle.getAttribute("edgedefault");
+			boolean isDirected;
 			switch(edgeDefault){
-			case "undirected" : graph = new SimpleGraph<Node, GCLEdge>(GCLEdge.class); break;
-			
+			case "directed" : isDirected = true; break;
+			case "undirected" : isDirected = false; break;
 			default : throw new InputMismatchException("edgeDefault "+edgeDefault+" is not supported");
 			}
 			
@@ -82,8 +84,10 @@ public class TopologyParser {
 						throw new InputMismatchException("Aborting : edge didn't contain any target");
 					} 
 					target = target.toUpperCase();
-					
 					graph.addEdge(nodeMap.get(source), nodeMap.get(target), new GCLEdge(100));
+					if(!isDirected){
+						graph.addEdge(nodeMap.get(target), nodeMap.get(source), new GCLEdge(100));
+					}
 				}
 			}
 			nodeMap.clear();

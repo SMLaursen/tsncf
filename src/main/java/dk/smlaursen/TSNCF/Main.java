@@ -35,7 +35,6 @@ public class Main {
 	//////////////////////////////////////////////
 	//TODO Create pre-processor and validator  
 	//TODO Improve logging and error handling
-	//TODO Undirected edged -> Directed as Full-Duplex
 	//TODO Create GUI in separate project
 	//////////////////////////////////////////////
 	public static void main(String[] args){

@@ -8,13 +8,18 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.jgrapht.DirectedGraph;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.KShortestPaths;
+import org.jgrapht.graph.AsUndirectedGraph;
+import org.jgrapht.graph.GraphPathImpl;
 import org.jgrapht.graph.SimpleGraph;
 import org.jgrapht.graph.SimpleGraphPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Single;
 
 import dk.smlaursen.TSNCF.application.Application;
 import dk.smlaursen.TSNCF.application.TTApplication;
@@ -153,13 +158,17 @@ public class KShortestPathSolver_SR implements Solver {
 		ArrayList<GraphPath<Node, GCLEdge>> aRouting = new ArrayList<GraphPath<Node, GCLEdge>>(ttApp.getDestinations().length);
 		try{
 			for(int i=0; i<ttApp.getDestinations().length; i++){
-				List<Node> path = new LinkedList<Node>();
-				path.add(ttApp.getSource());
-				path.addAll(ttApp.getPath().get(i));
-				path.add(ttApp.getDestinations()[i]);
+				List<GCLEdge> edgeList = new LinkedList<GCLEdge>();
 				
-				SimpleGraphPath<Node, GCLEdge> p = new SimpleGraphPath<Node, GCLEdge>((SimpleGraph<Node, GCLEdge>) graph, path , 1.0);
-				aRouting.add(p);
+				Node prev = ttApp.getSource();
+				for(Node curr : ttApp.getPath().get(i)){
+					edgeList.add(graph.getEdge(prev, curr));
+					prev = curr;
+				}
+				edgeList.add(graph.getEdge(prev, ttApp.getDestinations()[i]));
+				
+				GraphPath<Node, GCLEdge> gp = new GraphPathImpl<Node, GCLEdge>(graph, ttApp.getSource(), ttApp.getDestinations()[i], edgeList, 1.0);
+				aRouting.add(gp);
 			}
 			return new VLAN(ttApp, aRouting);
 		} catch(IllegalArgumentException e){

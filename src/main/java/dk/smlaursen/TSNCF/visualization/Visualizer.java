@@ -18,6 +18,7 @@ import org.jgrapht.graph.DefaultEdge;
 import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.layout.mxFastOrganicLayout;
 import com.mxgraph.layout.mxGraphLayout;
+import com.mxgraph.layout.mxParallelEdgeLayout;
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGraphModel;
@@ -79,7 +80,6 @@ public class Visualizer{
 			}
 		});
 
-		mxStyleUtils.setCellStyles(graphModel, edges, mxConstants.STYLE_ENDARROW, mxConstants.NONE);
 		mxStyleUtils.setCellStyles(graphModel, edges, mxConstants.STYLE_NOLABEL ,"1");
 		mxStyleUtils.setCellStyles(graphModel, edges, mxConstants.STYLE_STROKECOLOR, "black");
 		mxStyleUtils.setCellStyles(graphModel, endSystems, mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
@@ -87,9 +87,8 @@ public class Visualizer{
 
 		//Disable editing of figure
 		canvasComponent.setEnabled(false);
-		mxGraphLayout layout = new mxFastOrganicLayout(adapter);
-		layout.execute(adapter.getDefaultParent());
-
+		new mxFastOrganicLayout(adapter).execute(adapter.getDefaultParent());
+		new mxParallelEdgeLayout(canvasComponent.getGraph()).execute(adapter.getDefaultParent());
 		//Setup combobox
 		comboBox = new JComboBox<VLAN>();
 		comboBox.addActionListener(new ActionListener() {
@@ -146,7 +145,7 @@ public class Visualizer{
 				return false;
 			}
 		});
-
+		
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
