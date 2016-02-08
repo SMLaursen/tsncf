@@ -15,6 +15,8 @@ import org.jgrapht.Graph;
 import org.jgrapht.ext.JGraphXAdapter;
 import org.jgrapht.graph.DefaultEdge;
 
+import com.mxgraph.layout.mxCircleLayout;
+import com.mxgraph.layout.mxFastOrganicLayout;
 import com.mxgraph.layout.mxGraphLayout;
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.model.mxCell;
@@ -85,7 +87,7 @@ public class Visualizer{
 
 		//Disable editing of figure
 		canvasComponent.setEnabled(false);
-		mxGraphLayout layout = new mxHierarchicalLayout(adapter);
+		mxGraphLayout layout = new mxFastOrganicLayout(adapter);
 		layout.execute(adapter.getDefaultParent());
 
 		//Setup combobox
