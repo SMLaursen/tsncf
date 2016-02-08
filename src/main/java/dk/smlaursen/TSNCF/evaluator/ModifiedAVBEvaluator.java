@@ -70,34 +70,38 @@ public class ModifiedAVBEvaluator implements Evaluator{
 			Set<VLAN> vls = new HashSet<VLAN>();
 			vls.addAll(modeMap.get(mode));
 			vls.addAll(ttSet);
-			
+
 			//First we calculate the accumulated bwthRequirement and the cost due to disjointEdges
 			for(VLAN vl : vls){
 				Set<GCLEdge> edges = new HashSet<GCLEdge>();
 				Application app = vl.getApplication();
+				//Retrieve all unique edges for that app
 				for(GraphPath<Node, GCLEdge> gp : vl.getRoutings()){
 					//Hashset so only unique edges will be stored for this route
 					for(GCLEdge edge : gp.getEdgeList()){
 						edges.add(edge);
-						//If not already there, put it there
-						if(!allocMap.containsKey(edge)){
-							allocMap.put(edge, 0.0);
-						}
-						double allocMbps = (app.getMaxFrameSize() * 8) * app.getNoOfFramesPerInterval() / app.getInterval();
-						double totalAllocMbps = allocMap.get(edge) + allocMbps;
-
-						//Abort if edge-capacity exceeded (remember not 100% of the edge is allowed to be reserved)
-						if(totalAllocMbps > edge.getCapacityMbps() * MAX_ALLOC){
-							if(logger.isDebugEnabled()){
-								logger.debug("VLANS invalid : edge "+edge+"'s capacity exceeded. VLANS : "+vlans);
-							}
-							return cost = Double.MAX_VALUE;
-						}
-						allocMap.put(edge, totalAllocMbps);
 					}
 				}
-				//Cost also includes the the sum of all disjoint edges
-				cost += edges.size() * HOP_PENALITY;
+				//Run over all the unique edges
+				for(GCLEdge edge : edges){
+					//If not already there, put it there
+					if(!allocMap.containsKey(edge)){
+						allocMap.put(edge, 0.0);
+					}
+					double allocMbps = (app.getMaxFrameSize() * 8) * app.getNoOfFramesPerInterval() / app.getInterval();
+					double totalAllocMbps = allocMap.get(edge) + allocMbps;
+
+					//Abort if edge-capacity exceeded (remember not 100% of the edge is allowed to be reserved)
+					if(totalAllocMbps > edge.getCapacityMbps() * MAX_ALLOC){
+						if(logger.isDebugEnabled()){
+							logger.debug("VLANS invalid : edge "+edge+"'s capacity exceeded. VLANS : "+vlans);
+						}
+						return cost = Double.MAX_VALUE;
+					}
+					allocMap.put(edge, totalAllocMbps);
+					//Cost also includes the the sum of all disjoint edges
+					cost += edges.size() * HOP_PENALITY;
+				}
 			}
 
 			//Now calculate timings 

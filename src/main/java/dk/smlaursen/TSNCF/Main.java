@@ -35,6 +35,7 @@ public class Main {
 	//////////////////////////////////////////////
 	//TODO Create pre-processor and validator  
 	//TODO Improve logging and error handling
+	//TODO Undirected edged -> Directed as Full-Duplex
 	//TODO Create GUI in separate project
 	//////////////////////////////////////////////
 	public static void main(String[] args){
@@ -82,11 +83,16 @@ public class Main {
 			logger.debug("Solving problem");
 			Solver s = new KShortestPathSolver_SR();
 			Set<VLAN> sol = s.solve(graph, apps, new ModifiedAVBEvaluator());
-			logger.info("Found solution ");
-
-			if(display){
-				vis.addSolutions(sol);
+			if(sol == null || sol.isEmpty()){
+				logger.info("No solution could be found ");
+			} else {
+				logger.info("Found solution : "+sol);
+				if(display){
+					logger.info("Displaying solution");
+					vis.addSolutions(sol);
+				}
 			}
+		
 		} catch (ParseException e) {
 			System.err.println(e);
 

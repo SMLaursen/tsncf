@@ -28,8 +28,8 @@ import dk.smlaursen.TSNCF.solver.VLAN;
  * for each src-dest nodes of an SRApplication. Naturally, the greater K the better solution can be found, but as the shortest paths are in sorted order, the simples routes (Often yielding the best results) are evaluated first. 
  * So increase K with care, as it can quickly lead to excessive memory and computation time use. */
 public class KShortestPathSolver_SR implements Solver {
-	private static final int K = 3;
-	private static final int MAX_HOPS = 7;
+	private static final int K = 7;
+	private static final int MAX_HOPS = 10;
 	private static final int PROGRESS_PERIOD = 10000;
 
 	private static Logger logger = LoggerFactory.getLogger(KShortestPathSolver_SR.class.getSimpleName());
