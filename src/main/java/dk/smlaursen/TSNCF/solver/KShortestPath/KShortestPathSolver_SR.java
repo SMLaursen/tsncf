@@ -8,18 +8,12 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.jgrapht.DirectedGraph;
 import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.KShortestPaths;
-import org.jgrapht.graph.AsUndirectedGraph;
 import org.jgrapht.graph.GraphPathImpl;
-import org.jgrapht.graph.SimpleGraph;
-import org.jgrapht.graph.SimpleGraphPath;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Single;
 
 import dk.smlaursen.TSNCF.application.Application;
 import dk.smlaursen.TSNCF.application.TTApplication;
@@ -31,9 +25,9 @@ import dk.smlaursen.TSNCF.solver.VLAN;
 
 /**The KShortestPathSolver_SR relies on the {@link KShortestPaths} algorithm in the jgrapht library to calculate the K shortest paths
  * for each src-dest nodes of an SRApplication. Naturally, the greater K the better solution can be found, but as the shortest paths are in sorted order, the simples routes (Often yielding the best results) are evaluated first. 
- * So increase K with care, as it can quickly lead to excessive memory and computation time use. */
+ * So increase K with care, as it can quickly lead to excessive computation time use. */
 public class KShortestPathSolver_SR implements Solver {
-	private static final int K = 7;
+	private static final int K = 5;
 	private static final int MAX_HOPS = 10;
 	private static final int PROGRESS_PERIOD = 10000;
 

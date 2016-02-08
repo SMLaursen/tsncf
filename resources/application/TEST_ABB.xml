@@ -13,7 +13,7 @@
 	</SRApplication>
 
 	<SRApplication name="AVB_2">
-		<Mode>B</Mode>
+		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>60</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
@@ -24,7 +24,7 @@
 	</SRApplication>
 	
 	<SRApplication name="AVB_3">
-		<Mode>C</Mode>
+		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>60</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
@@ -35,7 +35,7 @@
 	</SRApplication>
 	
 	<SRApplication name="AVB_4">
-		<Mode>D</Mode>
+		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>60</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
@@ -47,7 +47,7 @@
 	</SRApplication>
 	
 	<SRApplication name="AVB_5">
-		<Mode>E</Mode>
+		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>60</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>

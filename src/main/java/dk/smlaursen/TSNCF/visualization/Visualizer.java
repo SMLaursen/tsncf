@@ -15,11 +15,8 @@ import org.jgrapht.Graph;
 import org.jgrapht.ext.JGraphXAdapter;
 import org.jgrapht.graph.DefaultEdge;
 
-import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.layout.mxFastOrganicLayout;
-import com.mxgraph.layout.mxGraphLayout;
 import com.mxgraph.layout.mxParallelEdgeLayout;
-import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.model.mxCell;
 import com.mxgraph.model.mxGraphModel;
 import com.mxgraph.model.mxGraphModel.Filter;

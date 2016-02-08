@@ -31,9 +31,9 @@
 		<Destinations>
 			<Dest name="ES4">
 				<Route>
-					<Bridge name="B1"></Bridge>
-					<Bridge name="B4"></Bridge>
-					<Bridge name="B2"></Bridge>
+					<Bridge name="B1" offset="0" duration="10.4" period="62.5"/>
+					<Bridge name="B4" offset="0" duration="10.4" period="62.5"/>
+					<Bridge name="B2" offset="0" duration="10.4" period="62.5"/>
 				</Route>
 			</Dest>
 		</Destinations>
