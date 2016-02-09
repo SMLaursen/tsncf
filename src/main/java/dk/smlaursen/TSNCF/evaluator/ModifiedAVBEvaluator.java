@@ -141,8 +141,7 @@ public class ModifiedAVBEvaluator implements Evaluator{
 
 	//TODO Add UnitTests
 	/** This method has been based on the formulas in 802.1BA Draft 2.5 
-	 * http://www.ieee802.org/1/files/private/ba-drafts/d2/802-1ba-d2-5.pdf
-	 * Note the WCRT has been shown to be optimistic and are therefore not guaranteed*/
+	 * http://www.ieee802.org/1/files/private/ba-drafts/d2/802-1ba-d2-5.pdf*/
 	private double calculateMaxLatency(double alloc_mbps, double totalAlloc_mbps, int frame_size_bytes){
 		double tDevice = 5.12;
 		//Time to transmit max interfering packet.  

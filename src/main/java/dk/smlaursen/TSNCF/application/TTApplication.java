@@ -1,22 +1,19 @@
 package dk.smlaursen.TSNCF.application;
 
 import java.util.Arrays;
-import java.util.List;
-
-import dk.smlaursen.TSNCF.architecture.Bridge;
 import dk.smlaursen.TSNCF.architecture.EndSystem;
 
 public class TTApplication extends Application{
 	private int ttInterval = 500;
-	private List<List<Bridge>> explicitRoute;
+	private ExplicitPath explicitRoute;
 	
 	/** Assumes that all TTApplications are periodic so payloadSize and NoOfFrames is enough */
-	public TTApplication(String name, int payloadSize, int noOfFrames, List<List<Bridge>> path, EndSystem src, EndSystem ...dest) {
+	public TTApplication(String name, int payloadSize, int noOfFrames, ExplicitPath path, EndSystem src, EndSystem ...dest) {
 		super(name, payloadSize, noOfFrames, src, dest);
 		explicitRoute = path;
 	}
 	
-	public List<List<Bridge>> getPath(){
+	public ExplicitPath getExplicitPath(){
 		return explicitRoute;
 	}
 	

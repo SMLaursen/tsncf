@@ -18,11 +18,13 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import dk.smlaursen.TSNCF.application.Application;
+import dk.smlaursen.TSNCF.application.ExplicitPath;
 import dk.smlaursen.TSNCF.application.SRApplication;
 import dk.smlaursen.TSNCF.application.SRType;
 import dk.smlaursen.TSNCF.application.TTApplication;
 import dk.smlaursen.TSNCF.architecture.Bridge;
 import dk.smlaursen.TSNCF.architecture.EndSystem;
+import dk.smlaursen.TSNCF.architecture.GCL;
 
 public class ApplicationParser {
 	private static Logger logger = LoggerFactory.getLogger(ApplicationParser.class.getSimpleName());
@@ -118,7 +120,7 @@ public class ApplicationParser {
 		int noOfFrames = parseNoOfFrames(ttAppEle);
 
 		EndSystem src = parseSource(ttAppEle);
-		List<List<Bridge>> path = parseExplicitPath(ttAppEle);
+		ExplicitPath path = parseExplicitPath(ttAppEle);
 
 		EndSystem[] dest = parseDestinations(ttAppEle);
 		return new TTApplication(name, payloadSize, noOfFrames, path, src, dest);
@@ -165,10 +167,23 @@ public class ApplicationParser {
 
 	/**Parses the route to each of the destination. The index of the outer ArrayList matches the EndSystem[] array returned by {@link #parseDestinations(Element)}
 	 * Destinations with no explicit routes contains null in the returned List*/
-	private static List<List<Bridge>> parseExplicitPath(Element ele){
+	private static ExplicitPath parseExplicitPath(Element ele){
 		List<List<Bridge>> path = null;
+		List<GCL> gcl = null;
 		Element destEl = (Element) ele.getElementsByTagName("Destinations").item(0);
 		NodeList destNL = destEl.getElementsByTagName("Dest");
+		NodeList gclNL = destEl.getElementsByTagName("GCL");
+		//Parse GCL
+		if(gclNL != null && gclNL.getLength() > 0){
+			gcl = new LinkedList<GCL>();
+			for(int i=0; i < gclNL.getLength(); i++){
+				double off = Double.parseDouble(((Element) gclNL.item(i)).getAttribute("offset"));
+				double dur = Double.parseDouble(((Element) gclNL.item(i)).getAttribute("duration"));
+				double per = Double.parseDouble(((Element) gclNL.item(i)).getAttribute("period"));
+				gcl.add(new GCL(off, dur, per));
+			}
+		}
+		//Parse Path
 		if(destNL != null && destNL.getLength() > 0){
 			path = new ArrayList<List<Bridge>>(destNL.getLength());
 			for(int i= 0; i < destNL.getLength(); i++){
@@ -189,6 +204,6 @@ public class ApplicationParser {
 				}
 			}
 		} 
-		return path;
+		return new ExplicitPath(gcl, path);
 	}
 }

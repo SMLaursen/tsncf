@@ -155,11 +155,13 @@ public class KShortestPathSolver_SR implements Solver {
 				List<GCLEdge> edgeList = new LinkedList<GCLEdge>();
 				
 				Node prev = ttApp.getSource();
-				for(Node curr : ttApp.getPath().get(i)){
+				for(Node curr : ttApp.getExplicitPath().getPath().get(i)){
 					edgeList.add(graph.getEdge(prev, curr));
 					prev = curr;
 				}
 				edgeList.add(graph.getEdge(prev, ttApp.getDestinations()[i]));
+				//Put the GCL on the GCLEdge
+				graph.getEdge(prev, ttApp.getDestinations()[i]).addGCL(ttApp.getExplicitPath().getGCL());
 				
 				GraphPath<Node, GCLEdge> gp = new GraphPathImpl<Node, GCLEdge>(graph, ttApp.getSource(), ttApp.getDestinations()[i], edgeList, 1.0);
 				aRouting.add(gp);
