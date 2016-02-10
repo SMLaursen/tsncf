@@ -29,7 +29,7 @@
 		<NoOfFrames>10</NoOfFrames>
 		<Source name="ES1"></Source>
 		<Destinations>
-			<GCL offset="0" duration="10.4" period="62.5"/>
+			<GCL offset="0" duration="10.4" frequency="8"/>
 			<Dest name="ES4">
 				<Route>
 					<Bridge name="B1" />

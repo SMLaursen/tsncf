@@ -83,9 +83,9 @@ public class TopologyParser {
 						throw new InputMismatchException("Aborting : edge didn't contain any target");
 					} 
 					target = target.toUpperCase();
-					graph.addEdge(nodeMap.get(source), nodeMap.get(target), new GCLEdge(100));
+					graph.addEdge(nodeMap.get(source), nodeMap.get(target), new GCLEdge(100, 5.12));
 					if(!isDirected){
-						graph.addEdge(nodeMap.get(target), nodeMap.get(source), new GCLEdge(100));
+						graph.addEdge(nodeMap.get(target), nodeMap.get(source), new GCLEdge(100, 5.12));
 					}
 				}
 			}

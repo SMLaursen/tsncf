@@ -5,7 +5,7 @@
 		<NoOfFrames>2</NoOfFrames>
 		<Source name="ES1"/>
 		<Destinations>
-			<GCL offset="0" duration="10.4" period="62.5"/>
+			<GCL offset="0" duration="10.4" frequency="8"/>
 			<Dest name="ES5">
 				<Route>
 					<Bridge name="B1"/>

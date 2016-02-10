@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import dk.smlaursen.TSNCF.application.Application;
 import dk.smlaursen.TSNCF.application.SRApplication;
-import dk.smlaursen.TSNCF.application.SRType;
 import dk.smlaursen.TSNCF.application.TTApplication;
 import dk.smlaursen.TSNCF.architecture.GCLEdge;
 import dk.smlaursen.TSNCF.architecture.Node;
@@ -33,10 +32,6 @@ public class ModifiedAVBEvaluator implements Evaluator{
 	/** How much each hop increases the cost*/
 	private final static double HOP_PENALITY = 1.0;
 	//----------- CONFIGURATION ------------------
-	/** The global rate of the network*/
-	private final static double RATE_MBPS = 100;
-	/** The ratio of allocatable bwth / BE traffic*/
-	private final static double MAX_ALLOC = 0.75;
 	/** The maximum BE frame-size*/
 	private final static int MAX_BE_FRAME_BYTES = 1522;
 
@@ -90,9 +85,9 @@ public class ModifiedAVBEvaluator implements Evaluator{
 					}
 					double allocMbps = (app.getMaxFrameSize() * 8) * app.getNoOfFramesPerInterval() / app.getInterval();
 					double totalAllocMbps = allocMap.get(edge) + allocMbps;
-
+					
 					//Abort if edge-capacity exceeded (remember not 100% of the edge is allowed to be reserved)
-					if(totalAllocMbps > edge.getCapacityMbps() * MAX_ALLOC){
+					if(totalAllocMbps > edge.getRateMbps() * edge.getAllocationCapacity()){
 						if(logger.isDebugEnabled()){
 							logger.debug("VLANS invalid : edge "+edge+"'s capacity exceeded. VLANS : "+vlans);
 						}
@@ -115,8 +110,8 @@ public class ModifiedAVBEvaluator implements Evaluator{
 				for(GraphPath<Node, GCLEdge> gp : vl.getRoutings()){
 					double latency = 0;
 					for(GCLEdge edge : gp.getEdgeList()){
-						double alloc_mbps = (app.getMaxFrameSize() * 8) * app.getNoOfFramesPerInterval() / app.getInterval();
-						latency += calculateMaxLatency(alloc_mbps, allocMap.get(edge)-alloc_mbps , app.getMaxFrameSize());
+						double capacity = edge.getAllocationCapacity() - (edge.calculateWorstCaseInterference(app.getInterval()) /app.getInterval()-1);
+						latency += calculateMaxLatency(edge, allocMap.get(edge), app, capacity);
 					}
 					//For multicast routing, were only interested in the worst route
 					if(maxLatency < latency){
@@ -138,28 +133,22 @@ public class ModifiedAVBEvaluator implements Evaluator{
 		}
 		return cost;
 	}
-
-	//TODO Add UnitTests
-	/** This method has been based on the formulas in 802.1BA Draft 2.5 
-	 * http://www.ieee802.org/1/files/private/ba-drafts/d2/802-1ba-d2-5.pdf*/
-	private double calculateMaxLatency(double alloc_mbps, double totalAlloc_mbps, int frame_size_bytes){
-		double tDevice = 5.12;
-		//Time to transmit max interfering packet.  
-		double tMaxPacket = (MAX_BE_FRAME_BYTES + 8)*8 / RATE_MBPS;
-		//Time to transmit 
-		double tStreamPacket = (frame_size_bytes + 8)*8 / RATE_MBPS;
+//	//TODO Add UnitTests
+//	/** This method has been based on the formulas in 802.1BA Draft 2.5 
+//	 * http://www.ieee802.org/1/files/private/ba-drafts/d2/802-1ba-d2-5.pdf*/
+	private double calculateMaxLatency(GCLEdge edge, double totalAlloc_mbps, Application app, double capacity){
+		//Time to transmit max interfering BE packet.  
+		double tMaxPacket = (MAX_BE_FRAME_BYTES + 8)*8 / edge.getRateMbps();
+		//Time to transmit frame_size
+		double tStreamPacket = (app.getMaxFrameSize() + 8)*8 / edge.getRateMbps();
 		//Inter-Frame-Gap
-		double tIFG = 12*8 / RATE_MBPS;
-		//Sum of transmission times of all Class A stream frames in a 125ms interval (Here just assumed to be max)
-		//TODO this is only for one stream. Set it to maxAlloc or calculate real value
-		double tAllStreams = totalAlloc_mbps * SRType.CLASS_A.getIntervalMicroSec() / RATE_MBPS;
-		//How much can the TT traffic interfere = given the TT schedule of the port, how much delay can this add?
-		double tTTInterference = 0;
-		double maxLatency = tDevice + tMaxPacket+tIFG +
-				(tAllStreams - (tStreamPacket+tIFG)) * (RATE_MBPS/alloc_mbps) + 
-				tStreamPacket + 
-				tTTInterference;
-		return maxLatency;
+		double tIFG = 12*8 / edge.getRateMbps();
+		//Sum of transmission times of all Class A stream frames in a 125us interval
+		double tAllStreams = totalAlloc_mbps * app.getInterval() / edge.getRateMbps();
+		double maxLatency = edge.getLatency() + edge.calculateWorstCaseInterference((tMaxPacket+tIFG +
+				tAllStreams - (tStreamPacket+tIFG)) * (edge.getRateMbps()/capacity)/100 + 
+				tStreamPacket); 
+		return maxLatency; 
 	}
 }
 

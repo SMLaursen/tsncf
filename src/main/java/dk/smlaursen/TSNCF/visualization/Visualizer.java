@@ -46,7 +46,7 @@ public class Visualizer{
 		canvasComponent = new mxGraphComponent(adapter);
 		graphModel = (mxGraphModel) canvasComponent.getGraph().getModel();
 		mxGraphView view = canvasComponent.getGraph().getView();
-		view.setScale(2);
+		view.setScale(1);
 		cells = graphModel.getCells().values();
 
 		//Filter to get endSystems

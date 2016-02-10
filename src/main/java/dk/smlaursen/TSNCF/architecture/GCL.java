@@ -1,12 +1,13 @@
 package dk.smlaursen.TSNCF.architecture;
 
 public class GCL {
-	private double aOffset, aDuration, aPeriod;
+	private int afrequency;
+	private double aOffset, aDuration;
 	
-	public GCL(double offset, double duration, double period){
+	public GCL(double offset, double duration, int frequency){
 		aOffset = offset;
 		aDuration = duration;
-		aPeriod = period;
+		afrequency = frequency;
 	}
 	public double getOffset(){
 		return aOffset;
@@ -16,13 +17,13 @@ public class GCL {
 		return aDuration;
 	}
 	
-	public double getPeriod(){
-		return aPeriod;
+	public double getFrequency(){
+		return afrequency;
 	}
 	
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		sb.append("<").append(aOffset).append(",").append(aDuration).append(",").append(aPeriod).append(">");
+		sb.append("<").append(aOffset).append(",").append(aDuration).append(",").append(afrequency).append(">");
 		return sb.toString();
 	}
 }

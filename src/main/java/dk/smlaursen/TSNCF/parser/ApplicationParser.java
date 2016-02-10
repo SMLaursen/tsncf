@@ -179,8 +179,8 @@ public class ApplicationParser {
 			for(int i=0; i < gclNL.getLength(); i++){
 				double off = Double.parseDouble(((Element) gclNL.item(i)).getAttribute("offset"));
 				double dur = Double.parseDouble(((Element) gclNL.item(i)).getAttribute("duration"));
-				double per = Double.parseDouble(((Element) gclNL.item(i)).getAttribute("period"));
-				gcl.add(new GCL(off, dur, per));
+				int freq = Integer.parseInt(((Element) gclNL.item(i)).getAttribute("frequency"));
+				gcl.add(new GCL(off, dur, freq));
 			}
 		}
 		//Parse Path
