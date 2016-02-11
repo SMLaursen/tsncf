@@ -10,7 +10,7 @@ Being based on Java TSNCF should run on all major platforms. Following external 
 * [SLF4J 1.7.13](http://www.slf4j.org/) and [LogBack](http://logback.qos.ch/) for logging (not mandatory)
 
 ## Getting Started ##
-The folder `/resource` includes some example files. The solution for these can be displayed using the `-display` command where the `-net` argument refers to architecture **GraphML** files and `-app` argument for **XML** application files. 
+The folder `/resources` includes some example files. The solution for these can be displayed using the `-display` command where the `-net` argument refers to architecture **GraphML** files and `-app` argument for **XML** application files. 
 	
 	$ Java -jar TSNCF -net <file> -app <file> -display -verbose
 

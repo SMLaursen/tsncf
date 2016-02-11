@@ -27,7 +27,7 @@ import dk.smlaursen.TSNCF.solver.VLAN;
  * for each src-dest nodes of an SRApplication. Naturally, the greater K the better solution can be found, but as the shortest paths are in sorted order, the simples routes (Often yielding the best results) are evaluated first. 
  * So increase K with care, as it can quickly lead to excessive computation time use. */
 public class KShortestPathSolver_SR implements Solver {
-	private static final int K = 5;
+	private static final int K = 4;
 	private static final int MAX_HOPS = 10;
 	private static final int PROGRESS_PERIOD = 10000;
 
@@ -115,13 +115,13 @@ public class KShortestPathSolver_SR implements Solver {
 		};
 
 		//If info is enabled, start a task that reports the progress every PROGRESS_PERIOD
+		long currTime = System.currentTimeMillis();
 		if(logger.isInfoEnabled()){
 			timer.schedule(progressUpdater, PROGRESS_PERIOD, PROGRESS_PERIOD);
 		}
 
 		//Start evaluating
 		double bestCost = Double.MAX_VALUE;
-
 		//TODO Parallelize
 		while(!abortFlag && table.hasNext()){
 
@@ -141,6 +141,9 @@ public class KShortestPathSolver_SR implements Solver {
 			}
 			table.next();
 
+		}
+		if(logger.isInfoEnabled()){
+			logger.info("Finished in "+(System.currentTimeMillis()-currTime)/1000.0+"s");
 		}
 		timer.cancel();
 		//return best;

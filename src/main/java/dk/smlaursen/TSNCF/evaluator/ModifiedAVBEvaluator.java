@@ -28,7 +28,7 @@ public class ModifiedAVBEvaluator implements Evaluator{
 	/** The threshold of WCRT / DEADLINE for when starting to increase with {@value #THRESHOLD_EXCEEDED_PENALITY} per. percent*/
 	private final static double PENALITY_THRESHOLD = 0.8;
 	/** The penality applied to every percent of WCRT / DEADLINE exceeds {@link #PENALITY_THRESHOLD}*/
-	private final static double THRESHOLD_EXCEEDED_PENALITY = 0.1;
+	private final static double THRESHOLD_EXCEEDED_PENALITY = 0.2;
 	/** How much each hop increases the cost*/
 	private final static double HOP_PENALITY = 1.0;
 	//----------- CONFIGURATION ------------------
