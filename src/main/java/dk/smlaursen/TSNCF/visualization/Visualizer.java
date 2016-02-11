@@ -1,6 +1,7 @@
 package dk.smlaursen.TSNCF.visualization;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
@@ -31,13 +32,14 @@ import com.mxgraph.util.mxConstants;
 import com.mxgraph.util.mxStyleUtils;
 import com.mxgraph.view.mxGraphView;
 
+import dk.smlaursen.TSNCF.architecture.Bridge;
 import dk.smlaursen.TSNCF.architecture.EndSystem;
 import dk.smlaursen.TSNCF.architecture.GCLEdge;
 import dk.smlaursen.TSNCF.architecture.Node;
 import dk.smlaursen.TSNCF.solver.VLAN;
 
 public class Visualizer{
-	private Object[] endSystems, edges, highlightedVls;
+	private Object[] endSystems, bridges, edges, highlightedVls;
 	private mxGraphModel graphModel;
 	private mxGraphComponent canvasComponent;
 	private Collection<Object> cells;
@@ -50,6 +52,8 @@ public class Visualizer{
 	public Visualizer(final Graph<Node, GCLEdge> g){
 		JGraphXAdapter<Node, GCLEdge> adapter = new JGraphXAdapter<Node, GCLEdge>(g);
 		canvasComponent = new mxGraphComponent(adapter);
+		canvasComponent.getViewport().setOpaque(true);
+		canvasComponent.getViewport().setBackground(Color.WHITE);
 		graphModel = (mxGraphModel) canvasComponent.getGraph().getModel();
 		cells = graphModel.getCells().values();
 		//Filter to get endSystems
@@ -66,6 +70,19 @@ public class Visualizer{
 			}
 		});
 
+		bridges = mxGraphModel.filterCells(cells.toArray(), new Filter() {
+			@Override
+			public boolean filter(Object cell) {
+				if(cell instanceof mxCell){
+					mxCell mxc = (mxCell) cell;
+					if(mxc.getValue() instanceof Bridge){
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+		
 		//Filter to get edges
 		edges = mxGraphModel.filterCells(cells.toArray(), new Filter() {
 			@Override
@@ -82,8 +99,11 @@ public class Visualizer{
 
 		mxStyleUtils.setCellStyles(graphModel, edges, mxConstants.STYLE_NOLABEL ,"1");
 		mxStyleUtils.setCellStyles(graphModel, edges, mxConstants.STYLE_STROKECOLOR, "black");
+		
+		mxStyleUtils.setCellStyles(graphModel, bridges, mxConstants.STYLE_FILLCOLOR, "BAE4B2");
+		
 		mxStyleUtils.setCellStyles(graphModel, endSystems, mxConstants.STYLE_SHAPE, mxConstants.SHAPE_ELLIPSE);
-		mxStyleUtils.setCellStyles(graphModel, endSystems, mxConstants.STYLE_FILLCOLOR, "FAFAD2");
+		mxStyleUtils.setCellStyles(graphModel, endSystems, mxConstants.STYLE_FILLCOLOR, "BDD7E7");
 
 		//Disable editing of figure
 		canvasComponent.setEnabled(false);
