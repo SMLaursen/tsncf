@@ -29,7 +29,7 @@ import dk.smlaursen.TSNCF.visualization.Visualizer;
 
 public class Main {
 	//Command line options
-	private static final String APP_ARG = "app",NET_ARG = "net", DISP_ARG = "display", VERBOSE_ARG = "verbose";
+	private static final String APP_ARG = "app",NET_ARG = "net", DISP_ARG = "display", VERBOSE_ARG = "verbose", K_ARG="K";
 
 	//FIXME todos
 	//////////////////////////////////////////////
@@ -39,12 +39,15 @@ public class Main {
 	//TODO Create GUI in separate project
 	//////////////////////////////////////////////
 	public static void main(String[] args){
+		//Default value of K
+		int K = 4;
 		Option architectureFile = Option.builder(NET_ARG).required().argName("file").hasArg().desc("Use given file as network").build();
 		Option applicationFile = Option.builder(APP_ARG).required().argName("file").hasArg().desc("Use given file as application").build();
-
+		
 		Options options = new Options();
 		options.addOption(applicationFile);
 		options.addOption(architectureFile);
+		options.addOption(K_ARG, true, "Value of K for search-space reduction (default = 4)");
 		options.addOption(VERBOSE_ARG, false, "Verbose output");
 		options.addOption(DISP_ARG, false, "Display output");
 
@@ -62,6 +65,12 @@ public class Main {
 			Logger logger = LoggerFactory.getLogger(Main.class.getSimpleName());
 			boolean display = line.hasOption(DISP_ARG);
 
+			//Set K
+			String valueOfK = line.getOptionValue(K_ARG);
+			if(valueOfK != null){
+				K = Integer.parseInt(valueOfK);
+			}
+			
 			//Parse Topology
 			logger.debug("Parsing Topology from "+net.getName());
 			Graph<Node, GCLEdge> graph= TopologyParser.parse(net);
@@ -81,7 +90,7 @@ public class Main {
 
 			//Solve problem
 			logger.debug("Solving problem");
-			Solver s = new KShortestPathSolver_SR();
+			Solver s = new KShortestPathSolver_SR(K);
 			Set<VLAN> sol = s.solve(graph, apps, new ModifiedAVBEvaluator());
 			if(sol == null || sol.isEmpty()){
 				logger.info("No solution could be found ");

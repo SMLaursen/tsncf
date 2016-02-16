@@ -27,7 +27,7 @@ import dk.smlaursen.TSNCF.solver.VLAN;
  * for each src-dest nodes of an SRApplication. Naturally, the greater K the better solution can be found, but as the shortest paths are in sorted order, the simples routes (Often yielding the best results) are evaluated first. 
  * So increase K with care, as it can quickly lead to excessive computation time use. */
 public class KShortestPathSolver_SR implements Solver {
-	private static final int K = 2;
+	private int K = 4;
 	private static final int MAX_HOPS = 10;
 	private static final int PROGRESS_PERIOD = 10000;
 
@@ -40,6 +40,10 @@ public class KShortestPathSolver_SR implements Solver {
 	private Set<VLAN> ttVlan  = new HashSet<VLAN>();
 
 	private boolean abortFlag;
+	
+	public KShortestPathSolver_SR(int K) {
+		this.K = K;
+	}
 
 	@Override
 	public Set<VLAN> solve(final Graph<Node, GCLEdge> topology,final List<Application> applications, Evaluator eval) {
