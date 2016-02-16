@@ -45,6 +45,10 @@ public class GCLEdge extends DefaultEdge {
 		return aLatency;
 	}
 	
+	public double calculateReservedForTTTraffic(double duration){
+		return (calculateWorstCaseInterference(duration)/duration - 1)*aRate;
+	}
+	
 	/** Calculates the worst-case duration it will require  */
 	public double calculateWorstCaseInterference(double duration){
 		double interference = duration;

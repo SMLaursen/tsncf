@@ -27,7 +27,7 @@ import dk.smlaursen.TSNCF.solver.VLAN;
  * for each src-dest nodes of an SRApplication. Naturally, the greater K the better solution can be found, but as the shortest paths are in sorted order, the simples routes (Often yielding the best results) are evaluated first. 
  * So increase K with care, as it can quickly lead to excessive computation time use. */
 public class KShortestPathSolver_SR implements Solver {
-	private static final int K = 4;
+	private static final int K = 2;
 	private static final int MAX_HOPS = 10;
 	private static final int PROGRESS_PERIOD = 10000;
 
@@ -163,8 +163,11 @@ public class KShortestPathSolver_SR implements Solver {
 					prev = curr;
 				}
 				edgeList.add(graph.getEdge(prev, ttApp.getDestinations()[i]));
-				//Put the GCL on the GCLEdge
-				graph.getEdge(prev, ttApp.getDestinations()[i]).addGCL(ttApp.getExplicitPath().getGCL());
+				
+				for(GCLEdge edge : edgeList){
+					//Put the GCL on all the GCLEdges in the edgeList
+					edge.addGCL(ttApp.getExplicitPath().getGCL());
+				}
 				
 				GraphPath<Node, GCLEdge> gp = new GraphPathImpl<Node, GCLEdge>(graph, ttApp.getSource(), ttApp.getDestinations()[i], edgeList, 1.0);
 				aRouting.add(gp);

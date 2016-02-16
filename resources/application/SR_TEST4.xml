@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Applications>
 	<TTApplication name="TT_EngineControl">
-		<PayloadSize>100</PayloadSize>
-		<NoOfFrames>2</NoOfFrames>
 		<Source name="ES1"/>
 		<Destinations>
 			<GCL offset="0" duration="10.4" frequency="8"/>

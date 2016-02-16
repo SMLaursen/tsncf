@@ -40,11 +40,11 @@ public class ModifiedAVBEvaluator implements Evaluator{
 	@Override
 	public double evaluate(Set<VLAN> vlans, Graph<Node, GCLEdge> graph) {
 		Map<GCLEdge, Double> allocMap = new HashMap<GCLEdge, Double>(); 
+		Map<GCLEdge, Double> ttAllocMap = new HashMap<GCLEdge, Double>();
 		double cost = 0;
 
 		// First we identify all the different modes 
 		Map<String, Set<VLAN>> modeMap = new HashMap<String, Set<VLAN>>();
-		Set<VLAN> ttSet = new HashSet<VLAN>();
 		for(VLAN vl : vlans){
 			if(vl.getApplication() instanceof SRApplication){
 				SRApplication app = (SRApplication) vl.getApplication();
@@ -55,21 +55,33 @@ public class ModifiedAVBEvaluator implements Evaluator{
 					modeMap.get(mode).add(vl);
 				}
 			} else if(vl.getApplication() instanceof TTApplication){
-				ttSet.add(vl);
+				//First we add the TT-contribution
+				//TODO this is only for 125us intervals - if we also consider 250us class B intervals, 
+				//	tighter analysis can be made by looking at 250us intervals 
+				for(GraphPath<Node, GCLEdge> gp : vl.getRoutings()){
+					//Hashset so only unique edges will be stored for this route
+					for(GCLEdge edge : gp.getEdgeList()){
+						double reservedTTTraffic = edge.calculateReservedForTTTraffic(125);
+						ttAllocMap.put(edge, reservedTTTraffic);
+					}
+				}
 			} else {
 				throw new IllegalArgumentException("Unsupported application class '"+vl.getApplication().getClass().getSimpleName()+"' of "+vl.getApplication().getTitle());
 			}
 		}
 		//Then we run through each mode
 		for(String mode : modeMap.keySet()){
-			Set<VLAN> vls = new HashSet<VLAN>();
-			vls.addAll(modeMap.get(mode));
-			vls.addAll(ttSet);
-
+			Set<VLAN> vls = new HashSet<VLAN>(modeMap.get(mode));
+			
+			//Clear allocationMap before evaluating next mode
+			allocMap.clear();
+			//Add all pre-calculated TTAllocs
+			allocMap.putAll(ttAllocMap);
+			
 			//First we calculate the accumulated bwthRequirement and the cost due to disjointEdges
 			for(VLAN vl : vls){
 				Set<GCLEdge> edges = new HashSet<GCLEdge>();
-				Application app = vl.getApplication();
+				SRApplication app =  (SRApplication) vl.getApplication();
 				//Retrieve all unique edges for that app
 				for(GraphPath<Node, GCLEdge> gp : vl.getRoutings()){
 					//Hashset so only unique edges will be stored for this route
@@ -83,13 +95,14 @@ public class ModifiedAVBEvaluator implements Evaluator{
 					if(!allocMap.containsKey(edge)){
 						allocMap.put(edge, 0.0);
 					}
+					
 					double allocMbps = (app.getMaxFrameSize() * 8) * app.getNoOfFramesPerInterval() / app.getInterval();
 					double totalAllocMbps = allocMap.get(edge) + allocMbps;
 					
 					//Abort if edge-capacity exceeded (remember not 100% of the edge is allowed to be reserved)
 					if(totalAllocMbps > edge.getRateMbps() * edge.getAllocationCapacity()){
 						if(logger.isDebugEnabled()){
-							logger.debug("VLANS invalid : edge "+edge+"'s capacity exceeded. VLANS : "+vlans);
+							logger.debug("VLANS invalid : edge "+edge+"'s capacity exceeded. "+totalAllocMbps+"/"+(edge.getRateMbps() * edge.getAllocationCapacity())+" VLANS : "+vlans);
 						}
 						return cost = Double.MAX_VALUE;
 					}
@@ -111,7 +124,7 @@ public class ModifiedAVBEvaluator implements Evaluator{
 					double latency = 0;
 					for(GCLEdge edge : gp.getEdgeList()){
 						double capacity = edge.getAllocationCapacity() - (edge.calculateWorstCaseInterference(app.getInterval()) /app.getInterval()-1);
-						latency += calculateMaxLatency(edge, allocMap.get(edge), app, capacity);
+						latency += calculateMaxLatency(edge, allocMap.get(edge),(SRApplication) app, capacity);
 					}
 					//For multicast routing, were only interested in the worst route
 					if(maxLatency < latency){
@@ -128,15 +141,13 @@ public class ModifiedAVBEvaluator implements Evaluator{
 					cost += (maxLatency/app.getDeadline() - PENALITY_THRESHOLD) * 100 * THRESHOLD_EXCEEDED_PENALITY;
 				}
 			}
-			//Clear allocationMap before evaluating next mode
-			allocMap.clear();
 		}
 		return cost;
 	}
 //	//TODO Add UnitTests
 //	/** This method has been based on the formulas in 802.1BA Draft 2.5 
 //	 * http://www.ieee802.org/1/files/private/ba-drafts/d2/802-1ba-d2-5.pdf*/
-	private double calculateMaxLatency(GCLEdge edge, double totalAlloc_mbps, Application app, double capacity){
+	private double calculateMaxLatency(GCLEdge edge, double totalAlloc_mbps, SRApplication app, double capacity){
 		//Time to transmit max interfering BE packet.  
 		double tMaxPacket = (MAX_BE_FRAME_BYTES + 8)*8 / edge.getRateMbps();
 		//Time to transmit frame_size

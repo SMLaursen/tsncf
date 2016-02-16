@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Applications>
+	<SRApplication name="S1_BLUE">
+		<Mode>1</Mode>
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>1100</PayloadSize>
+		<NoOfFrames>1</NoOfFrames>
+		<Source name="ES1"></Source>
+		<Destinations>
+			<Dest name="ES4"></Dest>
+		</Destinations>
+	</SRApplication>
+
+	<SRApplication name="S2_PURPLE">
+		<Mode>2</Mode>
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>350</PayloadSize>
+		<NoOfFrames>3</NoOfFrames>
+		<Source name="ES5"></Source>
+		<Destinations>
+			<Dest name="ES3"></Dest>
+			<Dest name="ES4"></Dest>
+		</Destinations>
+	</SRApplication>
+	
+	<SRApplication name="S3_ORANGE">
+		<Mode>1</Mode>
+		<Mode>2</Mode>
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>300</PayloadSize>
+		<NoOfFrames>1</NoOfFrames>
+		<Source name="ES7"></Source>
+		<Destinations>
+			<Dest name="ES2"></Dest>
+		</Destinations>
+	</SRApplication>
+
+	<TTApplication name="TT">
+		<Source name="ES6"></Source>
+		<Destinations>
+			<GCL offset="0" duration="10.4" frequency="8" />
+			<Dest name="ES2">
+				<Route>
+					<Bridge name="B3" />
+					<Bridge name="B2" />
+				</Route>
+			</Dest>
+		</Destinations>
+	</TTApplication>
+</Applications>

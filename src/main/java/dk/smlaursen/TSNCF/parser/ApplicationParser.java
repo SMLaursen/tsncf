@@ -100,7 +100,7 @@ public class ApplicationParser {
 		int payloadSize = parsePayloadSize(srAppEle);
 
 		//Parse NoOfFrames
-		int noOfFrames = Integer.parseInt(srAppEle.getElementsByTagName("NoOfFrames").item(0).getFirstChild().getNodeValue());
+		int noOfFrames = parseNoOfFrames(srAppEle);
 
 		//Parse Source
 		EndSystem src = parseSource(srAppEle);
@@ -116,14 +116,12 @@ public class ApplicationParser {
 	 * @return The corresponding {@link TTApplication}*/
 	private static TTApplication getTTApplication(Element ttAppEle){
 		String name = ttAppEle.getAttribute("name");
-		int payloadSize = parsePayloadSize(ttAppEle);
-		int noOfFrames = parseNoOfFrames(ttAppEle);
 
 		EndSystem src = parseSource(ttAppEle);
 		ExplicitPath path = parseExplicitPath(ttAppEle);
 
 		EndSystem[] dest = parseDestinations(ttAppEle);
-		return new TTApplication(name, payloadSize, noOfFrames, path, src, dest);
+		return new TTApplication(name, path, src, dest);
 	}
 
 	private static int parsePayloadSize(Element ele){

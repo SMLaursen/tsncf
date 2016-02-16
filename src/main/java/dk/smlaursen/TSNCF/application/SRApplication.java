@@ -8,13 +8,23 @@ import dk.smlaursen.TSNCF.architecture.EndSystem;
 public class SRApplication extends Application {
 	private SRType aSRType;
 	private List<String> aModes;
+	private int aNoOfFramesPerInterval,aMaxFrameSize;
 	
 	public SRApplication (String name, List<String> modes, SRType type, int payloadSize, int noOfFrames, EndSystem src, EndSystem ...dest){
-		super(name, payloadSize, noOfFrames, src, dest);
+		super(name, src, dest);
 		aSRType = type;
 		aModes = modes;
+		aNoOfFramesPerInterval = noOfFrames;
+		aMaxFrameSize = payloadSize;
 	}
 	
+	public int getNoOfFramesPerInterval(){
+		return aNoOfFramesPerInterval;
+	}
+	
+	public int getMaxFrameSize(){
+		return aMaxFrameSize;
+	}
 	public SRType getType(){
 		return aSRType;
 	}

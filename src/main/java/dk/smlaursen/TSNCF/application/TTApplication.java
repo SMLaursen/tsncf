@@ -8,8 +8,8 @@ public class TTApplication extends Application{
 	private ExplicitPath explicitRoute;
 	
 	/** Assumes that all TTApplications are periodic so payloadSize and NoOfFrames is enough */
-	public TTApplication(String name, int payloadSize, int noOfFrames, ExplicitPath path, EndSystem src, EndSystem ...dest) {
-		super(name, payloadSize, noOfFrames, src, dest);
+	public TTApplication(String name, ExplicitPath path, EndSystem src, EndSystem ...dest) {
+		super(name, src, dest);
 		explicitRoute = path;
 	}
 	
@@ -26,7 +26,6 @@ public class TTApplication extends Application{
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("TT ").append(aTitle);
-		sb.append(" (").append(aNoOfFramesPerInterval).append(" x ").append(aMaxFrameSize).append("B / ").append(getInterval()).append("us)");
 		sb.append(" (").append(aSource).append(" -> ").append(Arrays.toString(aDestinations)).append(")");
 		sb.append(" Route (").append(explicitRoute).append(")");
 		return sb.toString();
