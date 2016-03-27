@@ -18,5 +18,5 @@ The folder `/resources` includes some example files. The solution for these can 
 TSNCF is released under the [LGPLv3 license](http://www.gnu.org/licenses/lgpl-3.0.html).
 
 ## Authors ##
--[Sune M\oe lgaard Laursen](http://smlaursen.github.io/)
+-[Sune Mølgaard Laursen](http://smlaursen.github.io/)
 
