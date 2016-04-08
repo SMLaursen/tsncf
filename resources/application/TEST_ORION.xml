@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Applications>
+
+<SRApplication name="rc0.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1290</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CM2CB"></Source>
+	<Destinations>
+		<Dest name="ES_DU1"></Dest>
+		<Dest name="ES_SM1CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc1.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1442</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM2CB"></Source>
+	<Destinations>
+		<Dest name="ES_CM2CA"></Dest>
+		<Dest name="ES_STARTR1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc2.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>526</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CMRIU1"></Source>
+	<Destinations>
+		<Dest name="ES_LCM2"></Dest>
+		<Dest name="ES_GPS1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc3.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>193</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM1CA"></Source>
+	<Destinations>
+		<Dest name="ES_FCM2"></Dest>
+		<Dest name="ES_DU2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc4.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1426</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM2CB"></Source>
+	<Destinations>
+		<Dest name="ES_BFCU"></Dest>
+		<Dest name="ES_STARTR1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc5.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>156</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_GPS1"></Source>
+	<Destinations>
+		<Dest name="ES_SM1CA"></Dest>
+		<Dest name="ES_MIMU3"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc6.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>778</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_BFCU"></Source>
+	<Destinations>
+		<Dest name="ES_FCM2"></Dest>
+		<Dest name="ES_MIMU3"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc7.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1336</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_FCM2"></Source>
+	<Destinations>
+		<Dest name="ES_SM2CB"></Dest>
+		<Dest name="ES_CMRIU1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc8.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>959</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CMRIU1"></Source>
+	<Destinations>
+		<Dest name="ES_SMRIU1"></Dest>
+		<Dest name="ES_SM2CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc9.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>930</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_LCM2"></Source>
+	<Destinations>
+		<Dest name="ES_CMRIU1"></Dest>
+		<Dest name="ES_SMRIU1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc10.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1263</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CM2CB"></Source>
+	<Destinations>
+		<Dest name="ES_MIMU1"></Dest>
+		<Dest name="ES_FCM2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc11.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1079</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_FCM2"></Source>
+	<Destinations>
+		<Dest name="ES_STARTR1"></Dest>
+		<Dest name="ES_RCM1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc12.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1015</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM2CB"></Source>
+	<Destinations>
+		<Dest name="ES_STARTR2"></Dest>
+		<Dest name="ES_SM1CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc13.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>185</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_MIMU3"></Source>
+	<Destinations>
+		<Dest name="ES_SM2CA"></Dest>
+		<Dest name="ES_CMRIU1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc14.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>118</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CM2CB"></Source>
+	<Destinations>
+		<Dest name="ES_CM1CA"></Dest>
+		<Dest name="ES_SM1CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc15.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1438</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_DU2"></Source>
+	<Destinations>
+		<Dest name="ES_SM1CB"></Dest>
+		<Dest name="ES_SMRIU1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc16.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>737</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_GPS2"></Source>
+	<Destinations>
+		<Dest name="ES_SM2CB"></Dest>
+		<Dest name="ES_MIMU1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc17.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>331</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM2CB"></Source>
+	<Destinations>
+		<Dest name="ES_CM2CB"></Dest>
+		<Dest name="ES_STARTR1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc18.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>89</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_DU1"></Source>
+	<Destinations>
+		<Dest name="ES_BFCU"></Dest>
+		<Dest name="ES_MIMU1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc19.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1213</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SBAND2"></Source>
+	<Destinations>
+		<Dest name="ES_DU1"></Dest>
+		<Dest name="ES_SM2CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc20.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>821</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM1CB"></Source>
+	<Destinations>
+		<Dest name="ES_SM2CA"></Dest>
+		<Dest name="ES_DU3"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc21.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1376</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM2CA"></Source>
+	<Destinations>
+		<Dest name="ES_DU1"></Dest>
+		<Dest name="ES_LCM1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc22.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1438</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CM1CA"></Source>
+	<Destinations>
+		<Dest name="ES_LCM2"></Dest>
+		<Dest name="ES_MIMU2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc23.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>891</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_RCM2"></Source>
+	<Destinations>
+		<Dest name="ES_SM2CB"></Dest>
+		<Dest name="ES_CM2CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc24.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>981</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_GPS1"></Source>
+	<Destinations>
+		<Dest name="ES_LCM2"></Dest>
+		<Dest name="ES_SMRIU1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc25.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>950</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_FCM1"></Source>
+	<Destinations>
+		<Dest name="ES_SM1CB"></Dest>
+		<Dest name="ES_SMRIU2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc26.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>832</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_MIMU1"></Source>
+	<Destinations>
+		<Dest name="ES_DU1"></Dest>
+		<Dest name="ES_CMRIU2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc27.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>185</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_DU1"></Source>
+	<Destinations>
+		<Dest name="ES_MIMU1"></Dest>
+		<Dest name="ES_FCM2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc28.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>592</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_DU1"></Source>
+	<Destinations>
+		<Dest name="ES_LCM2"></Dest>
+		<Dest name="ES_FCM2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc29.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>932</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CM2CB"></Source>
+	<Destinations>
+		<Dest name="ES_MIMU3"></Dest>
+		<Dest name="ES_SM2CA"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc30.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1431</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CMRIU2"></Source>
+	<Destinations>
+		<Dest name="ES_CM1CA"></Dest>
+		<Dest name="ES_RCM2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc31.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>459</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_MIMU2"></Source>
+	<Destinations>
+		<Dest name="ES_SMRIU1"></Dest>
+		<Dest name="ES_CM1CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc32.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>240</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_RCM1"></Source>
+	<Destinations>
+		<Dest name="ES_SBAND1"></Dest>
+		<Dest name="ES_STARTR1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc33.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>313</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CMRIU1"></Source>
+	<Destinations>
+		<Dest name="ES_SM2CA"></Dest>
+		<Dest name="ES_MIMU1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc34.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>993</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_LCM2"></Source>
+	<Destinations>
+		<Dest name="ES_SM1CA"></Dest>
+		<Dest name="ES_RCM2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc35.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1277</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_FCM2"></Source>
+	<Destinations>
+		<Dest name="ES_DU2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc36.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1363</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_MIMU3"></Source>
+	<Destinations>
+		<Dest name="ES_GPS2"></Dest>
+		<Dest name="ES_GPS1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc37.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>577</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SBAND2"></Source>
+	<Destinations>
+		<Dest name="ES_MIMU1"></Dest>
+		<Dest name="ES_DU2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc38.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>867</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CMRIU2"></Source>
+	<Destinations>
+		<Dest name="ES_FCM2"></Dest>
+		<Dest name="ES_CM1CA"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc39.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1354</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM1CB"></Source>
+	<Destinations>
+		<Dest name="ES_MIMU2"></Dest>
+		<Dest name="ES_DU2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc40.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>547</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CMRIU2"></Source>
+	<Destinations>
+		<Dest name="ES_SM2CA"></Dest>
+		<Dest name="ES_LCM1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc41.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>619</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CM2CB"></Source>
+	<Destinations>
+		<Dest name="ES_GPS2"></Dest>
+		<Dest name="ES_SM1CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc42.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>350</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_STARTR2"></Source>
+	<Destinations>
+		<Dest name="ES_CM2CB"></Dest>
+		<Dest name="ES_MIMU2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc43.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>376</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM2CA"></Source>
+	<Destinations>
+		<Dest name="ES_CM1CA"></Dest>
+		<Dest name="ES_GPS2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc44.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>529</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CM2CA"></Source>
+	<Destinations>
+		<Dest name="ES_LCM2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc45.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>487</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_STARTR2"></Source>
+	<Destinations>
+		<Dest name="ES_DU3"></Dest>
+		<Dest name="ES_MIMU3"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc46.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>523</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM1CB"></Source>
+	<Destinations>
+		<Dest name="ES_CM1CB"></Dest>
+		<Dest name="ES_MIMU2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc47.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>759</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_BFCU"></Source>
+	<Destinations>
+		<Dest name="ES_CM2CB"></Dest>
+		<Dest name="ES_DU2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc48.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1360</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_BFCU"></Source>
+	<Destinations>
+		<Dest name="ES_CMRIU2"></Dest>
+		<Dest name="ES_CM1CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc49.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>963</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM1CA"></Source>
+	<Destinations>
+		<Dest name="ES_SBAND1"></Dest>
+		<Dest name="ES_SM1CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc50.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>501</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_GPS2"></Source>
+	<Destinations>
+		<Dest name="ES_CM2CB"></Dest>
+		<Dest name="ES_CM1CA"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc51.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>125</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_RCM1"></Source>
+	<Destinations>
+		<Dest name="ES_FCM1"></Dest>
+		<Dest name="ES_SMRIU2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc52.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1046</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_DU2"></Source>
+	<Destinations>
+		<Dest name="ES_CM2CA"></Dest>
+		<Dest name="ES_LCM2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc53.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1058</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_DU1"></Source>
+	<Destinations>
+		<Dest name="ES_CMRIU2"></Dest>
+		<Dest name="ES_CMRIU1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc54.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>440</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM2CA"></Source>
+	<Destinations>
+		<Dest name="ES_LCM1"></Dest>
+		<Dest name="ES_CM1CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc55.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>863</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_RCM1"></Source>
+	<Destinations>
+		<Dest name="ES_DU3"></Dest>
+		<Dest name="ES_LCM1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc56.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>537</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SBAND1"></Source>
+	<Destinations>
+		<Dest name="ES_SMRIU1"></Dest>
+		<Dest name="ES_CM1CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc57.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>784</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CMRIU1"></Source>
+	<Destinations>
+		<Dest name="ES_MIMU2"></Dest>
+		<Dest name="ES_SBAND1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc58.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>234</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_DU3"></Source>
+	<Destinations>
+		<Dest name="ES_SM1CA"></Dest>
+		<Dest name="ES_DU1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc59.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>723</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM2CA"></Source>
+	<Destinations>
+		<Dest name="ES_LCM2"></Dest>
+		<Dest name="ES_FCM2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc60.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1182</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SBAND2"></Source>
+	<Destinations>
+		<Dest name="ES_SM1CB"></Dest>
+		<Dest name="ES_CM1CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc61.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1200</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_GPS1"></Source>
+	<Destinations>
+		<Dest name="ES_SBAND2"></Dest>
+		<Dest name="ES_STARTR1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc62.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>751</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_STARTR1"></Source>
+	<Destinations>
+		<Dest name="ES_STARTR2"></Dest>
+		<Dest name="ES_GPS2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc63.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>820</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_GPS1"></Source>
+	<Destinations>
+		<Dest name="ES_FCM1"></Dest>
+		<Dest name="ES_CM2CA"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc64.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>147</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CM2CB"></Source>
+	<Destinations>
+		<Dest name="ES_SM1CB"></Dest>
+		<Dest name="ES_RCM1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc65.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>757</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM1CA"></Source>
+	<Destinations>
+		<Dest name="ES_SBAND1"></Dest>
+		<Dest name="ES_SMRIU1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc66.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>170</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_BFCU"></Source>
+	<Destinations>
+		<Dest name="ES_CM1CB"></Dest>
+		<Dest name="ES_SM1CA"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc67.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>177</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SBAND2"></Source>
+	<Destinations>
+		<Dest name="ES_SBAND1"></Dest>
+		<Dest name="ES_CM1CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc68.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1293</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SMRIU2"></Source>
+	<Destinations>
+		<Dest name="ES_DU3"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc69.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1154</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_MIMU1"></Source>
+	<Destinations>
+		<Dest name="ES_CM2CB"></Dest>
+		<Dest name="ES_SBAND1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc70.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1189</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_MIMU3"></Source>
+	<Destinations>
+		<Dest name="ES_CM1CB"></Dest>
+		<Dest name="ES_LCM2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc71.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1040</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CM1CB"></Source>
+	<Destinations>
+		<Dest name="ES_GPS2"></Dest>
+		<Dest name="ES_DU2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc72.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1499</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_MIMU3"></Source>
+	<Destinations>
+		<Dest name="ES_SMRIU1"></Dest>
+		<Dest name="ES_STARTR2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc73.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>773</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SBAND2"></Source>
+	<Destinations>
+		<Dest name="ES_GPS2"></Dest>
+		<Dest name="ES_CM2CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc74.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>621</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_LCM1"></Source>
+	<Destinations>
+		<Dest name="ES_FCM1"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc75.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>780</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_MIMU1"></Source>
+	<Destinations>
+		<Dest name="ES_SMRIU2"></Dest>
+		<Dest name="ES_GPS2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc76.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1062</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_MIMU1"></Source>
+	<Destinations>
+		<Dest name="ES_DU1"></Dest>
+		<Dest name="ES_CM1CA"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc77.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>462</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CMRIU1"></Source>
+	<Destinations>
+		<Dest name="ES_FCM2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc78.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1018</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SBAND1"></Source>
+	<Destinations>
+		<Dest name="ES_SM1CB"></Dest>
+		<Dest name="ES_CM1CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc79.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>668</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_DU3"></Source>
+	<Destinations>
+		<Dest name="ES_MIMU3"></Dest>
+		<Dest name="ES_CM2CB"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc80.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>772</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_MIMU1"></Source>
+	<Destinations>
+		<Dest name="ES_SBAND1"></Dest>
+		<Dest name="ES_MIMU3"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc81.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>414</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_CMRIU2"></Source>
+	<Destinations>
+		<Dest name="ES_SBAND1"></Dest>
+		<Dest name="ES_SM1CA"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc82.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>539</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_STARTR1"></Source>
+	<Destinations>
+		<Dest name="ES_MIMU3"></Dest>
+		<Dest name="ES_SBAND2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc83.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>989</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_MIMU3"></Source>
+	<Destinations>
+		<Dest name="ES_SM1CA"></Dest>
+		<Dest name="ES_DU3"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc84.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>1242</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_SM1CB"></Source>
+	<Destinations>
+		<Dest name="ES_RCM2"></Dest>
+		<Dest name="ES_STARTR2"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc85.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>729</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_MIMU3"></Source>
+	<Destinations>
+		<Dest name="ES_STARTR2"></Dest>
+		<Dest name="ES_CM1CA"></Dest>
+	</Destinations>
+</SRApplication>
+
+<SRApplication name="rc86.0">
+	<SRType>CLASS_A</SRType>
+	<PayloadSize>145</PayloadSize>
+	<NoOfFrames>1</NoOfFrames>
+	<Source name="ES_MIMU2"></Source>
+	<Destinations>
+		<Dest name="ES_STARTR2"></Dest>
+		<Dest name="ES_RCM2"></Dest>
+	</Destinations>
+</SRApplication>
+
+</Applications>
