@@ -32,6 +32,17 @@ public abstract class Application {
 	}
 	
 	@Override
+	public boolean equals(Object obj){
+		if(obj instanceof Application){
+			Application a = (Application) obj;
+			if(aTitle.equals(a.aTitle)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
 	public int hashCode(){
 		return aTitle.hashCode();
 	}

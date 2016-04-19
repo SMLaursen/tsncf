@@ -1,8 +1,8 @@
 package dk.smlaursen.TSNCF;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -22,8 +22,9 @@ import dk.smlaursen.TSNCF.architecture.Node;
 import dk.smlaursen.TSNCF.evaluator.ModifiedAVBEvaluator;
 import dk.smlaursen.TSNCF.parser.ApplicationParser;
 import dk.smlaursen.TSNCF.parser.TopologyParser;
+import dk.smlaursen.TSNCF.solver.Multicast;
 import dk.smlaursen.TSNCF.solver.Solver;
-import dk.smlaursen.TSNCF.solver.VLAN;
+import dk.smlaursen.TSNCF.solver.GRASP.GraspSolver;
 import dk.smlaursen.TSNCF.solver.KShortestPath.KShortestPathSolver_SR;
 import dk.smlaursen.TSNCF.visualization.Visualizer;
 
@@ -40,7 +41,7 @@ public class Main {
 	//////////////////////////////////////////////
 	public static void main(String[] args){
 		//Default value of K
-		int K = 4;
+		int K = 3;
 		Option architectureFile = Option.builder(NET_ARG).required().argName("file").hasArg().desc("Use given file as network").build();
 		Option applicationFile = Option.builder(APP_ARG).required().argName("file").hasArg().desc("Use given file as application").build();
 		
@@ -90,8 +91,9 @@ public class Main {
 
 			//Solve problem
 			logger.debug("Solving problem");
-			Solver s = new KShortestPathSolver_SR(K);
-			Set<VLAN> sol = s.solve(graph, apps, new ModifiedAVBEvaluator());
+//			Solver s = new KShortestPathSolver_SR(K);
+			Solver s = new GraspSolver();
+			List<Multicast> sol = s.solve(graph, apps, new ModifiedAVBEvaluator(), Duration.ofSeconds(20));
 			if(sol == null || sol.isEmpty()){
 				logger.info("No solution could be found ");
 			} else {

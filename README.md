@@ -1,5 +1,5 @@
 #Time Sensitive Network Configuration Framework
-The TSN configuration framework is used to retrieve and optimize the VLAN routings used for configuring a TSN network topology.
+The TSN configuration framework is used to retrieve and optimize the routing used for configuring a TSN network topology.
 
 ## Dependencies ###
 Being based on Java TSNCF should run on all major platforms. Following external dependencies are needed and have been verified:
@@ -18,5 +18,5 @@ The folder `/resources` includes some example files. The solution for these can 
 TSNCF is released under the [LGPLv3 license](http://www.gnu.org/licenses/lgpl-3.0.html).
 
 ## Authors ##
--[Sune Mølgaard Laursen](http://smlaursen.github.io/)
+-[Sune Mï¿½lgaard Laursen](http://smlaursen.github.io/)
 

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.swing.JComboBox;
@@ -36,14 +37,14 @@ import dk.smlaursen.TSNCF.architecture.Bridge;
 import dk.smlaursen.TSNCF.architecture.EndSystem;
 import dk.smlaursen.TSNCF.architecture.GCLEdge;
 import dk.smlaursen.TSNCF.architecture.Node;
-import dk.smlaursen.TSNCF.solver.VLAN;
+import dk.smlaursen.TSNCF.solver.Multicast;
 
 public class Visualizer{
 	private Object[] endSystems, bridges, edges, highlightedVls;
 	private mxGraphModel graphModel;
 	private mxGraphComponent canvasComponent;
 	private Collection<Object> cells;
-	private JComboBox<VLAN> comboBox;
+	private JComboBox<Multicast> comboBox;
 	private JPanel zoomPanel = new JPanel(new BorderLayout());
 
 	/**Setups the topology in a JFrame.
@@ -110,13 +111,13 @@ public class Visualizer{
 		new mxFastOrganicLayout(adapter).execute(adapter.getDefaultParent());
 		new mxParallelEdgeLayout(canvasComponent.getGraph()).execute(adapter.getDefaultParent());
 		//Setup combobox
-		comboBox = new JComboBox<VLAN>();
+		comboBox = new JComboBox<Multicast>();
 		comboBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VLAN vlan = (VLAN) comboBox.getSelectedItem();
-				if(vlan != null)
-					displayVLAN(vlan);
+				Multicast r = (Multicast) comboBox.getSelectedItem();
+				if(r != null)
+					displayRoute(r);
 			}
 		});
 		JSlider slider = new JSlider(SwingConstants.VERTICAL, 5, 50, 10);
@@ -158,17 +159,19 @@ public class Visualizer{
 		});
 	}
 
-	/**Adds the VLAN to the comboBox beneath the figure for display*/
-	public void addSolutions(Set<VLAN> sol) {
-		for(VLAN vl : sol){
-			comboBox.addItem(vl);
+	/**Adds the Route to the comboBox beneath the figure for display*/
+	public void addSolutions(List<Multicast> sol) {
+		
+		//Merge to multi-cast routes
+		for(Multicast m : sol){
+			comboBox.addItem(m);
 		}
 	}
 
-	private void displayVLAN(final VLAN route){
+	private void displayRoute(final Multicast route){
 		Set<DefaultEdge> edgeSet = new HashSet<DefaultEdge>();
-		for(int i = 0; i < route.getRoutings().size(); i++){
-			edgeSet.addAll(route.getRoutings().get(i).getEdgeList());
+		for(int i = 0; i < route.getUnicasts().size(); i++){
+			edgeSet.addAll(route.getUnicasts().get(i).getRoute().getEdgeList());
 		}
 
 		highlightedVls = mxGraphModel.filterCells(cells.toArray(), new Filter() {

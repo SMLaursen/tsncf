@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="src" path="src/test/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/smla/workspace/Library/commons-cli-1.3.1/commons-cli-1.3.1.jar"/>
+	<classpathentry kind="lib" path="/home/smla/workspace/Library/jgrapht-0.9.1/lib/jgraphx-2.0.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/smla/workspace/Library/jgrapht-0.9.1/lib/jgrapht-ext-0.9.1.jar"/>
+	<classpathentry kind="lib" path="/home/smla/workspace/Library/jgrapht-0.9.1/lib/jgrapht-core-0.9.1.jar"/>
+	<classpathentry kind="lib" path="/home/smla/workspace/Library/slf4j-1.7.13/slf4j-simple-1.7.13.jar"/>
+	<classpathentry kind="lib" path="/home/smla/workspace/Library/slf4j-1.7.13/slf4j-api-1.7.13.jar"/>
+	<classpathentry kind="lib" path="/home/smla/workspace/Library/junit 4.12/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="/home/smla/workspace/Library/junit 4.12/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

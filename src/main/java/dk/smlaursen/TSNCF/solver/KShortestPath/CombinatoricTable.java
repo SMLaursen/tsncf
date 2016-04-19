@@ -1,17 +1,14 @@
 package dk.smlaursen.TSNCF.solver.KShortestPath;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-
+import java.util.List;
 import org.jgrapht.GraphPath;
 
 import dk.smlaursen.TSNCF.application.Application;
 import dk.smlaursen.TSNCF.architecture.GCLEdge;
 import dk.smlaursen.TSNCF.architecture.Node;
-import dk.smlaursen.TSNCF.solver.VLAN;
+import dk.smlaursen.TSNCF.solver.Unicast;
+import dk.smlaursen.TSNCF.solver.UnicastCandidates;
 
 public class CombinatoricTable {
 	//FIXME ensure no overflow
@@ -21,9 +18,9 @@ public class CombinatoricTable {
 	private boolean hasNext;
 	private byte[] indexTable;
 	private byte[] sizes;
-	private ArrayList<VLAN> graphPaths;
+	private List<UnicastCandidates> graphPaths;
 	
-	public CombinatoricTable(ArrayList<VLAN> paths){
+	public CombinatoricTable(List<UnicastCandidates> paths){
 		hasNext = true;
 		
 		graphPaths = paths;
@@ -32,7 +29,7 @@ public class CombinatoricTable {
 		
 		//Store all the sizes
 		for(int i = 0; i < sizes.length; i++){
-			sizes[i] = (byte) graphPaths.get(i).getRoutings().size();
+			sizes[i] = (byte) graphPaths.get(i).getCandidates().size();
 			noOfCombinations *= sizes[i];
 		}
 	}
@@ -54,26 +51,37 @@ public class CombinatoricTable {
 		}
 	}
 	
-	public Set<VLAN> getSet(){
-		Map<Application, ArrayList<GraphPath<Node, GCLEdge>>> map = new HashMap<Application, ArrayList<GraphPath<Node, GCLEdge>>>();
-		Set<VLAN> routing = new HashSet<VLAN>();
-		
-		//TODO performance can be improved by an incremental "find and replace" instead of this redo everything naive approach
-		for(int i = 0; i < graphPaths.size(); i++){
+	public List<Unicast> getCandidateSolution(){
+		List<Unicast> routing = new ArrayList<Unicast>();
+		for(int i = 0; i< graphPaths.size(); i++){
 			Application app = graphPaths.get(i).getApplication();
-			//This merges multiple destinations into one vlan
-			if(!map.containsKey(app)){
-				map.put(app, new ArrayList<GraphPath<Node, GCLEdge>>());
-			}
-			map.get(app).add(graphPaths.get(i).getRoutings().get(indexTable[i]));
-		}
-
-		//Convert map into HashSet<VLAN>
-		for(Application app : map.keySet()){
-			routing.add(new VLAN(app, map.get(app)));
+			Node destNode = graphPaths.get(i).getDestNode();
+			GraphPath<Node, GCLEdge> gp = graphPaths.get(i).getCandidates().get(indexTable[i]);
+			routing.add(new Unicast(app, destNode, gp));
 		}
 		return routing;
 	}
+	
+//	public Set<Routing> getSet(){
+//		Map<Application, ArrayList<GraphPath<Node, GCLEdge>>> map = new HashMap<Application, ArrayList<GraphPath<Node, GCLEdge>>>();
+//		Set<Routing> routing = new HashSet<Routing>();
+//		
+//		//TODO performance can be improved by an incremental "find and replace" instead of this redo everything naive approach
+//		for(int i = 0; i < graphPaths.size(); i++){
+//			Application app = graphPaths.get(i).getApplication();
+//			//This merges multiple destinations into one route
+//			if(!map.containsKey(app)){
+//				map.put(app, new ArrayList<GraphPath<Node, GCLEdge>>());
+//			}
+//			map.get(app).add(graphPaths.get(i).getCandidates().get(indexTable[i]));
+//		}
+//
+//		//Convert map into HashSet<VLAN>
+//		for(Application app : map.keySet()){
+//			routing.add(new Routing(app, map.get(app)));
+//		}
+//		return routing;
+//	}
 	
 	public boolean hasNext(){
 		return hasNext;
