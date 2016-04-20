@@ -93,7 +93,7 @@ public class Main {
 			logger.debug("Solving problem");
 //			Solver s = new KShortestPathSolver_SR(K);
 			Solver s = new GraspSolver();
-			List<Multicast> sol = s.solve(graph, apps, new ModifiedAVBEvaluator(), Duration.ofSeconds(20));
+			List<Multicast> sol = s.solve(graph, apps, new ModifiedAVBEvaluator(), Duration.ofSeconds(30));
 			if(sol == null || sol.isEmpty()){
 				logger.info("No solution could be found ");
 			} else {
@@ -103,7 +103,6 @@ public class Main {
 					vis.addSolutions(sol);
 				}
 			}
-		
 		} catch (ParseException e) {
 			System.err.println(e);
 
