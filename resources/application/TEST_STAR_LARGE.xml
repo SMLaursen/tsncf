@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- CurrentBest = 985.29 @ K = 100, hops = 20 -->
 <Applications>
 	<SRApplication name="AVB_1">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>50</PayloadSize>
 		<NoOfFrames>7</NoOfFrames>
-		<Source name="ES407"/>
+		<Source name="ES407" />
 		<Destinations>
-			<Dest name="ES402"/>
-			<Dest name="ES414"/>
+			<Dest name="ES402" />
+			<Dest name="ES414" />
 		</Destinations>
 	</SRApplication>
 
@@ -17,90 +18,209 @@
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>800</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
-		<Source name="ES419"/>
+		<Source name="ES419" />
 		<Destinations>
-			<Dest name="ES403"/>
+			<Dest name="ES403" />
+			<Dest name="ES406" />
+			<Dest name="ES416" />
 		</Destinations>
 	</SRApplication>
-	
+
 	<SRApplication name="AVB_3">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>400</PayloadSize>
 		<NoOfFrames>2</NoOfFrames>
-		<Source name="ES400"/>
+		<Source name="ES400" />
 		<Destinations>
-			<Dest name="ES405"/>
+			<Dest name="ES405" />
 		</Destinations>
 	</SRApplication>
-	
+
 	<SRApplication name="AVB_4">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>15</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
-		<Source name="ES401"/>
+		<Source name="ES401" />
 		<Destinations>
-			<Dest name="ES416"/>
-			<Dest name="ES411"/>
+			<Dest name="ES416" />
+			<Dest name="ES411" />
 		</Destinations>
 	</SRApplication>
-	
+
 	<SRApplication name="AVB_5">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>98</PayloadSize>
 		<NoOfFrames>3</NoOfFrames>
-		<Source name="ES413"/>
+		<Source name="ES413" />
 		<Destinations>
-			<Dest name="ES414"/>
-			<Dest name="ES401"/>
+			<Dest name="ES414" />
+			<Dest name="ES401" />
 		</Destinations>
 	</SRApplication>
-	
+
 	<SRApplication name="AVB_6">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>88</PayloadSize>
 		<NoOfFrames>3</NoOfFrames>
-		<Source name="ES408"/>
+		<Source name="ES408" />
 		<Destinations>
-			<Dest name="ES419"/>
-			<Dest name="ES402"/>
+			<Dest name="ES419" />
+			<Dest name="ES402" />
 		</Destinations>
 	</SRApplication>
-	
+
 	<SRApplication name="AVB_7">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>60</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
-		<Source name="ES412"/>
+		<Source name="ES412" />
 		<Destinations>
-			<Dest name="ES410"/>
+			<Dest name="ES410" />
 		</Destinations>
 	</SRApplication>
-	
+
 	<SRApplication name="AVB_8">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
-		<PayloadSize>60</PayloadSize>
-		<NoOfFrames>9</NoOfFrames>
-		<Source name="ES409"/>
+		<PayloadSize>100</PayloadSize>
+		<NoOfFrames>10</NoOfFrames>
+		<Source name="ES409" />
 		<Destinations>
-			<Dest name="ES417"/>
+			<Dest name="ES417" />
 		</Destinations>
 	</SRApplication>
-	
+
 	<SRApplication name="AVB_9">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>60</PayloadSize>
 		<NoOfFrames>9</NoOfFrames>
-		<Source name="ES409"/>
+		<Source name="ES409" />
 		<Destinations>
-			<Dest name="ES417"/>
+			<Dest name="ES417" />
+		</Destinations>
+	</SRApplication>
+
+	<SRApplication name="AVB_10">
+		<Mode>A</Mode>
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>100</PayloadSize>
+		<NoOfFrames>7</NoOfFrames>
+		<Source name="ES402" />
+		<Destinations>
+			<Dest name="ES410" />
+			<Dest name="ES415" />
+			<Dest name="ES405" />
+		</Destinations>
+	</SRApplication>
+
+	<SRApplication name="AVB_11">
+		<Mode>A</Mode>
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>100</PayloadSize>
+		<NoOfFrames>6</NoOfFrames>
+		<Source name="ES403" />
+		<Destinations>
+			<Dest name="ES404" />
+		</Destinations>
+	</SRApplication>
+
+	<SRApplication name="AVB_12">
+		<Mode>A</Mode>
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>100</PayloadSize>
+		<NoOfFrames>5</NoOfFrames>
+		<Source name="ES404" />
+		<Destinations>
+			<Dest name="ES407" />
+			<Dest name="ES408" />
+		</Destinations>
+	</SRApplication>
+
+	<SRApplication name="AVB_13">
+		<Mode>A</Mode>
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>200</PayloadSize>
+		<NoOfFrames>1</NoOfFrames>
+		<Source name="ES411" />
+		<Destinations>
+			<Dest name="ES419" />
+			<Dest name="ES400" />
+			<Dest name="ES401" />
 		</Destinations>
 	</SRApplication>
 	
+	<SRApplication name="AVB_14">
+		<Mode>A</Mode>
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>190</PayloadSize>
+		<NoOfFrames>1</NoOfFrames>
+		<Source name="ES409" />
+		<Destinations>
+			<Dest name="ES410" />
+			<Dest name="ES411" />
+			<Dest name="ES412" />
+		</Destinations>
+	</SRApplication>
+	
+	<SRApplication name="AVB_15">
+		<Mode>A</Mode>
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>100</PayloadSize>
+		<NoOfFrames>3</NoOfFrames>
+		<Source name="ES417" />
+		<Destinations>
+			<Dest name="ES410" />
+			<Dest name="ES408" />
+			<Dest name="ES406" />
+			<Dest name="ES404" />
+			<Dest name="ES402" />
+		</Destinations>
+	</SRApplication>
+	
+	<SRApplication name="AVB_16">
+		<Mode>A</Mode>
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>200</PayloadSize>
+		<NoOfFrames>1</NoOfFrames>
+		<Source name="ES414" />
+		<Destinations>
+			<Dest name="ES419" />
+			<Dest name="ES412" />
+		</Destinations>
+	</SRApplication>
+	
+	<SRApplication name="AVB_17">
+		<Mode>A</Mode>
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>200</PayloadSize>
+		<NoOfFrames>3</NoOfFrames>
+		<Source name="ES413" />
+		<Destinations>
+			<Dest name="ES411" />
+			<Dest name="ES412" />
+		</Destinations>
+	</SRApplication>
+
+	<SRApplication name="AVB_18">
+		<Mode>A</Mode>
+		<SRType>CLASS_A</SRType>
+		<PayloadSize>60</PayloadSize>
+		<NoOfFrames>2</NoOfFrames>
+		<Source name="ES407" />
+		<Destinations>
+			<Dest name="ES401" />
+			<Dest name="ES403" />
+			<Dest name="ES405" />
+			<Dest name="ES413" />
+			<Dest name="ES409" />
+			<Dest name="ES411" />
+		</Destinations>
+	</SRApplication>
+
 </Applications>

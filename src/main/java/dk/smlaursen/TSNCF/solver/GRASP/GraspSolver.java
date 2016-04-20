@@ -75,7 +75,7 @@ public class GraspSolver implements Solver {
 					//Report progress every 10sec
 
 					float searchProgress = (++i* (float) PROGRESS_PERIOD) / dur.toMillis();
-					logger.info("Searching "+numberFormat.format(searchProgress*100)+"% : CurrentBest "+numberFormat.format(globalBestCost));
+					logger.info("Searching "+numberFormat.format(searchProgress*100)+"% : CurrentBest "+(globalBestCost == Double.MAX_VALUE? "Infinity" :numberFormat.format(globalBestCost)));
 				}
 			};
 			//If info is enabled, start a timer-task that reports the progress every PROGRESS_PERIOD
@@ -173,11 +173,9 @@ public class GraspSolver implements Solver {
 				double currBestCost = Double.MAX_VALUE;
 				Unicast currUnicast;
 				Unicast currBestUnicast = null;
-				for(int u = 0; u < Math.max(3, K/3); u++){
-					//As the candidates are in ordered by their shortest path first, it may be clever to increase the probability, 
+				for(int u = 0; u < Math.max(3, K/4); u++){
 					//Of selecting one of the first elements.
-
-										int index = ThreadLocalRandom.current().nextInt(uc.getCandidates().size());
+					int index = ThreadLocalRandom.current().nextInt(uc.getCandidates().size());
 //					int index = RandomDistributions.RouletteWheelDistribution(uc.getCandidates().size());
 					currUnicast = new Unicast(aRandomizedRoutingCandidateList.get(i).getApplication(), uc.getDestNode(), uc.getCandidates().get(index));
 					//Add solution and evaluate
@@ -211,7 +209,6 @@ public class GraspSolver implements Solver {
 			for(UnicastCandidates uc : avbRoutes){
 				mapping.put(uc, uc);
 			}
-//			for(int index = 0; index < solution.size(); index++){
 			for(int sample = 0; sample < solution.size()/2; sample++){
 				int index = ThreadLocalRandom.current().nextInt(solution.size());
 				
@@ -227,9 +224,12 @@ public class GraspSolver implements Solver {
 						//If better than what previously has been found continue using that value 
 						if(cost < bestCost){
 							bestCost = cost;
-							//As long as we get improvements, make room for one more sample
+							//As long as we get improvements, make room for more samples
 							sample--;
-//							index--;
+							//But if this is a new record low, allow many more samples to be explored
+							if(cost < globalBestCost){
+								sample -= solution.size()/2;
+							}
 							break;
 						} else {
 							//Go back again
