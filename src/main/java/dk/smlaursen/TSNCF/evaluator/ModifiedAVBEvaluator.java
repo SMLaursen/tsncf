@@ -28,9 +28,9 @@ import dk.smlaursen.TSNCF.solver.Unicast;
 public class ModifiedAVBEvaluator implements Evaluator{
 	//----------- PENALTIES ----------------------
 	/** The threshold of WCRT / DEADLINE for when starting to increase with {@value #THRESHOLD_EXCEEDED_PENALITY} per. percent*/
-	private final static double PENALITY_THRESHOLD = 0.8;
+	private final static double PENALITY_THRESHOLD = 0.0;
 	/** The penality applied to every percent of WCRT / DEADLINE exceeds {@link #PENALITY_THRESHOLD}*/
-	private final static double THRESHOLD_EXCEEDED_PENALITY = 0.2;
+	private final static double THRESHOLD_EXCEEDED_PENALITY = 3.0;
 	/** How much each hop increases the cost*/
 	private final static double HOP_PENALITY = 1.0;
 	//----------- CONFIGURATION ------------------
@@ -143,7 +143,7 @@ public class ModifiedAVBEvaluator implements Evaluator{
 					cost = Double.MAX_VALUE;
 					break;
 				} else if (maxLatency / app.getDeadline() > PENALITY_THRESHOLD){
-					cost += (maxLatency/app.getDeadline() - PENALITY_THRESHOLD) * 100 * THRESHOLD_EXCEEDED_PENALITY;
+					cost += (maxLatency/app.getDeadline() - PENALITY_THRESHOLD) * THRESHOLD_EXCEEDED_PENALITY;
 				}
 			}
 		}
