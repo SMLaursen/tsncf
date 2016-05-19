@@ -3,8 +3,8 @@
 	<SRApplication name="S1_BLUE">
 		<Mode>1</Mode>
 		<SRType>CLASS_A</SRType>
-		<PayloadSize>1100</PayloadSize>
-		<NoOfFrames>1</NoOfFrames>
+		<PayloadSize>400</PayloadSize>
+		<NoOfFrames>2</NoOfFrames>
 		<Source name="ES1"></Source>
 		<Destinations>
 			<Dest name="ES4"></Dest>
@@ -15,7 +15,7 @@
 		<Mode>2</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>350</PayloadSize>
-		<NoOfFrames>3</NoOfFrames>
+		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES5"></Source>
 		<Destinations>
 			<Dest name="ES3"></Dest>
@@ -27,7 +27,7 @@
 		<Mode>1</Mode>
 		<Mode>2</Mode>
 		<SRType>CLASS_A</SRType>
-		<PayloadSize>300</PayloadSize>
+		<PayloadSize>480</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES7"></Source>
 		<Destinations>

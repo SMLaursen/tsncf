@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- CurrentBest = 985.29 @ K = 100, hops = 20 -->
 <Applications>
 	<SRApplication name="AVB_1">
 		<Mode>A</Mode>
@@ -155,7 +154,7 @@
 			<Dest name="ES401" />
 		</Destinations>
 	</SRApplication>
-	
+
 	<SRApplication name="AVB_14">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
@@ -168,7 +167,7 @@
 			<Dest name="ES412" />
 		</Destinations>
 	</SRApplication>
-	
+
 	<SRApplication name="AVB_15">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
@@ -182,7 +181,7 @@
 			<Dest name="ES402" />
 		</Destinations>
 	</SRApplication>
-	
+
 	<SRApplication name="AVB_16">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
@@ -194,42 +193,93 @@
 			<Dest name="ES412" />
 		</Destinations>
 	</SRApplication>
-	
-	<SRApplication name="AVB_17">
-		<Mode>A</Mode>
-		<SRType>CLASS_A</SRType>
-		<PayloadSize>200</PayloadSize>
-		<NoOfFrames>3</NoOfFrames>
-		<Source name="ES413" />
-		<Destinations>
-			<Dest name="ES411" />
-			<Dest name="ES412" />
-		</Destinations>
-	</SRApplication>
 
-	<SRApplication name="AVB_18">
-		<Mode>A</Mode>
-		<SRType>CLASS_A</SRType>
-		<PayloadSize>110</PayloadSize>
-		<NoOfFrames>2</NoOfFrames>
-		<Source name="ES407" />
-		<Destinations>
-			<Dest name="ES401" />
-			<Dest name="ES405" />
-			<Dest name="ES413" />
-			<Dest name="ES411" />
-		</Destinations>
-	</SRApplication>
-	
 	<TTApplication name="TT1">
 		<Source name="ES407"></Source>
 		<Destinations>
-			<GCL offset="0" duration="20.4" frequency="2" />
+			<GCL offset="0" duration="10.4" frequency="2" />
 			<Dest name="ES405">
 				<Route>
 					<Bridge name="B307" />
 					<Bridge name="B306" />
 					<Bridge name="B305" />
+				</Route>
+			</Dest>
+		</Destinations>
+	</TTApplication>
+
+	<TTApplication name="TT2">
+		<Source name="ES417"></Source>
+		<Destinations>
+			<GCL offset="10.4" duration="5.2" frequency="4" />
+			<Dest name="ES401">
+				<Route>
+					<Bridge name="B318" />
+					<Bridge name="B209" />
+					<Bridge name="B200" />
+					<Bridge name="B301" />
+				</Route>
+			</Dest>
+		</Destinations>
+	</TTApplication>
+
+	<TTApplication name="TT3">
+		<Source name="ES411"></Source>
+		<Destinations>
+			<GCL offset="10.4" duration="15.6" frequency="3" />
+			<Dest name="ES403">
+				<Route>
+					<Bridge name="B311" />
+					<Bridge name="B205" />
+					<Bridge name="B102" />
+					<Bridge name="B101" />
+					<Bridge name="B202" />
+					<Bridge name="B304" />
+				</Route>
+			</Dest>
+		</Destinations>
+	</TTApplication>
+
+	<TTApplication name="TT4">
+		<Source name="ES412"></Source>
+		<Destinations>
+			<GCL offset="10.4" duration="20.0" frequency="3" />
+			<Dest name="ES415">
+				<Route>
+					<Bridge name="B313" />
+					<Bridge name="B314" />
+					<Bridge name="B315" />
+				</Route>
+			</Dest>
+		</Destinations>
+	</TTApplication>
+
+	<TTApplication name="TT5">
+		<Source name="ES403"></Source>
+		<Destinations>
+			<GCL offset="10.4" duration="35.0" frequency="2" />
+			<Dest name="ES405">
+				<Route>
+					<Bridge name="B304" />
+					<Bridge name="B202" />
+					<Bridge name="B101" />
+					<Bridge name="B203" />
+					<Bridge name="B306" />
+				</Route>
+			</Dest>
+		</Destinations>
+	</TTApplication>
+
+	<TTApplication name="TT6">
+		<Source name="ES408"></Source>
+		<Destinations>
+			<GCL offset="10.4" duration="15.0" frequency="2" />
+			<Dest name="ES410">
+				<Route>
+					<Bridge name="B309" />
+					<Bridge name="B204" />
+					<Bridge name="B205" />
+					<Bridge name="B310" />
 				</Route>
 			</Dest>
 		</Destinations>
