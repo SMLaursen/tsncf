@@ -15,7 +15,9 @@ import org.slf4j.LoggerFactory;
 import dk.smlaursen.TSNCF.application.Application;
 import dk.smlaursen.TSNCF.architecture.GCLEdge;
 import dk.smlaursen.TSNCF.architecture.Node;
+import dk.smlaursen.TSNCF.evaluator.Cost;
 import dk.smlaursen.TSNCF.evaluator.Evaluator;
+import dk.smlaursen.TSNCF.evaluator.ModifiedAVBEvaluatorCost;
 import dk.smlaursen.TSNCF.solver.GraphPaths;
 import dk.smlaursen.TSNCF.solver.Multicast;
 import dk.smlaursen.TSNCF.solver.Solver;
@@ -86,7 +88,7 @@ public class KShortestPathSolver_SR implements Solver {
 		timer.schedule(progressUpdater, PROGRESS_PERIOD, PROGRESS_PERIOD);
 
 		//Start evaluating
-		double bestCost = Double.MAX_VALUE;
+		Cost bestCost = new ModifiedAVBEvaluatorCost();
 		//TODO Parallelize
 		while(!abortFlag && table.hasNext()){
 
@@ -95,8 +97,8 @@ public class KShortestPathSolver_SR implements Solver {
 			curr.addAll(ttRoutes);
 
 			//Evaluate and store the so far best solution
-			double currCost = eval.evaluate(curr, topology); 
-			if(currCost < bestCost){
+			Cost currCost = eval.evaluate(curr, topology); 
+			if(currCost.getTotalCost() < bestCost.getTotalCost()){
 				bestRoute.clear();
 				bestRoute.addAll(curr);
 				bestCost = currCost;
@@ -111,7 +113,7 @@ public class KShortestPathSolver_SR implements Solver {
 			logger.info("Finished in "+(System.currentTimeMillis()-currTime)/1000.0+"s");
 		}
 		timer.cancel();
-		
+		System.out.println(bestCost.toDetailedString());
 		//return best route as multicasts;
 		return Multicast.generateMulticasts(bestRoute);
 	}

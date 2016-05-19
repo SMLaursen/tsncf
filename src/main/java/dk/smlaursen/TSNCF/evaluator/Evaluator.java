@@ -15,7 +15,7 @@ public interface Evaluator {
 	/** Evaluates the set of route and returns a score based on how well it fits.
 	 * @param route the Collection of {@link Unicast}s containing the SR-Apps to be evaluated
 	 * @param graph the {@link Graph} containing the topology.
-	 * @return the score*/
-	public double evaluate(final Collection<Unicast> route, final Graph<Node, GCLEdge> graph);
+	 * @return the {@Cost}*/
+	public Cost evaluate(final Collection<Unicast> route, final Graph<Node, GCLEdge> graph);
 }
 

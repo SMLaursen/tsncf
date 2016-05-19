@@ -22,17 +22,18 @@ import org.slf4j.LoggerFactory;
 import dk.smlaursen.TSNCF.application.Application;
 import dk.smlaursen.TSNCF.architecture.GCLEdge;
 import dk.smlaursen.TSNCF.architecture.Node;
+import dk.smlaursen.TSNCF.evaluator.Cost;
 import dk.smlaursen.TSNCF.evaluator.Evaluator;
+import dk.smlaursen.TSNCF.evaluator.ModifiedAVBEvaluatorCost;
 import dk.smlaursen.TSNCF.solver.Solver;
 import dk.smlaursen.TSNCF.solver.GraphPaths;
 import dk.smlaursen.TSNCF.solver.Multicast;
 import dk.smlaursen.TSNCF.solver.Route;
 import dk.smlaursen.TSNCF.solver.Unicast;
 import dk.smlaursen.TSNCF.solver.UnicastCandidates;
-import dk.smlaursen.TSNCF.util.RandomDistributions;
 
 public class GraspSolver implements Solver {
-	private double globalBestCost;
+	private Cost globalBestCost;
 	private Set<Unicast> bestSolution;
 	private final Object costLock = new Object();
 	private ExecutorService exec;
@@ -40,7 +41,7 @@ public class GraspSolver implements Solver {
 	private static final int NO_OF_THREADS = 8;// Runtime.getRuntime().availableProcessors()-2;
 	private static final int PROGRESS_PERIOD = 10000;
 	private static final int MAX_HOPS = 20;
-	private static final int K = 100;
+	private static final int K = 50;
 
 	private static Logger logger = LoggerFactory.getLogger(GraspSolver.class.getSimpleName());
 
@@ -54,7 +55,7 @@ public class GraspSolver implements Solver {
 		///////////////////////////////////////////////////////
 		//                  -- Setup --                       //
 		///////////////////////////////////////////////////////
-		globalBestCost = Double.MAX_VALUE;
+		globalBestCost = new ModifiedAVBEvaluatorCost();
 		bestSolution = new HashSet<Unicast>();
 
 		aTopology = topology;
@@ -75,7 +76,7 @@ public class GraspSolver implements Solver {
 					//Report progress every 10sec
 
 					float searchProgress = (++i* (float) PROGRESS_PERIOD) / dur.toMillis();
-					logger.info("Searching "+numberFormat.format(searchProgress*100)+"% : CurrentBest "+(globalBestCost == Double.MAX_VALUE? "Infinity" :numberFormat.format(globalBestCost)));
+					logger.info("Searching "+numberFormat.format(searchProgress*100)+"% : CurrentBest "+globalBestCost);
 				}
 			};
 			//If info is enabled, start a timer-task that reports the progress every PROGRESS_PERIOD
@@ -107,6 +108,7 @@ public class GraspSolver implements Solver {
 		///////////////////////////////////////////////////////
 		//                  -- DONE --                       //
 		///////////////////////////////////////////////////////
+		System.out.println(globalBestCost.toDetailedString());
 		return Multicast.generateMulticasts(bestSolution);
 	}
 
@@ -133,11 +135,11 @@ public class GraspSolver implements Solver {
 				solution = localSearch(solution);
 				
 				//Evaluate and see if better than anything we have seen before
-				double cost = aEval.evaluate(solution, aTopology);
+				Cost cost = aEval.evaluate(solution, aTopology);
 				//pre-check before entering critical-section
-				if(cost < globalBestCost){
+				if(cost.getTotalCost() < globalBestCost.getTotalCost()){
 					synchronized(costLock){
-						if(cost < globalBestCost){
+						if(cost.getTotalCost() < globalBestCost.getTotalCost()){
 							globalBestCost = cost;
 							bestSolution.clear();
 							bestSolution.addAll(solution);
@@ -170,7 +172,7 @@ public class GraspSolver implements Solver {
 			for(int i = 0; i < aRandomizedRoutingCandidateList.size();i++){
 				UnicastCandidates uc = aRandomizedRoutingCandidateList.get(i);
 
-				double currBestCost = Double.MAX_VALUE;
+				Cost currBestCost = new ModifiedAVBEvaluatorCost();
 				Unicast currUnicast;
 				Unicast currBestUnicast = null;
 				for(int u = 0; u < Math.max(3, K/4); u++){
@@ -180,8 +182,8 @@ public class GraspSolver implements Solver {
 					currUnicast = new Unicast(aRandomizedRoutingCandidateList.get(i).getApplication(), uc.getDestNode(), uc.getCandidates().get(index));
 					//Add solution and evaluate
 					partialSolution.add(currUnicast);
-					double cost = aEval.evaluate(partialSolution, aTopology);
-					if(cost < currBestCost){
+					Cost cost = aEval.evaluate(partialSolution, aTopology);
+					if(cost.getTotalCost() < currBestCost.getTotalCost()){
 						currBestCost = cost;
 						currBestUnicast = currUnicast;
 					}
@@ -201,8 +203,8 @@ public class GraspSolver implements Solver {
 
 		/** Stochastic Steepest Hill algorithm */
 		private List<Unicast> localSearch(List<Unicast> solution){
-			double cost = aEval.evaluate(solution, aTopology);
-			double bestCost = cost;
+			Cost cost = aEval.evaluate(solution, aTopology);
+			Cost bestCost = cost;
 
 			Map<Route, Route> mapping = new HashMap<Route, Route>(solution.size());
 			//As UnicastCandidates and Unicasts uses same hash function, they can be used both as key and values
@@ -222,12 +224,12 @@ public class GraspSolver implements Solver {
 						solution.set(index, temp);
 						cost = aEval.evaluate(solution, aTopology);
 						//If better than what previously has been found continue using that value 
-						if(cost < bestCost){
+						if(cost.getTotalCost() < bestCost.getTotalCost()){
 							bestCost = cost;
 							//As long as we get improvements, make room for more samples
 							sample--;
 							//But if this is a new record low, allow many more samples to be explored
-							if(cost < globalBestCost){
+							if(cost.getTotalCost() < globalBestCost.getTotalCost()){
 								sample -= solution.size()/2;
 							}
 							break;
@@ -238,7 +240,8 @@ public class GraspSolver implements Solver {
 					}
 
 				} else {
-					throw new InternalError("Consistency error in localSearch() method");
+					//TT Route = Do nothing (re-sample)
+//					throw new InternalError("Consistency error in localSearch() method");
 				}
 			}
 			return solution;

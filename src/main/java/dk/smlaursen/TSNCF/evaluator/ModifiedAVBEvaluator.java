@@ -17,6 +17,7 @@ import dk.smlaursen.TSNCF.application.SRApplication;
 import dk.smlaursen.TSNCF.application.TTApplication;
 import dk.smlaursen.TSNCF.architecture.GCLEdge;
 import dk.smlaursen.TSNCF.architecture.Node;
+import dk.smlaursen.TSNCF.evaluator.ModifiedAVBEvaluatorCost.Objective;
 import dk.smlaursen.TSNCF.solver.Multicast;
 import dk.smlaursen.TSNCF.solver.Unicast;
 
@@ -29,10 +30,10 @@ public class ModifiedAVBEvaluator implements Evaluator{
 	//----------- PENALTIES ----------------------
 	/** The threshold of WCRT / DEADLINE for when starting to increase with {@value #THRESHOLD_EXCEEDED_PENALITY} per. percent*/
 	private final static double PENALITY_THRESHOLD = 0.0;
-	/** The penality applied to every percent of WCRT / DEADLINE exceeds {@link #PENALITY_THRESHOLD}*/
-	private final static double THRESHOLD_EXCEEDED_PENALITY = 3.0;
-	/** How much each hop increases the cost*/
-	private final static double HOP_PENALITY = 1.0;
+//	/** The penality applied to every percent of WCRT / DEADLINE exceeds {@link #PENALITY_THRESHOLD}*/
+//	private final static double THRESHOLD_EXCEEDED_PENALITY = 3.0;
+//	/** How much each hop increases the cost*/
+//	private final static double HOP_PENALITY = 1.0;
 	//----------- CONFIGURATION ------------------
 	/** The maximum BE frame-size*/
 	private final static int MAX_BE_FRAME_BYTES = 1522;
@@ -40,11 +41,11 @@ public class ModifiedAVBEvaluator implements Evaluator{
 	private static Logger logger = LoggerFactory.getLogger(ModifiedAVBEvaluator.class.getSimpleName());
 
 	@Override
-	public double evaluate(Collection<Unicast> route, Graph<Node, GCLEdge> graph) {
+	public Cost evaluate(Collection<Unicast> route, Graph<Node, GCLEdge> graph) {
 		Map<GCLEdge, Double> allocMap = new HashMap<GCLEdge, Double>(); 
 		Map<GCLEdge, Double> ttAllocMap = new HashMap<GCLEdge, Double>();
 		List<Multicast> multicasts = Multicast.generateMulticasts(route);
-		double cost = 0;
+		ModifiedAVBEvaluatorCost cost = new ModifiedAVBEvaluatorCost();
 
 		// Then we identify all the different modes 
 		Map<String, Set<Multicast>> modeMap = new HashMap<String, Set<Multicast>>();
@@ -81,6 +82,13 @@ public class ModifiedAVBEvaluator implements Evaluator{
 			edgeMap.get(r.getApplication()).addAll(r.getRoute().getEdgeList());
 		}
 		
+		//Cost also includes the the sum of all disjoint edges
+		for(Application app : edgeMap.keySet()){
+			if(app instanceof SRApplication){
+				cost.add(Objective.three, edgeMap.get(app).size());
+			}
+		}
+		
 		//Then we run through each mode
 		for(String mode : modeMap.keySet()){
 			Set<Multicast> rs_in_curr_mode = new HashSet<Multicast>(modeMap.get(mode));
@@ -109,11 +117,9 @@ public class ModifiedAVBEvaluator implements Evaluator{
 						if(logger.isDebugEnabled()){
 							logger.debug("Route invalid : edge "+edge+"'s capacity exceeded. "+totalAllocMbps+"/"+(edge.getRateMbps() * edge.getAllocationCapacity())+" Route : "+route);
 						}
-						return cost = Double.MAX_VALUE;
+						cost.add(Objective.one, 1);
 					}
 					allocMap.put(edge, totalAllocMbps);
-					//Cost also includes the the sum of all disjoint edges
-					cost += edgeMap.get(app).size() * HOP_PENALITY;
 				}
 			}
 			
@@ -140,10 +146,10 @@ public class ModifiedAVBEvaluator implements Evaluator{
 					if(logger.isDebugEnabled()){
 						logger.debug(route+" set non-schedulable : "+app.getTitle()+"'s maxLatency exceeds deadline");
 					}
-					cost = Double.MAX_VALUE;
-					break;
-				} else if (maxLatency / app.getDeadline() > PENALITY_THRESHOLD){
-					cost += (maxLatency/app.getDeadline() - PENALITY_THRESHOLD) * THRESHOLD_EXCEEDED_PENALITY;
+					cost.add(Objective.one, 1);
+				}
+				if (maxLatency / app.getDeadline() > PENALITY_THRESHOLD){
+					cost.add(Objective.two, (maxLatency/app.getDeadline() - PENALITY_THRESHOLD));
 				}
 			}
 		}
@@ -167,4 +173,3 @@ public class ModifiedAVBEvaluator implements Evaluator{
 		return maxLatency; 
 	}
 }
-

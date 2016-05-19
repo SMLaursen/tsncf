@@ -17,8 +17,9 @@ import dk.smlaursen.TSNCF.solver.Unicast;
 public class DisjointEdgesEvaluator implements Evaluator {
 
 	@Override
-	public double evaluate(final Collection<Unicast> routes,final Graph<Node, GCLEdge> graph) {
-		double cost = 0;
+	public Cost evaluate(final Collection<Unicast> routes,final Graph<Node, GCLEdge> graph) {
+		DisjointEdgesCost cost = new DisjointEdgesCost();
+		
 		HashMap<Application, HashSet<DefaultEdge>> map = new HashMap<Application, HashSet<DefaultEdge>>(); 
 		//First we put all unqiue edges in the map
 		for(Unicast r : routes){
@@ -30,7 +31,7 @@ public class DisjointEdgesEvaluator implements Evaluator {
 		
 		//Then we run through it, and report the number
 		for(HashSet<DefaultEdge> m : map.values()){
-			cost +=m.size();
+			cost.addToCost(m.size());
 		}
 		
 		return cost;
