@@ -57,7 +57,7 @@ public class GCLEdge extends DefaultEdge {
 			interference = cachedInterferenceValues.get(duration); 
 		} else {
 			if(aGCLList.size() > 1){
-				logger.warn("Currently only one GCL pr. edge is supported. Ignoring all but the first.");
+				logger.warn(this.toString()+"Currently only one GCL pr. edge is supported. Ignoring all but the first.");
 			}
 			//FIXME : correct this calculation for #gcl > 1
 			for(GCL gcl : aGCLList){
