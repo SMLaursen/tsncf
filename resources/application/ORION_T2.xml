@@ -4,7 +4,7 @@
 	<TTApplication name="tt4.0">
 		<Source name="ES_SM1CA"></Source>
 		<Destinations>
-			<GCL offset="5.2" duration="4.6" frequency="1" />
+			<GCL offset="5.2" duration="20.6" frequency="1" />
 			<Dest name="ES_DU3">
 				<Route>
 					<Bridge name="SW51" />
@@ -20,7 +20,7 @@
 	<TTApplication name="tt23.0">
 		<Source name="ES_DU2"></Source>
 		<Destinations>
-			<GCL offset="10.4" duration="1.8" frequency="2" />
+			<GCL offset="10.4" duration="21.8" frequency="2" />
 			<Dest name="ES_CM1CB">
 				<Route>
 					<Bridge name="SW11" />
@@ -32,25 +32,10 @@
 		</Destinations>
 	</TTApplication>
 
-	<TTApplication name="tt50.0">
-		<Source name="ES_CM1CA"></Source>
-		<Destinations>
-			<GCL offset="2.9" duration="10.6" frequency="1" />
-			<Dest name="ES_GPS2">
-				<Route>
-					<Bridge name="SW41" />
-					<Bridge name="SW31" />
-					<Bridge name="SW21" />
-					<Bridge name="SW14" />
-				</Route>
-			</Dest>
-		</Destinations>
-	</TTApplication>
-
 	<TTApplication name="tt67.0">
 		<Source name="ES_FCM2"></Source>
 		<Destinations>
-			<GCL offset="10.4" duration="30.6" frequency="3" />
+			<GCL offset="10.4" duration="15.6" frequency="3" />
 			<Dest name="ES_SMRIU1">
 				<Route>
 					<Bridge name="SW32" />
@@ -59,23 +44,10 @@
 			</Dest>
 		</Destinations>
 	</TTApplication>
-	
-	<TTApplication name="tt80.0">
-		<Source name="ES_CM2CB"></Source>
-		<Destinations>
-			<GCL offset="10.4" duration="10.6" frequency="3" />
-			<Dest name="ES_RCM2">
-				<Route>
-					<Bridge name="SW42" />
-					<Bridge name="SW32" />
-				</Route>
-			</Dest>
-		</Destinations>
-	</TTApplication>
 
 	<SRApplication name="rc3.0">
 		<SRType>CLASS_A</SRType>
-		<PayloadSize>4</PayloadSize>
+		<PayloadSize>44</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_SM1CA"></Source>
 		<Destinations>
@@ -86,7 +58,7 @@
 
 	<SRApplication name="rc5.0">
 		<SRType>CLASS_A</SRType>
-		<PayloadSize>4</PayloadSize>
+		<PayloadSize>34</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_GPS1"></Source>
 		<Destinations>
@@ -119,7 +91,7 @@
 
 	<SRApplication name="rc18.0">
 		<SRType>CLASS_A</SRType>
-		<PayloadSize>4</PayloadSize>
+		<PayloadSize>44</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_DU1"></Source>
 		<Destinations>
@@ -131,7 +103,7 @@
 	<SRApplication name="rc19.0">
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>4</PayloadSize>
-		<NoOfFrames>1</NoOfFrames>
+		<NoOfFrames>3</NoOfFrames>
 		<Source name="ES_SBAND2"></Source>
 		<Destinations>
 			<Dest name="ES_DU1"></Dest>

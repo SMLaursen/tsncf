@@ -1,90 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Applications>
-	<SRApplication name="AVB_1">
+	
+	<TTApplication name="TT_E">
+		<Source name="ES1E"></Source>
+		<Destinations>
+			<GCL offset="0.0" duration="60" frequency="2" />
+			<Dest name="ES5E">
+				<Route>
+					<Bridge name="B2" />
+					<Bridge name="B4" />
+				</Route>
+			</Dest>
+		</Destinations>
+	</TTApplication>
+
+	<SRApplication name="AVB_A">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
 		<PayloadSize>220</PayloadSize>
 		<NoOfFrames>2</NoOfFrames>
 		<Source name="ES1A" />
 		<Destinations>
-			<Dest name="ES6A" />
-			<Dest name="ES4A" />
+			<Dest name="ES5A" />
+			<Dest name="ES5B" />
 		</Destinations>
 	</SRApplication>
 
-	<SRApplication name="AVB_2">
+	<SRApplication name="AVB_B">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
-		<PayloadSize>250</PayloadSize>
+		<PayloadSize>600</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES1B" />
 		<Destinations>
-			<Dest name="ES4A" />
+			<Dest name="ES5B" />
 		</Destinations>
 	</SRApplication>
-
-	<SRApplication name="AVB_3">
+	
+	<SRApplication name="AVB_C">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
-		<PayloadSize>220</PayloadSize>
+		<PayloadSize>300</PayloadSize>
 		<NoOfFrames>2</NoOfFrames>
-		<Source name="ES2A" />
+		<Source name="ES1C" />
 		<Destinations>
-			<Dest name="ES1B" />
-			<Dest name="ES4B" />
+			<Dest name="ES5C" />
 			<Dest name="ES5A" />
 		</Destinations>
 	</SRApplication>
 
-	<SRApplication name="AVB_4">
+	<SRApplication name="AVB_D">
 		<Mode>A</Mode>
 		<SRType>CLASS_A</SRType>
-		<PayloadSize>15</PayloadSize>
-		<NoOfFrames>10</NoOfFrames>
-		<Source name="ES5A" />
+		<PayloadSize>500</PayloadSize>
+		<NoOfFrames>1</NoOfFrames>
+		<Source name="ES1D" />
 		<Destinations>
-			<Dest name="ES4A" />
+			<Dest name="ES5D" />
 		</Destinations>
 	</SRApplication>
-	
-	<TTApplication name="TT_1">
-		<Source name="ES6B"></Source>
-		<Destinations>
-			<GCL offset="5.2" duration="50.6" frequency="1" />
-			<Dest name="ES4C">
-				<Route>
-					<Bridge name="B6" />
-					<Bridge name="B5" />
-					<Bridge name="B4" />
-				</Route>
-			</Dest>
-		</Destinations>
-	</TTApplication>
-	
-	<TTApplication name="TT_2">
-		<Source name="ES4B"></Source>
-		<Destinations>
-			<GCL offset="5.2" duration="4.6" frequency="1" />
-			<Dest name="ES5B">
-				<Route>
-					<Bridge name="B4" />
-					<Bridge name="B5" />
-				</Route>
-			</Dest>
-		</Destinations>
-	</TTApplication>
-	
-	<TTApplication name="TT_3">
-		<Source name="ES1B"></Source>
-		<Destinations>
-			<GCL offset="5.2" duration="4.6" frequency="1" />
-			<Dest name="ES2A">
-				<Route>
-					<Bridge name="B1" />
-					<Bridge name="B2" />
-				</Route>
-			</Dest>
-		</Destinations>
-	</TTApplication>
 	
 </Applications>

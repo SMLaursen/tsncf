@@ -4,7 +4,7 @@
 	<TTApplication name="tt4.0">
 		<Source name="ES_SM1CA"></Source>
 		<Destinations>
-			<GCL offset="5.2" duration="50.6" frequency="1" />
+			<GCL offset="5.2" duration="4.6" frequency="1" />
 			<Dest name="ES_DU3">
 				<Route>
 					<Bridge name="SW51" />
@@ -27,19 +27,6 @@
 					<Bridge name="SW21" />
 					<Bridge name="SW31" />
 					<Bridge name="SW41" />
-				</Route>
-			</Dest>
-		</Destinations>
-	</TTApplication>
-
-	<TTApplication name="tt67.0">
-		<Source name="ES_FCM2"></Source>
-		<Destinations>
-			<GCL offset="10.4" duration="15.6" frequency="3" />
-			<Dest name="ES_SMRIU1">
-				<Route>
-					<Bridge name="SW32" />
-					<Bridge name="SW6" />
 				</Route>
 			</Dest>
 		</Destinations>
