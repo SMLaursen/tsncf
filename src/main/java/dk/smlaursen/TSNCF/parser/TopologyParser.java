@@ -24,6 +24,9 @@ import dk.smlaursen.TSNCF.architecture.Node;
 
 public class TopologyParser {
 
+	private static final int RATE = 1000;
+	private static final double DEVICE_DELAY = 5.12;
+	
 	public static AbstractBaseGraph<Node, GCLEdge> parse(File f){
 		AbstractBaseGraph<Node, GCLEdge> graph = new SimpleDirectedGraph<Node, GCLEdge>(GCLEdge.class);
 
@@ -83,9 +86,9 @@ public class TopologyParser {
 						throw new InputMismatchException("Aborting : edge didn't contain any target");
 					} 
 					target = target.toUpperCase();
-					graph.addEdge(nodeMap.get(source), nodeMap.get(target), new GCLEdge(1000, 5.12));
+					graph.addEdge(nodeMap.get(source), nodeMap.get(target), new GCLEdge(RATE, DEVICE_DELAY));
 					if(!isDirected){
-						graph.addEdge(nodeMap.get(target), nodeMap.get(source), new GCLEdge(1000, 5.12));
+						graph.addEdge(nodeMap.get(target), nodeMap.get(source), new GCLEdge(RATE, DEVICE_DELAY));
 					}
 				}
 			}

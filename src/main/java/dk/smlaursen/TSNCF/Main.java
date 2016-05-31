@@ -30,7 +30,7 @@ import dk.smlaursen.TSNCF.visualization.Visualizer;
 
 public class Main {
 	//Command line options
-	private static final String APP_ARG = "app",NET_ARG = "net", DISP_ARG = "display", VERBOSE_ARG = "verbose", K_ARG="K";
+	private static final String APP_ARG = "app",NET_ARG = "net", DISP_ARG = "display", VERBOSE_ARG = "verbose", K_ARG="K", SOLVER_ARG="GRASP";
 
 	//FIXME todos
 	//////////////////////////////////////////////
@@ -41,14 +41,15 @@ public class Main {
 	//////////////////////////////////////////////
 	public static void main(String[] args){
 		//Default value of K
-		int K = 3;
+		int K = 50;
 		Option architectureFile = Option.builder(NET_ARG).required().argName("file").hasArg().desc("Use given file as network").build();
 		Option applicationFile = Option.builder(APP_ARG).required().argName("file").hasArg().desc("Use given file as application").build();
 		
 		Options options = new Options();
 		options.addOption(applicationFile);
 		options.addOption(architectureFile);
-		options.addOption(K_ARG, true, "Value of K for search-space reduction (default = 4)");
+		options.addOption(K_ARG, true, "Value of K for search-space reduction (Default = 50)");
+		options.addOption(SOLVER_ARG, true, "The type of solver to use (Default = GRASP)");
 		options.addOption(VERBOSE_ARG, false, "Verbose output");
 		options.addOption(DISP_ARG, false, "Display output");
 
@@ -90,10 +91,25 @@ public class Main {
 			logger.info("Applications parsed! ");
 
 			//Solve problem
-			logger.debug("Solving problem");
-//			Solver s = new KShortestPathSolver_SR(K);
-			Solver s = new GraspSolver();
+			String solver = "GRASP";
+			Solver s;
+			if(line.hasOption(SOLVER_ARG)){
+				solver = line.getOptionValue(SOLVER_ARG);
+			}
+			switch(solver){
+			case "exhaustive" :
+				s = new KShortestPathSolver_SR(K);
+				break;
+			case "GRASP" :
+				s = new GraspSolver(K);
+				break;
+			default :
+				throw new Error("Aborting : Solver "+solver+" unrecognized.");
+			}
+			
+			logger.info("Solving problem using "+solver+" solver");
 			List<Multicast> sol = s.solve(graph, apps, new ModifiedAVBEvaluator(), Duration.ofSeconds(60));
+			
 			if(sol == null || sol.isEmpty()){
 				logger.info("No solution could be found ");
 			} else {

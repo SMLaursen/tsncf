@@ -113,7 +113,7 @@ public class KShortestPathSolver_SR implements Solver {
 			logger.info("Finished in "+(System.currentTimeMillis()-currTime)/1000.0+"s");
 		}
 		timer.cancel();
-		System.out.println(bestCost.toDetailedString());
+		
 		//return best route as multicasts;
 		return Multicast.generateMulticasts(bestRoute);
 	}

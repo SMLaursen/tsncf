@@ -37,11 +37,11 @@ public class GraspSolver implements Solver {
 	private Set<Unicast> bestSolution;
 	private final Object costLock = new Object();
 	private ExecutorService exec;
+	private int K = 50;
 
 	private static final int NO_OF_THREADS = 8;// Runtime.getRuntime().availableProcessors()-2;
 	private static final int PROGRESS_PERIOD = 10000;
 	private static final int MAX_HOPS = 20;
-	private static final int K = 50;
 
 	private static Logger logger = LoggerFactory.getLogger(GraspSolver.class.getSimpleName());
 
@@ -50,6 +50,10 @@ public class GraspSolver implements Solver {
 	private Graph<Node, GCLEdge> aTopology;
 	private Evaluator aEval;
 
+	public GraspSolver(int K){
+		this.K = K;
+	}
+	
 	@Override
 	public List<Multicast> solve(Graph<Node, GCLEdge> topology, List<Application> applications, Evaluator eval, Duration dur) {
 		///////////////////////////////////////////////////////
