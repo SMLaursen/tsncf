@@ -112,7 +112,7 @@ public class GCLEdge extends DefaultEdge {
 			@Override
 			public int compare(GCE o1, GCE o2) {
 				Double g1 = new Double(o1.getStart());
-				Double g2 = new Double(o1.getStart());
+				Double g2 = new Double(o2.getStart());
 				return g1.compareTo(g2);
 			}
 		});
