@@ -24,7 +24,7 @@ import dk.smlaursen.TSNCF.architecture.Node;
 
 public class TopologyParser {
 
-	private static final int RATE = 1000;
+	private static final int RATE = 100;
 	private static final double DEVICE_DELAY = 5.12;
 	
 	public static AbstractBaseGraph<Node, GCLEdge> parse(File f){
