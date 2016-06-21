@@ -39,7 +39,7 @@ public class GraspSolver implements Solver {
 	private ExecutorService exec;
 	private int K = 50;
 
-	private static final int NO_OF_THREADS = 8;// Runtime.getRuntime().availableProcessors()-2;
+	private static final int NO_OF_THREADS = Runtime.getRuntime().availableProcessors()/2;
 	private static final int PROGRESS_PERIOD = 10000;
 	private static final int MAX_HOPS = 20;
 

@@ -10,6 +10,7 @@ import org.jgrapht.alg.KShortestPaths;
 import org.jgrapht.graph.GraphPathImpl;
 import dk.smlaursen.TSNCF.application.Application;
 import dk.smlaursen.TSNCF.application.TTApplication;
+import dk.smlaursen.TSNCF.architecture.GCL;
 import dk.smlaursen.TSNCF.architecture.GCLEdge;
 import dk.smlaursen.TSNCF.architecture.Node;
 
@@ -71,7 +72,7 @@ public class GraphPaths {
 		ArrayList<Unicast> aRouting = new ArrayList<Unicast>(ttApp.getDestinations().length);
 		try{
 			for(int i=0; i<ttApp.getDestinations().length; i++){
-				List<GCLEdge> edgeList = new LinkedList<GCLEdge>();
+				List<GCLEdge> edgeList = new ArrayList<GCLEdge>();
 				
 				Node prev = ttApp.getSource();
 				for(Node curr : ttApp.getExplicitPath().getPath().get(i)){
@@ -80,11 +81,15 @@ public class GraphPaths {
 				}
 				edgeList.add(graph.getEdge(prev, ttApp.getDestinations()[i]));
 				
-				for(GCLEdge edge : edgeList){
+				for(int u = 0; u < edgeList.size(); u++){
+					List<GCL> gcls = new LinkedList<GCL>();
+					//Add offset (Here we just use the duration of the transmission as offset per hop)
+					for(GCL g : ttApp.getExplicitPath().getGCL()){
+						gcls.add(new GCL(g.getOffset()+g.getDuration()*u, g.getDuration(), g.getFrequency()));
+					}
 					//Put the GCL on all the GCLEdges in the edgeList
-					edge.addGCL(ttApp.getExplicitPath().getGCL());
+					edgeList.get(u).addGCL(gcls);
 				}
-				
 				GraphPath<Node, GCLEdge> gp = new GraphPathImpl<Node, GCLEdge>(graph, ttApp.getSource(), ttApp.getDestinations()[i], edgeList, 1.0);
 				aRouting.add(new Unicast(ttApp,ttApp.getDestinations()[i], gp));
 			}

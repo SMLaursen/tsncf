@@ -17,7 +17,7 @@ public class GCL {
 		return aDuration;
 	}
 	
-	public double getFrequency(){
+	public int getFrequency(){
 		return afrequency;
 	}
 	
