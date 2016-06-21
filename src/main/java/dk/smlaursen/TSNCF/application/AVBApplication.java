@@ -45,7 +45,7 @@ public class AVBApplication extends Application {
 	
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		sb.append("SR ").append(aTitle).append(" ").append(aModes);
+		sb.append("AVB ").append(aTitle).append(" ").append(aModes);
 		sb.append(" : ").append(aAVBClass);
 		sb.append(" (").append(aNoOfFramesPerInterval).append("x").append(aMaxFrameSize).append("B / ").append(getInterval()).append("us)");
 		sb.append(" (").append(aSource).append(" -> ").append(Arrays.toString(aDestinations)).append(")");
