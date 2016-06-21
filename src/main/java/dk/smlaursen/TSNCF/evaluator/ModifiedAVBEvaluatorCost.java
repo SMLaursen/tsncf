@@ -1,13 +1,26 @@
 package dk.smlaursen.TSNCF.evaluator;
 
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+
+import dk.smlaursen.TSNCF.solver.Multicast;
 
 public class ModifiedAVBEvaluatorCost implements Cost, Comparator<ModifiedAVBEvaluatorCost> {
 	private double w1 = 10000, w2 = 3.0, w3 = 1.0, obj1, obj2, obj3;
 	private boolean isUsed;
+	private Map<Multicast, Double> aWCDMap = new HashMap<Multicast, Double>(); 
 	
 	public ModifiedAVBEvaluatorCost() {
 		reset();
+	}
+	
+	public void setWCD(Multicast m, Double wcd){
+		aWCDMap.put(m, wcd);
+	}
+	
+	public double getWCD(Multicast m){
+		return aWCDMap.get(m);
 	}
 	
 	public void add(Objective e, double value){
@@ -55,7 +68,7 @@ public class ModifiedAVBEvaluatorCost implements Cost, Comparator<ModifiedAVBEva
 	}
 	
 	public String toDetailedString(){
-		return "Total : "+toString()+" | o1 "+obj1+", o2 "+obj2+", o3 "+obj3;
+		return "Total : "+toString()+" | o1 "+obj1+", o2 "+obj2+", o3 "+obj3+" -- "+aWCDMap+" --";
 	}
 }
 

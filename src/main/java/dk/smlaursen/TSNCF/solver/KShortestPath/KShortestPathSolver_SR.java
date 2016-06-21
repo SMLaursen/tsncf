@@ -20,12 +20,13 @@ import dk.smlaursen.TSNCF.evaluator.Evaluator;
 import dk.smlaursen.TSNCF.evaluator.ModifiedAVBEvaluatorCost;
 import dk.smlaursen.TSNCF.solver.GraphPaths;
 import dk.smlaursen.TSNCF.solver.Multicast;
+import dk.smlaursen.TSNCF.solver.Solution;
 import dk.smlaursen.TSNCF.solver.Solver;
 import dk.smlaursen.TSNCF.solver.Unicast;
 import dk.smlaursen.TSNCF.solver.UnicastCandidates;
 
 /**The KShortestPathSolver_SR relies on the {@link KShortestPaths} algorithm in the jgrapht library to calculate the K shortest paths
- * for each src-dest nodes of an SRApplication. Naturally, the greater K the better solution can be found, but as the shortest paths are in sorted order, the simples routes (Often yielding the best results) are evaluated first. 
+ * for each src-dest nodes of an AVBApplication. Naturally, the greater K the better solution can be found, but as the shortest paths are in sorted order, the simples routes (Often yielding the best results) are evaluated first. 
  * So increase K with care, as it can quickly lead to excessive computation time use. */
 public class KShortestPathSolver_SR implements Solver {
 	private int K = 7;
@@ -48,7 +49,7 @@ public class KShortestPathSolver_SR implements Solver {
 	}
 
 	@Override
-	public List<Multicast> solve(final Graph<Node, GCLEdge> topology,final List<Application> applications, Evaluator eval, Duration dur) {
+	public Solution solve(final Graph<Node, GCLEdge> topology,final List<Application> applications, Evaluator eval, Duration dur) {
 		abortFlag = false;
 		
 		///////////////////////////////////////////////////////
@@ -115,7 +116,7 @@ public class KShortestPathSolver_SR implements Solver {
 		timer.cancel();
 		
 		//return best route as multicasts;
-		return Multicast.generateMulticasts(bestRoute);
+		return new Solution(bestCost,Multicast.generateMulticasts(bestRoute));
 	}
 
 	@Override

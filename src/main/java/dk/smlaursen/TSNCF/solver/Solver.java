@@ -18,8 +18,8 @@ public interface Solver {
 	 * @param applications the set of {@link Application}s.
 	 * @param eval the {@link Evaluator} to use for scoring.
 	 * @param dur the {@link Duration} the solver is allowed to run. 
-	 * @return the list of {@link multicast} routings this solver deemed best within the given constraints*/
-	public List<Multicast> solve(final Graph<Node, GCLEdge> topology,final List<Application> applications, Evaluator eval, Duration dur);
+	 * @return the {@link Solution} containing the solution this solver deemed best*/
+	public Solution solve(final Graph<Node, GCLEdge> topology,final List<Application> applications, Evaluator eval, Duration dur);
 	
 	/** Instructs the solver method to abort and return the currently best solution, if any, at the time of aborting*/
 	public void abort();

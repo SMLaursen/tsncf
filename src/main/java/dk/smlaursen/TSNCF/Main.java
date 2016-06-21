@@ -22,7 +22,7 @@ import dk.smlaursen.TSNCF.architecture.Node;
 import dk.smlaursen.TSNCF.evaluator.ModifiedAVBEvaluator;
 import dk.smlaursen.TSNCF.parser.ApplicationParser;
 import dk.smlaursen.TSNCF.parser.TopologyParser;
-import dk.smlaursen.TSNCF.solver.Multicast;
+import dk.smlaursen.TSNCF.solver.Solution;
 import dk.smlaursen.TSNCF.solver.Solver;
 import dk.smlaursen.TSNCF.solver.GRASP.GraspSolver;
 import dk.smlaursen.TSNCF.solver.KShortestPath.KShortestPathSolver_SR;
@@ -108,15 +108,15 @@ public class Main {
 			}
 			
 			logger.info("Solving problem using "+solver+" solver");
-			List<Multicast> sol = s.solve(graph, apps, new ModifiedAVBEvaluator(), Duration.ofSeconds(60));
+			Solution sol = s.solve(graph, apps, new ModifiedAVBEvaluator(), Duration.ofSeconds(15));
 			
-			if(sol == null || sol.isEmpty()){
+			if(sol.getRouting() == null || sol.getRouting().isEmpty()){
 				logger.info("No solution could be found ");
 			} else {
-				logger.info("Found solution : "+sol);
+				logger.info("Found solution : "+sol.getCost().toDetailedString());
 				if(display){
 					logger.info("Displaying solution");
-					vis.addSolutions(sol);
+					vis.addSolutions(sol.getRouting());
 				}
 			}
 		} catch (ParseException e) {

@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import dk.smlaursen.TSNCF.application.Application;
-import dk.smlaursen.TSNCF.application.SRApplication;
+import dk.smlaursen.TSNCF.application.AVBApplication;
 import dk.smlaursen.TSNCF.application.TTApplication;
 import dk.smlaursen.TSNCF.architecture.GCLEdge;
 import dk.smlaursen.TSNCF.architecture.Node;
@@ -21,19 +21,11 @@ import dk.smlaursen.TSNCF.evaluator.ModifiedAVBEvaluatorCost.Objective;
 import dk.smlaursen.TSNCF.solver.Multicast;
 import dk.smlaursen.TSNCF.solver.Unicast;
 
-/** This {@link Evaluator} is used for calculating the cost of the given {@link Unicast} assignment taking SR- and TT-timings into account.
- *  The cost is calculated using the following penalties :
- *  <li> {@value #HOP_PENALITY} for each edge. This favors shorter paths and penalizes disjoint multi-cast routes.
- *  <li> {@value #PENALITY_THRESHOLD} The threshold of when to start increasing cost due to high-utilization.   
- *  <li> {@value #THRESHOLD_EXCEEDED_PENALITY} The penality applied to every percent of WCRT / DEADLINE exceeds {@link #PENALITY_THRESHOLD}  */
+/** This {@link Evaluator} is used for calculating the cost of the given {@link Unicast} assignment taking SR- and TT-timings into account.*/
 public class ModifiedAVBEvaluator implements Evaluator{
 	//----------- PENALTIES ----------------------
 	/** The threshold of WCRT / DEADLINE for when starting to increase with {@value #THRESHOLD_EXCEEDED_PENALITY} per. percent*/
 	private final static double PENALITY_THRESHOLD = 0.0;
-//	/** The penality applied to every percent of WCRT / DEADLINE exceeds {@link #PENALITY_THRESHOLD}*/
-//	private final static double THRESHOLD_EXCEEDED_PENALITY = 3.0;
-//	/** How much each hop increases the cost*/
-//	private final static double HOP_PENALITY = 1.0;
 	//----------- CONFIGURATION ------------------
 	/** The maximum BE frame-size*/
 	private final static int MAX_BE_FRAME_BYTES = 1522;
@@ -50,8 +42,8 @@ public class ModifiedAVBEvaluator implements Evaluator{
 		// Then we identify all the different modes 
 		Map<String, Set<Multicast>> modeMap = new HashMap<String, Set<Multicast>>();
 		for(Multicast m : multicasts){
-			if(m.getApplication() instanceof SRApplication){
-				SRApplication app = (SRApplication) m.getApplication();
+			if(m.getApplication() instanceof AVBApplication){
+				AVBApplication app = (AVBApplication) m.getApplication();
 				for(String mode : app.getModes()){
 					if(!modeMap.containsKey(mode)){
 						modeMap.put(mode, new HashSet<Multicast>());
@@ -84,7 +76,7 @@ public class ModifiedAVBEvaluator implements Evaluator{
 		
 		//Cost also includes the the sum of all disjoint edges
 		for(Application app : edgeMap.keySet()){
-			if(app instanceof SRApplication){
+			if(app instanceof AVBApplication){
 				cost.add(Objective.three, edgeMap.get(app).size());
 			}
 		}
@@ -100,7 +92,7 @@ public class ModifiedAVBEvaluator implements Evaluator{
 
 			//First we calculate the accumulated bwthRequirement and the cost due to disjointEdges
 			for(Multicast m : rs_in_curr_mode){
-				SRApplication app = (SRApplication) m.getApplication();
+				AVBApplication app = (AVBApplication) m.getApplication();
 				
 				//Run over all the unique edges in that application
 				for(GCLEdge edge : edgeMap.get(app)){
@@ -135,13 +127,14 @@ public class ModifiedAVBEvaluator implements Evaluator{
 					double latency = 0;
 					for(GCLEdge edge : u.getRoute().getEdgeList()){
 						double capacity = edge.getAllocationCapacity() - (edge.calculateWorstCaseInterference(app.getInterval()) /app.getInterval()-1);
-						latency += calculateMaxLatency(edge, allocMap.get(edge),(SRApplication) app, capacity);
+						latency += calculateMaxLatency(edge, allocMap.get(edge),(AVBApplication) app, capacity);
 					}
 					//For multicast routing, were only interested in the worst route
 					if(maxLatency < latency){
 						maxLatency = latency;
 					}
 				}
+				cost.setWCD(m, maxLatency);
 				if(maxLatency > app.getDeadline()){
 					if(logger.isDebugEnabled()){
 						logger.debug(route+" set non-schedulable : "+app.getTitle()+"'s maxLatency exceeds deadline");
@@ -158,7 +151,7 @@ public class ModifiedAVBEvaluator implements Evaluator{
 	//	//TODO Add UnitTests
 	//	/** This method has been based on the formulas in 802.1BA Draft 2.5 
 	//	 * http://www.ieee802.org/1/files/private/ba-drafts/d2/802-1ba-d2-5.pdf*/
-	private double calculateMaxLatency(GCLEdge edge, double totalAlloc_mbps, SRApplication app, double capacity){
+	private double calculateMaxLatency(GCLEdge edge, double totalAlloc_mbps, AVBApplication app, double capacity){
 		//Time to transmit max interfering BE packet.  
 		double tMaxPacket = (MAX_BE_FRAME_BYTES + 8)*8 / edge.getRateMbps();
 		//Time to transmit frame_size

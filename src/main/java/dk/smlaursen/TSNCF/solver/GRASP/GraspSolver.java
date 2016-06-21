@@ -29,6 +29,7 @@ import dk.smlaursen.TSNCF.solver.Solver;
 import dk.smlaursen.TSNCF.solver.GraphPaths;
 import dk.smlaursen.TSNCF.solver.Multicast;
 import dk.smlaursen.TSNCF.solver.Route;
+import dk.smlaursen.TSNCF.solver.Solution;
 import dk.smlaursen.TSNCF.solver.Unicast;
 import dk.smlaursen.TSNCF.solver.UnicastCandidates;
 
@@ -55,7 +56,7 @@ public class GraspSolver implements Solver {
 	}
 	
 	@Override
-	public List<Multicast> solve(Graph<Node, GCLEdge> topology, List<Application> applications, Evaluator eval, Duration dur) {
+	public Solution solve(Graph<Node, GCLEdge> topology, List<Application> applications, Evaluator eval, Duration dur) {
 		///////////////////////////////////////////////////////
 		//                  -- Setup --                       //
 		///////////////////////////////////////////////////////
@@ -112,8 +113,7 @@ public class GraspSolver implements Solver {
 		///////////////////////////////////////////////////////
 		//                  -- DONE --                       //
 		///////////////////////////////////////////////////////
-		System.out.println(globalBestCost.toDetailedString());
-		return Multicast.generateMulticasts(bestSolution);
+		return new Solution(globalBestCost, Multicast.generateMulticasts(bestSolution));
 	}
 
 	@Override
