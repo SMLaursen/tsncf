@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Applications>
-	<SRApplication name="APP1_SR">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="APP1_SR">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>8</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
 		<Source name="ES1"></Source>
@@ -9,10 +9,10 @@
 			<Dest name="ES6"></Dest>
 			<Dest name="ES7"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 	
-	<SRApplication name="APP2_SR">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="APP2_SR">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>8</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
 		<Source name="ES6"></Source>
@@ -20,5 +20,5 @@
 			<Dest name="ES3"></Dest>
 			<Dest name="ES4"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 </Applications>

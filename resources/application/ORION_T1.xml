@@ -32,8 +32,8 @@
 		</Destinations>
 	</TTApplication>
 
-	<SRApplication name="rc3.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc3.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>4</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_SM1CA"></Source>
@@ -41,10 +41,10 @@
 			<Dest name="ES_FCM2"></Dest>
 			<Dest name="ES_DU2"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc5.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc5.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>4</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_GPS1"></Source>
@@ -52,10 +52,10 @@
 			<Dest name="ES_SM1CA"></Dest>
 			<Dest name="ES_MIMU3"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc12.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc12.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>40</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_SM2CB"></Source>
@@ -63,10 +63,10 @@
 			<Dest name="ES_STARTR2"></Dest>
 			<Dest name="ES_SM1CB"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc15.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc15.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>19</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_DU2"></Source>
@@ -74,10 +74,10 @@
 			<Dest name="ES_SM1CB"></Dest>
 			<Dest name="ES_SMRIU1"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc18.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc18.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>4</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_DU1"></Source>
@@ -85,10 +85,10 @@
 			<Dest name="ES_BFCU"></Dest>
 			<Dest name="ES_MIMU1"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc19.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc19.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>4</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_SBAND2"></Source>
@@ -96,10 +96,10 @@
 			<Dest name="ES_DU1"></Dest>
 			<Dest name="ES_SM2CB"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc25.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc25.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>55</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_FCM1"></Source>
@@ -107,10 +107,10 @@
 			<Dest name="ES_SM1CB"></Dest>
 			<Dest name="ES_SMRIU2"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc26.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc26.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>34</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_MIMU1"></Source>
@@ -118,10 +118,10 @@
 			<Dest name="ES_DU1"></Dest>
 			<Dest name="ES_CMRIU2"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc28.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc28.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>4</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_DU1"></Source>
@@ -129,10 +129,10 @@
 			<Dest name="ES_LCM2"></Dest>
 			<Dest name="ES_FCM2"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc29.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc29.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>31</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_CM2CB"></Source>
@@ -140,10 +140,10 @@
 			<Dest name="ES_MIMU3"></Dest>
 			<Dest name="ES_SM2CA"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc34.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc34.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>27</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_LCM2"></Source>
@@ -151,20 +151,20 @@
 			<Dest name="ES_SM1CA"></Dest>
 			<Dest name="ES_RCM2"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc35.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc35.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>14</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_FCM2"></Source>
 		<Destinations>
 			<Dest name="ES_DU2"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc37.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc37.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>4</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_SBAND2"></Source>
@@ -172,10 +172,10 @@
 			<Dest name="ES_MIMU1"></Dest>
 			<Dest name="ES_DU2"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc41.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc41.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>8</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_CM2CB"></Source>
@@ -183,20 +183,20 @@
 			<Dest name="ES_GPS2"></Dest>
 			<Dest name="ES_SM1CB"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc44.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc44.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>22</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_CM2CA"></Source>
 		<Destinations>
 			<Dest name="ES_LCM2"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc54.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc54.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>5</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_SM2CA"></Source>
@@ -204,10 +204,10 @@
 			<Dest name="ES_LCM1"></Dest>
 			<Dest name="ES_CM1CB"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc57.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc57.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>22</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_CMRIU1"></Source>
@@ -215,10 +215,10 @@
 			<Dest name="ES_MIMU2"></Dest>
 			<Dest name="ES_SBAND1"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc61.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc61.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>13</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_GPS1"></Source>
@@ -226,10 +226,10 @@
 			<Dest name="ES_SBAND2"></Dest>
 			<Dest name="ES_STARTR1"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc66.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc66.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>5</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_BFCU"></Source>
@@ -237,10 +237,10 @@
 			<Dest name="ES_CM1CB"></Dest>
 			<Dest name="ES_SM1CA"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc73.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc73.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>4</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_SBAND2"></Source>
@@ -248,10 +248,10 @@
 			<Dest name="ES_GPS2"></Dest>
 			<Dest name="ES_CM2CB"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc80.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc80.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>10</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_MIMU1"></Source>
@@ -259,10 +259,10 @@
 			<Dest name="ES_SBAND1"></Dest>
 			<Dest name="ES_MIMU3"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="rc86.0">
-		<SRType>CLASS_A</SRType>
+	<AVBApplication name="rc86.0">
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>4</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES_MIMU2"></Source>
@@ -270,6 +270,6 @@
 			<Dest name="ES_STARTR2"></Dest>
 			<Dest name="ES_RCM2"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
 </Applications>

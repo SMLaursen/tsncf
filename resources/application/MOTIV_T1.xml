@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Applications>
-	<SRApplication name="S1_BLUE">
+	<AVBApplication name="S1_BLUE">
 		<Mode>1</Mode>
-		<SRType>CLASS_A</SRType>
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>400</PayloadSize>
 		<NoOfFrames>2</NoOfFrames>
 		<Source name="ES1"></Source>
 		<Destinations>
 			<Dest name="ES4"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="S2_PURPLE">
+	<AVBApplication name="S2_PURPLE">
 		<Mode>2</Mode>
-		<SRType>CLASS_A</SRType>
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>350</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES5"></Source>
@@ -21,19 +21,19 @@
 			<Dest name="ES3"></Dest>
 			<Dest name="ES4"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 	
-	<SRApplication name="S3_ORANGE">
+	<AVBApplication name="S3_ORANGE">
 		<Mode>1</Mode>
 		<Mode>2</Mode>
-		<SRType>CLASS_A</SRType>
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>480</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES7"></Source>
 		<Destinations>
 			<Dest name="ES2"></Dest>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
 	<TTApplication name="TT">
 		<Source name="ES6"></Source>

@@ -13,25 +13,25 @@
 		</Destinations>
 	</TTApplication>
 
-	<SRApplication name="AVB_Parking">
+	<AVBApplication name="AVB_Parking">
 		<Mode>Parking</Mode>
-		<SRType>CLASS_A</SRType>
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>50</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
 		<Source name="ES2"/>
 		<Destinations>
 			<Dest name="ES4"/>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="AVB_Lane">
+	<AVBApplication name="AVB_Lane">
 		<Mode>Lane</Mode>
-		<SRType>CLASS_A</SRType>
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>60</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
 		<Source name="ES3"/>
 		<Destinations>
 			<Dest name="ES6"/>
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 </Applications>

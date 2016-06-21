@@ -19,8 +19,8 @@ import org.xml.sax.SAXException;
 
 import dk.smlaursen.TSNCF.application.Application;
 import dk.smlaursen.TSNCF.application.ExplicitPath;
-import dk.smlaursen.TSNCF.application.SRApplication;
-import dk.smlaursen.TSNCF.application.SRType;
+import dk.smlaursen.TSNCF.application.AVBApplication;
+import dk.smlaursen.TSNCF.application.AVBClass;
 import dk.smlaursen.TSNCF.application.TTApplication;
 import dk.smlaursen.TSNCF.architecture.Bridge;
 import dk.smlaursen.TSNCF.architecture.EndSystem;
@@ -43,16 +43,16 @@ public class ApplicationParser {
 			dom = db.parse(f);
 			Element docEle = dom.getDocumentElement();
 
-			//Get nodelist of SRApplicationElements
-			NodeList nl = docEle.getElementsByTagName("SRApplication");
+			//Get nodelist of AVBApplicationElements
+			NodeList nl = docEle.getElementsByTagName("AVBApplication");
 			if(nl != null && nl.getLength() > 0){
 				for(int i = 0; i < nl.getLength(); i++){
-					//Get the SRApplication element
-					Element srAppEle = (Element) nl.item(i);
-					//Get the SRApplication object
-					Application srApp = getSRApplication(srAppEle);
+					//Get the AVBApplication element
+					Element avbAppEle = (Element) nl.item(i);
+					//Get the AVBApplication object
+					Application avbApp = getAVBApplication(avbAppEle);
 					//Add it to the application list
-					applications.add(srApp);
+					applications.add(avbApp);
 				}
 			}
 
@@ -79,20 +79,20 @@ public class ApplicationParser {
 		return applications;
 	}
 
-	/**Parses an element into a {@link SRApplication}
-	 * @param srAppEle the SRApplicationElement
+	/**Parses an element into a {@link AVBApplication}
+	 * @param srAppEle the AVBApplicationElement
 	 * @throws A
-	 * @return The corresponding {@link SRApplication}*/
-	private static SRApplication getSRApplication(Element srAppEle){
+	 * @return The corresponding {@link AVBApplication}*/
+	private static AVBApplication getAVBApplication(Element srAppEle){
 		String name = srAppEle.getAttribute("name");
 		List<String> modes = parseModes(srAppEle);
 
-		//Parse SRType
-		SRType type;
-		String text =  srAppEle.getElementsByTagName("SRType").item(0).getFirstChild().getNodeValue();
+		//Parse AVBClass
+		AVBClass type;
+		String text =  srAppEle.getElementsByTagName("AVBClass").item(0).getFirstChild().getNodeValue();
 		switch(text){
-		case "CLASS_A" : type = SRType.CLASS_A; break;
-		case "CLASS_B" : type = SRType.CLASS_B; break;
+		case "CLASS_A" : type = AVBClass.CLASS_A; break;
+		case "CLASS_B" : type = AVBClass.CLASS_B; break;
 		default : return null;
 		}
 
@@ -108,7 +108,7 @@ public class ApplicationParser {
 		//Parse Destinations
 		EndSystem[] dest = parseDestinations(srAppEle);
 
-		return new SRApplication(name, modes, type, payloadSize, noOfFrames, src, dest);
+		return new AVBApplication(name, modes, type, payloadSize, noOfFrames, src, dest);
 	}
 
 	/**Parses an element into a {@link TTApplication}

@@ -14,6 +14,6 @@ public class ValidateInput {
 	//				return null;
 	//			}
 	//		}
-	//		applications.add(new SRApplication(app1name, type, payloadSize, noOfFrames , app1src, app1dests));
+	//		applications.add(new AVBApplication(app1name, type, payloadSize, noOfFrames , app1src, app1dests));
 	//		//}
 }

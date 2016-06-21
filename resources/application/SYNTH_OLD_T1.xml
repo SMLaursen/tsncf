@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Applications>
-	<SRApplication name="AVB_1">
+	<AVBApplication name="AVB_1">
 		<Mode>A</Mode>
-		<SRType>CLASS_A</SRType>
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>220</PayloadSize>
 		<NoOfFrames>2</NoOfFrames>
 		<Source name="ES1A" />
@@ -10,22 +10,22 @@
 			<Dest name="ES6A" />
 			<Dest name="ES4A" />
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="AVB_2">
+	<AVBApplication name="AVB_2">
 		<Mode>A</Mode>
-		<SRType>CLASS_A</SRType>
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>250</PayloadSize>
 		<NoOfFrames>1</NoOfFrames>
 		<Source name="ES1B" />
 		<Destinations>
 			<Dest name="ES4A" />
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="AVB_3">
+	<AVBApplication name="AVB_3">
 		<Mode>A</Mode>
-		<SRType>CLASS_A</SRType>
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>220</PayloadSize>
 		<NoOfFrames>2</NoOfFrames>
 		<Source name="ES2A" />
@@ -34,18 +34,18 @@
 			<Dest name="ES4B" />
 			<Dest name="ES5A" />
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 
-	<SRApplication name="AVB_4">
+	<AVBApplication name="AVB_4">
 		<Mode>A</Mode>
-		<SRType>CLASS_A</SRType>
+		<AVBClass>CLASS_A</AVBClass>
 		<PayloadSize>15</PayloadSize>
 		<NoOfFrames>10</NoOfFrames>
 		<Source name="ES5A" />
 		<Destinations>
 			<Dest name="ES4A" />
 		</Destinations>
-	</SRApplication>
+	</AVBApplication>
 	
 	<TTApplication name="TT_1">
 		<Source name="ES6B"></Source>
