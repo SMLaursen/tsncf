@@ -36,7 +36,6 @@ public class Main {
 	//FIXME todos
 	//////////////////////////////////////////////
 	//TODO Create pre-processor and validator
-	//TODO Fix so that a GCLEdge takes the union
 	//TODO Improve logging and error handling
 	//TODO Create GUI in separate project
 	//////////////////////////////////////////////
