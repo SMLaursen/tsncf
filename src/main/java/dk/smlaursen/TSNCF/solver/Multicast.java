@@ -34,6 +34,18 @@ public class Multicast {
 		}
 		
 		@Override
+		public boolean equals(Object o){
+			if(o instanceof Multicast){
+				Multicast obj = (Multicast) o;
+				if(obj.getApplication().equals(getApplication()) &&
+					obj.getUnicasts().equals(getUnicasts())){	
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		@Override
 		public String toString(){
 			return aApp.toString();
 		}

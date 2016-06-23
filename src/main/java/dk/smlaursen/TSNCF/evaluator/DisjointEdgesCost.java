@@ -1,5 +1,6 @@
 package dk.smlaursen.TSNCF.evaluator;
 
+import dk.smlaursen.TSNCF.solver.Multicast;
 
 public class DisjointEdgesCost implements Cost {
 	private double cost;
@@ -25,6 +26,12 @@ public class DisjointEdgesCost implements Cost {
 	@Override
 	public String toDetailedString() {
 		return toString();
+	}
+
+	@Override
+	public double getWCD(Multicast r) {
+		// TODO Not implemented
+		return 0;
 	}
 }
 

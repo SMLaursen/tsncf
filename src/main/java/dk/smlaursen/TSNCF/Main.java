@@ -20,17 +20,18 @@ import dk.smlaursen.TSNCF.application.Application;
 import dk.smlaursen.TSNCF.architecture.GCLEdge;
 import dk.smlaursen.TSNCF.architecture.Node;
 import dk.smlaursen.TSNCF.evaluator.ModifiedAVBEvaluator;
+import dk.smlaursen.TSNCF.output.FileWriter;
+import dk.smlaursen.TSNCF.output.Visualizer;
 import dk.smlaursen.TSNCF.parser.ApplicationParser;
 import dk.smlaursen.TSNCF.parser.TopologyParser;
 import dk.smlaursen.TSNCF.solver.Solution;
 import dk.smlaursen.TSNCF.solver.Solver;
 import dk.smlaursen.TSNCF.solver.GRASP.GraspSolver;
 import dk.smlaursen.TSNCF.solver.KShortestPath.KShortestPathSolver_SR;
-import dk.smlaursen.TSNCF.visualization.Visualizer;
 
 public class Main {
 	//Command line options
-	private static final String APP_ARG = "app",NET_ARG = "net", DISP_ARG = "display", VERBOSE_ARG = "verbose", K_ARG="K", SOLVER_ARG="GRASP";
+	private static final String APP_ARG = "app",NET_ARG = "net", OUTPUT_ARG = "out", DISP_ARG = "display", VERBOSE_ARG = "verbose", K_ARG="K", SOLVER_ARG="GRASP";
 
 	//FIXME todos
 	//////////////////////////////////////////////
@@ -44,13 +45,15 @@ public class Main {
 		int K = 50;
 		Option architectureFile = Option.builder(NET_ARG).required().argName("file").hasArg().desc("Use given file as network").build();
 		Option applicationFile = Option.builder(APP_ARG).required().argName("file").hasArg().desc("Use given file as application").build();
+		Option outputFile = Option.builder(OUTPUT_ARG).argName("file").hasArg().desc("Writes output to file").build();
 		
 		Options options = new Options();
 		options.addOption(applicationFile);
 		options.addOption(architectureFile);
+		options.addOption(outputFile);
 		options.addOption(K_ARG, true, "Value of K for search-space reduction (Default = 50)");
 		options.addOption(SOLVER_ARG, true, "The type of solver to use (Default = GRASP)");
-		options.addOption(VERBOSE_ARG, false, "Verbose output");
+		options.addOption(VERBOSE_ARG, false, "Verbose logging");
 		options.addOption(DISP_ARG, false, "Display output");
 
 		CommandLineParser parser = new DefaultParser();
@@ -117,6 +120,11 @@ public class Main {
 				if(display){
 					logger.info("Displaying solution");
 					vis.addSolutions(sol.getRouting());
+				}
+				if(line.hasOption(OUTPUT_ARG)){
+					File f = new File(line.getOptionValue(OUTPUT_ARG));
+					logger.info("Writing solution to file "+f);
+					FileWriter.Output(sol, f);
 				}
 			}
 		} catch (ParseException e) {

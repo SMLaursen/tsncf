@@ -1,4 +1,4 @@
-package dk.smlaursen.TSNCF.visualization;
+package dk.smlaursen.TSNCF.output;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
